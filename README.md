@@ -1,6 +1,4 @@
-# Database-bootcamp-10
-
-The contents of this repo are solely used for mentoring purposes.
+# Database bootcamp
 
 ## What you can expect
 

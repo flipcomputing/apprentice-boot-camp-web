@@ -26,7 +26,7 @@
 - (C#) **Get started create sample web application** [SourceCode](DotNetCore/README.md)
 - (Javascript) VS Code [Download](https://code.visualstudio.com/download)
 - (Java IDE) [IntelliJ](https://www.jetbrains.com/idea/promo/ultimate/?gclid=CjwKCAjwhOD0BRAQEiwAK7JHmF42gqqmvH1COAnUfTZ3Z4H-YveHj_kgE93Jqjr62Y0IzybduD25EhoCn_IQAvD_BwE)
-- (Docker configuration)[MysqlDocker/README.md] to provision database server for local setup
+- (Docker configuration)[MysqlDocker/README.md](../MysqlDocker/README.md) to provision database server for local setup
 - (Database IDE) [MySqlWorkbench](https://www.mysql.com/products/workbench/)
 - Database Entity Relationship Modelling [LucidChart](https://www.lucidchart.com/users/login)
 - (WhiteBoard) [Miro](https://miro.com/)

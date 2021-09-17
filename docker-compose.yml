@@ -19,7 +19,7 @@ services:
     restart: 'no'
     entrypoint: [ "bash", "-c", " sleep 5 && pg_restore --dbname=postgresql://postgres:MDigital21@database:5432/sequel-mart /database_backups/sequel-mart-20210904-complete"]
   app:
-    image: 'node:8'
+    image: 'node:8' # see https://github.com/nodejs/docker-node/blob/main/README.md#how-to-use-this-image
     user: 'node'
     depends_on:
       - database
@@ -30,6 +30,6 @@ services:
       - .:/home/node/app
     ports:
       - '5000:5000'
-    command: 'npm start'
+    command: 'npm start dev'
 volumes:
   database-data: # named volumes can be managed easier using docker-compose

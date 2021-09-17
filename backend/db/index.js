@@ -5,7 +5,7 @@ const pgp = require('pg-promise')();
 
 //Connection string = 1.type of database, 2.username & password, 3.where server is running
 const connectionString =
-  "postgresql://postgres:MDigital21@localhost:5432/sequel-mart";
+  "postgresql://postgres:MDigital21@database:5432/sequel-mart";
 
 //Initialise the connection
 const db = pgp(connectionString);

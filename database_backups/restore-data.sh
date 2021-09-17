@@ -1,0 +1,1 @@
+pg_restore --dbname=postgresql://postgres:MDigital21@localhost:5432/sequel-mart sequel-mart-20210904-complete

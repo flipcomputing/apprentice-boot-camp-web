@@ -8,5 +8,13 @@ services:
       - database-data:/var/lib/postgresql/data/ # persist data even if container shuts down
     ports:
       - "5432:5432"
+  populate-database:
+    image: 'postgres'
+    depends_on:
+      - database
+    volumes:
+      - ./database_backups:/database_backups
+    restart: 'no'
+    entrypoint: [ "bash", "-c", " sleep 3 && pg_restore --dbname=postgresql://postgres:MDigital21@database:5432/sequel-mart /database_backups/sequel-mart-20210904-complete"]
 volumes:
   database-data: # named volumes can be managed easier using docker-compose

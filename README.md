@@ -25,13 +25,11 @@
 ---
 
 
-
 &nbsp;
 
 # Overview
 - A sample database based on a fictional retail company (Sequel-Mart).
-- A basic front-end using vanilla HTML, CSS & Javascript that shows how a database-driven relationship to a back-end web server could be managed.
-
+- A basic front-end using vanilla HTML, CSS & Javascript with Express.  It shows how a database-driven relationship to a back-end web server could be managed.
 
 
 &nbsp;
@@ -84,13 +82,12 @@ Trying to absorb a lot of information in a short time can be exhausting. We will
 
 Get away from the monitor and take a real break. Pairing or not, taking breaks is important and increases productivity.
 
-&nbsp;
 
----
+&nbsp;
 ## General Advice for the Bootcamp
 
 ### Breakout rooms
-There is no better way to learn a craft than to get stuck in practice, practice, practice!
+There is no better way to learn a craft than to get stuck in and practice, practice, practice!
 
 The first section is all theory but after that there will be regular sets of exercises to try.  These exercises are an opportunity to split into the breakout rooms, try to answer them, then come back together to fill in any gaps in our knowledge.
 
@@ -133,7 +130,8 @@ In the absence of physical collaboration on a whiteboard, a tool like [Miro](htt
 
 If running locally, (make sure you set up a virtual environment in your project folder) once npm has been installed, run:
 ```
-npm install express@4.17.1 pg-promise@10.11.0 nodemon @2.0.12
+npm install express@4.17.1 pg-promise@10.11.0
+npm install -D nodemon @2.0.12
 ```
 Refer to `package.json` to see the full list
 

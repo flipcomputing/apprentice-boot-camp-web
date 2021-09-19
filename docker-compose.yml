@@ -17,7 +17,7 @@ services:
     volumes:
       - ./database_backups:/database_backups
     restart: 'no'
-    entrypoint: [ "bash", "-c", " sleep 5 && pg_restore --dbname=postgresql://postgres:MDigital21@database:5432/sequel-mart /database_backups/sequel-mart-20210904-complete"]
+    entrypoint: [ "bash", "-c", " sleep 5 && pg_restore --dbname=postgresql://postgres:MDigital21@database:5432/sequel-mart /database_backups/sequel-mart-20210919-complete"]
   app:
     image: 'node:8' # see https://github.com/nodejs/docker-node/blob/main/README.md#how-to-use-this-image
     user: 'node'

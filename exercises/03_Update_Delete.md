@@ -1,7 +1,7 @@
-## Exercises:
+# Exercises (Section 3 - Update & Delete):
 
----
-### INSERT INTO ...
+
+## INSERT INTO ...
 1. Add yourself as a customer
 2. Try to add a new **product**
 3. Try to add some new records to a table you created in the CREATE TABLE section
@@ -19,7 +19,7 @@ INSERT INTO "sequel-mart-schema"."Products"(
 ```
 
 ---
-### UPDATE ...
+## UPDATE ...
 1. Try updating a **customer** record
 2. Try updating a **product** record
 3. Try to update some new records to a table you created in the CREATE TABLE section
@@ -36,7 +36,7 @@ WHERE customer_id = 1;
 ```
 
 ---
-### DELETE ...
+## DELETE ...
 1. Try deleting the **customer, product or sales** records you’ve just added.
 2. Check they are removed with an appropriate `SELECT` query
 3. Try deleting some of the records from your own tables
@@ -50,7 +50,7 @@ WHERE customer_name = <your_name>;
 *Warning: If there is no WHERE clause, every row will be deleted!!*
 
 ---
-### TRUNCATE TABLE ...
+## TRUNCATE TABLE ...
 1. Try truncating a table you created in the CREATE TABLE section
 
 *Warning: Make sure you are deleting the correct table.  Measure twice, cut once!!*
@@ -61,7 +61,7 @@ TRUNCATE TABLE <schema_name>.<table_name>;
 ```
 
 ---
-### DROP ...
+## DROP ...
 1. Try dropping a table from your own schema (re-create one if necessary with CREATE TABLE)
 
 ```
@@ -69,7 +69,7 @@ DROP TABLE <schema_name>.<table_name>;
 ```
 
 ---
-### ALTER COLUMN ...
+## ALTER COLUMN ...
 1. Try to change one of these attributes of a column in one of your own databases
 	- If a proposed change is violated by any existing data, it will fail and rollback to what it was
 	- If a table is used in a view it will fail as the view is dependent on it

@@ -1,52 +1,98 @@
-# Database bootcamp
+# Database Bootcamp 2021
 
-## What you can expect
+## Table of contents
+
+- [Overview](#overview)
+- [What you can expect?](#what-you-can-expect)
+	- [Day 1](#day-1)
+	- [Day 2](#day-2)
+	- [Timing and Breaks](#timing-and-breaks)
+	- [General Advice for the Bootcamp](#general-advice-for-the-bootcamp)
+- [Essential Tools](#essential-tools)
+	- [Optional Tools](#optional-tools)
+- [Other Software and Extensions Used](#other-software-and-extensions-used)
+	- [Front-End](#front-end)
+	- [Back-End](#back-end)
+- [Installation Options](#installation-options)
+	- [1 Docker Compose](#1-docker-compose)
+	- [2 Remote Desktop](#2-remote-desktop)
+- [Installing PostgreSQL Locally](#installing-postgresql-locally)
+- [Cloning the Repo Locally](#cloning-the-repo-locally)
+- [Useful resources](#useful-resources)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
+
+---
+
+
+
+&nbsp;
+
+# Overview
+- A sample database based on a fictional retail company (Sequel-Mart).
+- A basic front-end using vanilla HTML, CSS & Javascript that shows how a database-driven relationship to a back-end web server could be managed.
+
+
+
+&nbsp;
+
+# What you can expect?
 
 ## Day 1
+### Section 1 (What are databases?)
+- Introduction & Set-up either with Remote Desktop or via Docker
+- How databases fit into a front-end / back-end architecture
+- Fundamental concepts of databases (Data Types, ERDs, Normalisation)
+- Connect to PostgreSQL database (including basic security)
 
-### Tooling
+### Section 2 (Querying a relational database - **CR**UD)
+- Create (`CREATE TABLE`)
+- Read (`SELECT` `FROM`, `WHERE`, `ORDER BY`, `GROUP BY`, `HAVING`, `LIMIT`)
+- Joining (`INNER JOIN`, `LEFT OUTER JOIN`)
 
-- Install any Mysql Client
-  ..\* If you dont have one you can install [MySqlWorkbench](https://www.mysql.com/products/workbench/) or [DataGrip](https://www.jetbrains.com/datagrip/promo/?gclid=CjwKCAjw1cX0BRBmEiwAy9tKHiE5FZofRZBmHw0Osypd4todpoxBObkLt2S_Y4cWLBvY0m3AcvSGshoCd1IQAvD_BwE) 30 day trail.
+### Section 3 (Changing content in a relational database - CR**UD**)
+- Update (`INSERT`, `UPDATE`)
+- Delete (`DELETE`, `TRUNCATE`, `DROP`)
+- Changing column details
 
-### Preparation
+### Section 4 (Streamlining - making a relational database more efficient)
+- Speeding up queries
+- `CREATE INDEX`, `CREATE VIEW`, `CREATE PROCEDURE`, Transactions
+- System Tables
+- SQL Injection
 
-- MySql **CRUD** operations (SELECT, DELETE, INSERT, UPDATE, JOINS)
-- **PluralSight is free this April**, good source of learning [Signup](https://www.pluralsight.com/offer/2020/free-april-month?oid=7014Q0000022aAOQAY&utm_term=&aid=701j0000002BGi1AAG&promo=&oid=&utm_source=branded&utm_medium=digital_paid_search_google&utm_campaign=UK_Brand_E&utm_content=&gclid=CjwKCAjwhOD0BRAQEiwAK7JHmJrsSvdJ1VqrBOg0fsJqUt0GLgDNksd0wZbp_bv7GVkZnToQTpKPLhoCIdgQAvD_BwE)
-
-![RemoteMob](remotemob_header_screen_grau.png?raw=true)
-
+---
 ## Day 2
+### Section 5 (Sequel-Mart)
+- Project structure
+- Routing
 
-### Tooling
+### Section 6 (Exercises)
+- Creating queries to populate the following routes:
+	- Transaction *(most recent 10)*
+	- Customers *(top 10 by average spend)*
+	- Products *(top 10 by items sold)*
+	- Summary *(6x headline cards at the top of the example web-page)*
 
-- Must have GITHUB account [SignUp](https://github.com/zuto).
-- (C#) VisualStudio 2019/2017 [Download](https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs-2019).
-- (C#) Atleast .net core 2.2 runtime [Download SDK](https://dotnet.microsoft.com/download/dotnet-core).
-- (C#) **Get started create sample web application** [SourceCode](DotNetCore/README.md)
-- (Javascript) VS Code [Download](https://code.visualstudio.com/download)
-- (Java IDE) [IntelliJ](https://www.jetbrains.com/idea/promo/ultimate/?gclid=CjwKCAjwhOD0BRAQEiwAK7JHmF42gqqmvH1COAnUfTZ3Z4H-YveHj_kgE93Jqjr62Y0IzybduD25EhoCn_IQAvD_BwE)
-- (Docker configuration)[MysqlDocker/README.md](https://github.com/MCR-Digital/apprentice-boot-camp-databases/tree/master/MysqlDocker) to provision database server for local setup
-- (Database IDE) [MySqlWorkbench](https://www.mysql.com/products/workbench/)
-- Database Entity Relationship Modelling [LucidChart](https://www.lucidchart.com/users/login)
-- (WhiteBoard) [Miro](https://miro.com/)
-- (Mobbing Timer/Alert Tool) Basic Phone Alarm or [Mobster](http://mobster.cc/)
-- (GitHub) Source Control
-- Zoom & Slack for communications
+---
+## Timing and Breaks
+- Morning = 09:30am - 12:30pm
+- Lunch		= 12:30pm - 1:30pm
+- Afternoon = 1:30pm - 4:30pm
 
-### Mob Programming
+Trying to absorb a lot of information in a short time can be exhausting. We will be aiming for 45 minutes of work followed by 15 minute breaks.
 
-I couldn't find a best Live share rich Mob Timing application available online. Setup [Mobster](http://mobster.cc/) on one of the team member PC
-One person controls the keyboard, this is the typist. The rest of the mob discusses the problem, agrees on the solution, and instructs the typist. The typist follows their instructions, puts them into code, and may ask clarifying questions to understand the solution. The rest of the mob guides the typist as needed.
+Get away from the monitor and take a real break. Pairing or not, taking breaks is important and increases productivity.
 
-We value the typist as they allow the rest of the mob to focus on solving the problem.
+&nbsp;
 
-The typist must not code on their own. This balances the participation of all team members and it reduces the dominance of strong characters.
+---
+## General Advice for the Bootcamp
 
-### Take Frequent Breaks As Agreed
+### Breakout rooms
+There is no better way to learn a craft than to get stuck in practice, practice, practice!
 
-Pairing can be exhausting. Taking enough breaks is key to face this challenge. Setup breaks using Mobster App or a simple alarm.
-Don't skip your lunch break: Get away from the monitor and take a real break. Pairing or not, taking breaks is important and increases productivity.
+The first section is all theory but after that there will be regular sets of exercises to try.  These exercises are an opportunity to split into the breakout rooms, try to answer them, then come back together to fill in any gaps in our knowledge.
 
 ### Camera Always On
 
@@ -56,19 +102,149 @@ So would advise activate our cameras all the time.
 
 ### Whiteboard
 
-We miss to scribble and discuss together on a physical whiteboard. There is no good alternative for distributed teams. What comes next is [Miro](https://miro.com/) to draw. You can share the Miro board in a video conference, so that everyone puts their focus on the same section of the board.
+In the absence of physical collaboration on a whiteboard, a tool like [Miro](https://miro.com/) is a reasonable alternaive. You can share the Miro board in a video conference, so that everyone puts their focus on the same section of the board.
 
-### Screen Sharing
 
-We tried collaboration IDEs before. Surprisingly, this led to worse collaboration. Impatient members of the rest of the mob circumvented both, the discussion and the typist, by just hacking their ideas, please dont, read Mob programming rules. Try below for .net Users
 
-- VS Live share is installed by default, if not you can install from the extensions-> Live Share [Try Demo](https://docs.microsoft.com/en-us/visualstudio/liveshare/quickstart/share).This extension allows maximum of five to collaboratively work on code base without needed to push/pull to source control.
-- Zoom - Mostly works, you may need Git or source control hand over, refer GIT push/pull commands.
+&nbsp;
+# Essential Tools
 
-### 10 Minute Intervals
+- A `GitHub` account [SignUp](https://github.com/zuto)
+- (Javascript) VS Code [Download](https://code.visualstudio.com/download)
+- Zoom & Slack for communications
 
-In a mob session, the typist role rotates periodically. Short rotation periods keep everyone concentrated and every opinion in the mix.
+## Optional Tools
+- Docker configuration [MysqlDocker/README.md](https://github.com/MCR-Digital/apprentice-boot-camp-databases/tree/master/MysqlDocker) to provision database server for local setup
+- Database Entity Relationship Modelling [LucidChart](https://www.lucidchart.com/users/login)
+- (WhiteBoard) [Miro](https://miro.com/)
+- (Mobbing Timer/Alert Tool) Basic Phone Alarm or [Mobster](http://mobster.cc/)
 
-Try rotate every ten minutes.
+&nbsp;
 
-Surprisingly, taking your turn as a typist allows you a mental relaxation. You just wait for instructions.
+# Other Software and Extensions Used
+## Front-End
+- HTML5
+- CSS
+- Javascript
+- [node.js 14.5.0 / npm 6.14.5](https://nodejs.org/download/release/v14.5.0/)
+- express 4.17.1
+- pg-promise 10.11.0
+- nodemon 2.0.12
+
+If running locally, (make sure you set up a virtual environment in your project folder) once npm has been installed, run:
+```
+npm install express@4.17.1 pg-promise@10.11.0 nodemon @2.0.12
+```
+Refer to `package.json` to see the full list
+
+## Back-End
+- [PostgreSQL 13.3](https://www.postgresql.org/download/)
+
+
+
+&nbsp;
+# Installation Options
+# 1 Docker Compose
+
+Three services are defined in `docker-compose.yml`:
+
+- `database`: runs a postgres database
+  - Data is persisted between runs
+- `populate-database`: runs another postgres container which is only used to import the data in `/database_backups/sequel-mart-20210919-complete`
+  - This only runs when the `initialise` profile is specified, so that it doesn’t have to run every time (otherwise it would try to recreate the database each time).
+- `app`: runs the application within a node image
+  - This requires `npm install` to be run first, as the node modules are copied into the container
+
+## First time set up
+
+- Run `npm install` from your command line to fetch dependencies.
+
+- Run `docker compose --profile=initialise up`. This will start the database, wait five seconds, populate the database, and start the application on http://localhost:5000/. Confirm that this works, and then you can use `ctrl c` to stop docker.
+
+## Running the app
+
+- Run `docker compose up` to start the database and the application.
+
+## Starting over
+
+- To delete your data, run `docker compose down --volumes`. You can now run from ‘First time set up’ again.
+
+
+
+&nbsp;
+
+# 2 Remote Desktop
+Remote Windows instances will be provided for anyone who doesn't want to use Docker.
+
+Just find the Remote Desktop Connection
+
+![](images/RemoteDesktop.jpg)
+
+Click 'Show Options' & input the remote IP, username and password.  These will be provided at the start of the course.
+
+![](images/RemoteDesktop2.jpg)
+
+Once connected, you'll be able to connect to PostgreSQL's pg-Admin tool to connect to the database and query the tables, and view the web project in VS Code.  Both have been pre-installed for you.
+
+**Note:** These environments will only be available while the course is in progress. They will be terminated shortly afterwards.  If you want to use this project longer-term, you should use Docker.
+
+
+
+&nbsp;
+
+# Installing PostgreSQL Locally
+This shouldn't be necessary if you're using Docker or an RDP connection but should you want to do this:
+- Go to https://www.postgresql.org/download/
+- Download the right install files for your operating system
+- Click on the **installer file** (.exe)
+
+Follow the steps to set:
+1. A default location for the **Installation Directory**
+2. The **components** and **add-ons** required (PostgreSQL Server, pgAdmin 4 & Command Line Tools as a minimum)
+3. A default **directory** for the **databases**
+4. A **superuser** user and **password** (retype to confirm)
+5. A **port number** for the database server to listen (defaults to **5432**)
+6. Preview your choices
+
+7. Click *Next* to install PostgreSQL
+8. Click *Finish* when it’s done
+
+#### Loading pgAdmin
+- Locate the pgAdmin app
+- Once it's loaded, input the default password created in step 4 above
+
+![](images/PostgreSQLLogin.jpg)
+
+
+
+&nbsp;
+
+# Cloning the Repo Locally
+Open your preferred code editor and run
+```
+git clone https://github.com/MCR-Digital/apprentice-boot-camp-databases.git
+```
+
+
+
+
+&nbsp;
+# Useful resources
+
+- [Sequel-Mart course](https://github.com/MCR-Digital/apprentice-boot-camp-databases)
+- [PostgreSQL v13 Documentation](https://www.postgresql.org/docs/13/index.html)
+- [PostgreSQL system tables](https://www.postgresql.org/docs/9.1/catalogs.html)
+
+
+
+&nbsp;
+# Author
+
+[Thomas Steeples (course created while working for Zuto)](https://github.com/Tom-S82/sequel-mart)
+
+
+
+&nbsp;
+# Acknowledgments
+- A big thanks to all of the mentors at Manchester Digital who have helped with the final delivery of this course material, and for mentoring the students.
+- Thanks also to Zuto for supporting Manchester Digital, and for allowing me the time to put this course together.

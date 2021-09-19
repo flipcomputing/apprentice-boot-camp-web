@@ -1,8 +1,6 @@
-## Exercises:
+# Exercises (Section 2 - Create & Read):
 
----
-
-### Create Table
+## Create Table
 1. Create a new table in the sandbox schema.
 	- Give it a few columns
 	- Try to add some of the features listed above
@@ -12,7 +10,7 @@
 
 2. Explore the `sequel-mart-schema` schema
 	- Find a table
-	- Right-click & open Scripts > CREATE Script
+	- Right-click & open Scripts > `CREATE Script`
 
 3. Review the table design
 	- Familiarise yourself with the features they contain
@@ -20,7 +18,7 @@
 
 ---
 
-### SELECT ...
+## SELECT ...
 1. Add or multiply two numbers and/or decimals
 2. Print some text.
 3. Different fields of text can be merged using the `CONCAT(<field1>, <field2>)` function.
@@ -30,12 +28,12 @@
 
 ---
 
-### FROM ...
+## FROM ...
 1. Write a `SELECT FROM` script to retrieve data from the table you created in the sandbox
 2. Try replacing the columns with `SELECT *`
 	- this returns all the columns - great for testing but try to avoid in production
 3. Query a couple of the tables in the `Sequel-Mart` schema
-	- Familiarise yourself with the structures and observe how they join![](Sequel-Mart-Schema.jpg)
+	- Familiarise yourself with the structures and observe how they join![](images/Sequel-Mart-Schema.jpg)
 *HINT: Rather than writing out the schema and table, find it in the Browser Panel (on the left in pgAdmin), and drag it onto the Query Window*
 
 ```
@@ -46,7 +44,7 @@ FROM "sequel-mart-schema"."Products";
 
 ---
 
-### WHERE ...
+## WHERE ...
 1. Practice filtering some of the data in the Sequel-Mart schema
 	- e.g. `SELECT * FROM "sequel-mart-schema"."Products" WHERE popularity > 80`*
 2. Try a few different comparison operators
@@ -64,7 +62,7 @@ WHERE popularity > 80;
 
 ---
 
-### ORDER BY ...
+## ORDER BY ...
 1. Practice ordering some of your above queries in the Sequel-Mart schema
 2. Try ordering ascending & descending
 	- Use `ASC` and `DESC`
@@ -86,7 +84,7 @@ ORDER BY popularity DESC;
 
 ---
 
-### GROUP BY & HAVING ...
+## GROUP BY & HAVING ...
 1. Practice aggregating on a couple of tables on the `Sequel-Mart` schema
 	- Experiment with `SUM`, `COUNT`, `AVG`, `MIN`, `MAX`, `STDDEV`
 2. Try combinations of aggregators that can include or exclude `HAVING`
@@ -104,7 +102,7 @@ HAVING COUNT(product_category) > 5;
 	
 ---
 
-### LIMIT...
+## LIMIT...
 1. Add limits to a couple of tables on the `Sequel-Mart` schema
 
 ```
@@ -118,8 +116,8 @@ LIMIT 5;
 
 
 ---
-### INNER JOIN...
-1. Refer to the ERD.![](Sequel-Mart-Schema.jpg)
+## INNER JOIN...
+1. Refer to the ERD.![](images/Sequel-Mart-Schema.jpg)
 2. Join the sales header or detail table with one that’s compatable
 	- e.g. Sales Head & Customers
 	- e.g. Sales Detail & Products
@@ -135,7 +133,7 @@ WHERE cu.customer_name LIKE 'Amelie%';
 ```
 
 ---
-### LEFT OUTER JOIN...
+## LEFT OUTER JOIN...
 1. Review your query from the last section 
 2. Change the `INNER JOIN` to `LEFT OUTER JOIN`
 3. See if the row counts change
@@ -156,7 +154,7 @@ WHERE cu.customer_name LIKE 'Amelie%';
 ```
 
 ---
-### Nested Statements
+## Nested Statements
 1. Recreate the below query
 ```
 SELECT 'Summary' AS Title,

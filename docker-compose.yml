@@ -31,5 +31,20 @@ services:
     ports:
       - '5000:5000'
     command: 'npm run dev'
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    depends_on:
+      - database
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@domain.com
+      PGADMIN_DEFAULT_PASSWORD: SuperSecret
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+    ports:
+      - "5050:80"
+    volumes:
+      - ./pgadmin4/servers.json:/pgadmin4/servers.json
 volumes:
   database-data: # named volumes can be managed easier using docker-compose

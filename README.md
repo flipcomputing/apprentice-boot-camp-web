@@ -3,6 +3,7 @@
 ## Table of contents
 
 - [Overview](#overview)
+- [Screenshot](#screenshot)
 - [What you can expect?](#what-you-can-expect)
 	- [Day 1](#day-1)
 	- [Day 2](#day-2)
@@ -31,6 +32,9 @@
 - A sample database based on a fictional retail company (Sequel-Mart).
 - A basic front-end using vanilla HTML, CSS & Javascript with Express.  It shows how a database-driven relationship to a back-end web server could be managed.
 
+# Screenshot
+Completed Sequel-Mart project web page:
+![image](https://user-images.githubusercontent.com/60580622/139312556-f2879a44-5c36-4732-997b-d5515f989dcd.png)
 
 &nbsp;
 
@@ -100,8 +104,6 @@ So would advise activate our cameras all the time.
 ### Whiteboard
 
 In the absence of physical collaboration on a whiteboard, a tool like [Miro](https://miro.com/) is a reasonable alternaive. You can share the Miro board in a video conference, so that everyone puts their focus on the same section of the board.
-
-
 
 &nbsp;
 # Essential Tools
@@ -222,9 +224,6 @@ Open your preferred code editor and run
 ```
 git clone https://github.com/MCR-Digital/apprentice-boot-camp-databases.git
 ```
-
-
-
 
 &nbsp;
 # Useful resources

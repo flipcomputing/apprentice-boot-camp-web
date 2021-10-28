@@ -33,8 +33,9 @@
 - A basic front-end using vanilla HTML, CSS & Javascript with Express.  It shows how a database-driven relationship to a back-end web server could be managed.
 
 # Screenshot
+
 Completed Sequel-Mart project web page:
-![image](https://user-images.githubusercontent.com/60580622/139312556-f2879a44-5c36-4732-997b-d5515f989dcd.png)
+![Sequel-Mart-Finished-Project](https://user-images.githubusercontent.com/60580622/139313616-0d045bb2-a4e9-4cf7-84ff-cfd7b1e27272.png)
 
 &nbsp;
 

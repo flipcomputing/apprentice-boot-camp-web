@@ -159,16 +159,18 @@ Three services are defined in `docker-compose.yml`:
 ## First time set up
 
 - Run `npm install` from your command line to fetch dependencies.
-
-- Run `docker compose --profile=initialise up`. This will start the database, wait five seconds, populate the database, and start the application on http://localhost:5000/. Confirm that this works, and then you can use `ctrl c` to stop docker.
+- Run `docker compose --profile=initialise up --build`. This will start the database, wait five seconds, populate the database, and start the application on http://localhost:5000/. Confirm that this works, and then you can use `ctrl c` to stop docker.
 
 ## Running the app
 
 - Run `docker compose up` to start the database and the application.
+- You should now have a working application running on http://localhost:5001, and pgadmin running on http://localhost:5050 (the password for the database is `MDigital21`)
+- You can stop these by hitting `ctrl-c`
+- You can restart the containers using `docker compose up`
 
 ## Starting over
 
-- To delete your data, run `docker compose down --volumes`. You can now run from ‘First time set up’ again.
+- To delete your data, run `docker container rm --volumes apprentice-boot-camp-databases-database-1; docker volume rm -f apprentice-boot-camp-databases_database-data`. You can now run from ‘First time set up’ again.
 
 
 

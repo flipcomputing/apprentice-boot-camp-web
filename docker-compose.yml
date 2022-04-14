@@ -29,7 +29,7 @@ services:
     volumes:
       - .:/home/node/app
     ports:
-      - '5000:5000'
+      - '5001:5000'
     command: 'npm run dev'
   pgadmin:
     container_name: pgadmin4_container

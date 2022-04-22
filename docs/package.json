@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "eleventy --serve",
-    "build": "NODE_ENV=production eleventy --pathprefix 'apprentice-boot-camp-databases'"
+    "build": "NODE_ENV=production eleventy --pathprefix 'apprentice-boot-camp-databases/docs'"
   },
   "keywords": [],
   "author": "",

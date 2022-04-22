@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+  </style>
+  <link rel="stylesheet" href="../../css/theme_001.css">
+  <link rel="stylesheet" href="../../css/style.css">
+  <title>Slides</title>
+</head>
+<body>
+  <article class="container">
+        <nav>
+      <h3 class="section__title">What are databases &amp; where do they fit into the development model?</h3>
+      <a class="slide__previous" href="../slide_003/"><</a>
+      <link rel="stylesheet" href="../../css/theme_001.css">
+      <a class="slide__next" href="../slide_005/">></a>
+      <h2 class="slide__title">Database Types</h2>
+      <p class="logo"><span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span></p>
+    </nav>
+    <main class=grid-2>
+      <section class="slide__text">
+<h4><u>Relational</u> - <em>(PostgreSQL, MySQL, SQL Server, Oracle)</em></h4>
+<ul>
+<li>Tabular - <span>(like an Excel spreadsheet)</span></li>
+<li>Structured - <span>(rows and columns)</span></li>
+<li>Consistency - <span>(datatypes &amp; constraints.  Limit allowed input to improve quality)</span></li>
+</ul>
+<p><span>Best when</span></p>
+<ul>
+<li><span>Clearly defined data structures &amp; relationships.  Can be easily Normalised</span></li>
+<li><span>Data quality matters or needs constraining</span></li>
+</ul>
+<hr>
+<h4><u>Non-Relational</u> - <em>(MongoDB, Cassandra, Redis, Couchbase, DynamoDB)</em></h4>
+<ul>
+<li>Less structured - <span>(flexibility for inconsistent keys or arrays)</span></li>
+<li>Data largely unrelated - <span>(no schemas, tables cannot be reliably joined)</span></li>
+</ul>
+<p><span>Best when</span></p>
+<ul>
+<li><span>The data structure cannot be clearly defined</span></li>
+<li><span>If data inputs are variant and flexibility matters</span></li>
+</ul>
+<hr>
+<h4><u>Graph Database</u></h4>
+<ul>
+<li>Nodes &amp; Edges - <span>(every node is related to other nodes via edges)</span></li>
+<li>No structure - <span>(relationships at record level)</span></li>
+</ul>
+<p><span>Best when</span></p>
+<ul>
+<li><span> Everything is related to everything else</span></li>
+<li><span> Deep-dive network analysis is required (e.g. fraud detection)</span></li>
+</ul>
+</section>
+<section class="slide__images">
+<caption>1. Relational Database (example from the Product table in our SQL-Mart database)</caption>
+<img src="../../images/001_Database_Types_Relational.png" />
+<caption>2. Non-Relational Database (objects and arrays. Various attributes of a test person)</caption>
+<img src="../../images/001_Database_Types_Non_Relational.png" />
+<caption>3. Graph Database (example design of a 'friendship network' between people)</caption>
+<img src="../../images/001_Database_Types_Graph.png" />
+</section>
+
+    </main>
+        
+    <footer>
+      <h4>Database Bootcamp 6</h4>
+      <p class="slide-number">Slide 4</p>
+    </footer>
+  </article>
+</body>
+</html>

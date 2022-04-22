@@ -2,7 +2,7 @@
 layout: 'base.njk'
 slide_number: 3
 slide_prev: 'slide_002/'
-slide_next: 'slide_017/'
+slide_next: 'slide_004/'
 section_title: 'What are databases & where do they fit into the development model?'
 slide_title: 'Frontend & Backend'
 theme: 'theme_001'
@@ -43,5 +43,5 @@ slide_layout: 'grid-2'
 
 <section class="slide__images">
 <caption>1. How a user interacts with an application & how the application responds</caption>
-<img src="{{ '../../images/001_Frontend_vs_Backend.png' | url }}" />
+<img src="{{ '../../images/001_Frontend_and_Backend.png' | url }}" />
 </section>

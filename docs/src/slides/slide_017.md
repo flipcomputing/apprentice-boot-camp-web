@@ -32,7 +32,7 @@ slide_layout: 'grid-2'
 
 <section class="slide__images">
 <caption>1. GROUP BY Example - Products - distinct list of categories and their count</caption>
-<img src="../../images/002_GROUP_BY_001.png" />
+<img src="{{ '../../images/002_GROUP_BY_001.png' | url }}" />
 
 </section>
 

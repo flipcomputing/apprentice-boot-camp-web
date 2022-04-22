@@ -43,5 +43,5 @@ slide_layout: 'grid-2'
 
 <section class="slide__images">
 <caption>1. How a user interacts with an application & how the application responds</caption>
-<img src="../../images/001_Frontend_vs_Backend.png" />
+<img src="{{ '../../images/001_Frontend_vs_Backend.png' | url }}" />
 </section>

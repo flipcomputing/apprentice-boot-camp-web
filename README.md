@@ -55,14 +55,14 @@ Completed Sequel-Mart project web page:
 - Connect to PostgreSQL database (including basic security)
 
 ### Section 2 (Querying a relational database - **CR**UD)
-- Create (`CREATE TABLE`)
 - Read (`SELECT` `FROM`, `WHERE`, `ORDER BY`, `GROUP BY`, `HAVING`, `LIMIT`)
+- Create (`CREATE TABLE`)
 - Joining (`INNER JOIN`, `LEFT OUTER JOIN`)
 
 ### Section 3 (Changing content in a relational database - CR**UD**)
 - Update (`INSERT`, `UPDATE`)
 - Delete (`DELETE`, `TRUNCATE`, `DROP`)
-- Changing column details
+- Changing column details (`ALTER ...`)
 
 ### Section 4 (Streamlining - making a relational database more efficient)
 - Speeding up queries

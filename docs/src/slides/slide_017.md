@@ -1,8 +1,8 @@
 ---
 layout: 'base.njk'
 slide_number: 1
-slide_prev: '/slides/slide_000/'
-slide_next: '/slides/slide_002/'
+slide_prev: '/apprentice-boot-camp-databases/public/slides/slide_000/'
+slide_next: '/apprentice-boot-camp-databases/public/slides/slide_002/'
 section_title: How do we create and query a relational database?
 slide_title: GROUP BY & HAVING ...
 theme: 'theme_002'
@@ -32,7 +32,7 @@ slide_layout: 'grid-2'
 
 <section class="slide__images">
 <caption>1. GROUP BY Example - Products - distinct list of categories and their count</caption>
-  <img src="../../images/002_GROUP_BY_001.png" />
+<img src="../../images/002_GROUP_BY_001.png" />
 
 </section>
 

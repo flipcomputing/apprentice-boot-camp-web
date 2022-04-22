@@ -1,8 +1,8 @@
 ---
 layout: 'base.njk'
 slide_number: 1
-slide_prev: '/apprentice-boot-camp-databases/public/slides/slide_000/'
-slide_next: '/apprentice-boot-camp-databases/public/slides/slide_002/'
+slide_prev: 'slide_000/'
+slide_next: 'slide_002/'
 section_title: 'Introduction'
 slide_title: 'Objectives'
 theme: 'theme_001'

@@ -1,8 +1,8 @@
 ---
 layout: 'base.njk'
 slide_number: 3
-slide_prev: '/apprentice-boot-camp-databases/public/slides/slide_002/'
-slide_next: '/apprentice-boot-camp-databases/public/slides/slide_017/'
+slide_prev: 'slide_002/'
+slide_next: 'slide_017/'
 section_title: 'What are databases & where do they fit into the development model?'
 slide_title: 'Frontend & Backend'
 theme: 'theme_001'

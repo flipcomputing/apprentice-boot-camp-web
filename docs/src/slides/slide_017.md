@@ -11,22 +11,22 @@ slide_layout: 'grid-2'
 
 <section class="slide__text">
 
-  #### If you want to aggregate some of the data by category (GROUP BY)
-  #### and optionally you want to filter these aggregations (HAVING)
+  #### Aggregate some of the data by one or more categories (`GROUP BY`)
+  ##### Optionally filter these aggregations (`HAVING`)
 
   ```
   SELECT    <field1>, SUM(<field2>) AS SumField2
-    (other functions include COUNT, AVG, MIN, MAX, STDDEV)
   FROM      <schema_name>.<table_name> | <view_name>
   WHERE     <field1> = ‘abc’
   GROUP BY  <field1>
   HAVING    SUM(<field2>) > 1
   ORDER BY  <field1> ASC | DESC;
   ```
-
-  A GROUP BY will work without a HAVING
   
-  It will not work the other way around
+  Other functions include `COUNT`, `AVG`, `MIN`, `MAX` and `STDDEV`
+
+  - A `GROUP BY` will work without a `HAVING`. It will not work the other way around
+  - A `HAVING` is to a `GROUP BY` what a `WHERE` is to a `SELECT`
   
 </section>
 

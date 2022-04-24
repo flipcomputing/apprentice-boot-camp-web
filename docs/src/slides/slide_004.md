@@ -11,7 +11,7 @@ slide_layout: 'grid-2'
 
 <section class="slide__text">
 
-#### <u>Relational</u> - *(PostgreSQL, MySQL, SQL Server, Oracle)*
+#### Relational - *(PostgreSQL, MySQL, SQL Server, Oracle)*
 - Tabular - <span>(like an Excel spreadsheet)</span>
 - Structured - <span>(rows and columns)</span>
 - Consistency - <span>(datatypes & constraints.  Limit allowed input to improve quality)</span>
@@ -22,7 +22,7 @@ slide_layout: 'grid-2'
 
 ---
 
-#### <u>Non-Relational</u> - *(MongoDB, Cassandra, Redis, Couchbase, DynamoDB)*
+#### Non-Relational - *(MongoDB, Cassandra, Redis, Couchbase, DynamoDB)*
 - Less structured - <span>(flexibility for inconsistent keys or arrays)</span>
 - Data largely unrelated - <span>(no schemas, tables cannot be reliably joined)</span>
 
@@ -32,7 +32,7 @@ slide_layout: 'grid-2'
 
 ---
 
-#### <u>Graph Database</u>
+#### Graph Database - *(AWS Neptune, Neo4J, HyperGraphDB, ArangoDB)*
 - Nodes & Edges - <span>(every node is related to other nodes via edges)</span>
 - No structure - <span>(relationships at record level)</span>
 

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+  </style>
+  <link rel="stylesheet" href="../../css/theme_002.css">
+  <link rel="stylesheet" href="../../css/style.css">
+  <title>Slides</title>
+</head>
+<body>
+  <article class="container">
+        <nav>
+      <h3 class="section__title">How do we create and query a relational database?</h3>
+      <a class="slide__previous" href="../slide_008/"><</a>
+      <link rel="stylesheet" href="../../css/theme_002.css">
+      <a class="slide__next" href="../slide_010/">></a>
+      <h2 class="slide__title">Data Types</h2>
+      <p class="logo"><span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span></p>
+    </nav>
+    <main class=grid-2>
+      <section class="slide__text">
+<h5>&quot;Acceptable values that can be returned or stored&quot;</h5>
+<p>Key points:</p>
+<ul>
+<li>Regulates input to ensure it’s acceptable</li>
+<li>The data type is included for each returned column in the Query Tool</li>
+<li>Helps to optimise the execution plan by assigning resources appropriately
+<ul>
+<li>e.g. Limiting to a smallint over an int saves 2 bytes per row</li>
+<li>Over a 1 billion row table, that would save ~1GB in storage and memory to query</li>
+</ul>
+</li>
+</ul>
+<hr />
+<table>
+  <tr>
+    <th>Common Types</th>
+    <th>Input Accepted</th>
+    <th>Bytes Reserved</th>
+  </tr>
+  <tr>
+    <th>...</th>
+    <th>...</th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Text</th>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>varchar(x)</td>
+    <td>Text, number or other ascii character up to the number in brackets. <br />
+    e.g. (varchar(10) would accept up to 10 characters)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>nvarchar(x)</td>
+    <td>As above but also accepts foreign ascii characters (e.g. ä, é, ø, ü)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <th>...</th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Integer</th>
+    <th>(Whole Numbers)</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>bit</td>
+    <td>Either 0 or 1 (used for yes/no or true/false flags)</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>smallint</td>
+    <td>Any whole number between -32,767 and 32,767</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>int</td>
+    <td>Any whole number between -2,147,483,647 and 2,147,483,647</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>bigint</td>
+    <td>-9,223,372,036,854,775,807 to 9,223,372,036,854,775,807</td>
+    <td>8</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <th>...</th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Numeric</th>
+    <th>(also known as Decimal)</th>
+    <td></td>
+  </tr>
+  <tr>
+    <td>numeric(p, s)</td>
+    <td>Any decimal up to the number of digits (precision) and decimal places (scale) <br /> e.g. (numeric(5,2) would accept a number up to 999.99)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <th>...</th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Timestamp</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>date</td>
+    <td>A date based on the current locale in YYYY-MM-DD format</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>datetime</td>
+    <td>A date based on the current locale in YYYY-MM-DD HH:MM:SS.MS format</td>
+    <td>5-8</td>
+  </tr>
+</table>
+</section>
+<section class="slide__images">
+    <caption>1. Data Type = 'text'</caption>
+    <img src="../../images/002_SELECT_Text.png" />
+    <caption>2. Data Type = 'integer'</caption>
+    <img src="../../images/002_SELECT_Highlighted.png" />
+    <caption>3. Data Type = 'numeric'</caption>
+    <img src="../../images/002_SELECT_Numeric.png" />
+    <caption>4. Data Type = 'timestamp'</caption>
+    <img src="../../images/002_SELECT_Timestamp.png" />
+</section>
+
+    </main>
+        
+    <footer>
+      <h4>Database Bootcamp 6</h4>
+      <p class="slide-number">Slide 9</p>
+    </footer>
+  </article>
+</body>
+</html>

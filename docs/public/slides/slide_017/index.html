@@ -23,18 +23,20 @@
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h4>If you want to aggregate some of the data by category (GROUP BY)</h4>
-<h4>and optionally you want to filter these aggregations (HAVING)</h4>
+<h4>Aggregate some of the data by one or more categories (<code>GROUP BY</code>)</h4>
+<h5>Optionally filter these aggregations (<code>HAVING</code>)</h5>
 <pre><code>SELECT    &lt;field1&gt;, SUM(&lt;field2&gt;) AS SumField2
-  (other functions include COUNT, AVG, MIN, MAX, STDDEV)
 FROM      &lt;schema_name&gt;.&lt;table_name&gt; | &lt;view_name&gt;
 WHERE     &lt;field1&gt; = ‘abc’
 GROUP BY  &lt;field1&gt;
 HAVING    SUM(&lt;field2&gt;) &gt; 1
 ORDER BY  &lt;field1&gt; ASC | DESC;
 </code></pre>
-<p>A GROUP BY will work without a HAVING</p>
-<p>It will not work the other way around</p>
+<p>Other functions include <code>COUNT</code>, <code>AVG</code>, <code>MIN</code>, <code>MAX</code> and <code>STDDEV</code></p>
+<ul>
+<li>A <code>GROUP BY</code> will work without a <code>HAVING</code>. It will not work the other way around</li>
+<li>A <code>HAVING</code> is to a <code>GROUP BY</code> what a <code>WHERE</code> is to a <code>SELECT</code></li>
+</ul>
 </section>
 <section class="slide__images">
 <caption>1. GROUP BY Example - Products - distinct list of categories and their count</caption>

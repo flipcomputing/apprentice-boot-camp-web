@@ -3,6 +3,7 @@
 ## Table of contents
 ---
 - [Overview](#overview)
+- [Project Slides](#project-slides)
 - [Screenshot](#screenshot)
 ---
 - [What you can expect](#what-you-can-expect)
@@ -15,8 +16,8 @@
 - [Optional Tools](#optional-tools)
 ---
 - [Installing the Database and Website Services](#installing-the-database-and-website-services)
-	- [1. Clone the Repository Locally](#1.-clone-the-repository-locally)
-	- [2. Docker Compose](#2.-docker-compose)
+	- [1. Clone the Repository Locally](#clone-the-repository-locally)
+	- [2. Docker Compose](#docker-compose)
 ---
 - [Software and Extensions Used](#software-and-extensions-used)
 	- [Front-End](#front-end)
@@ -34,6 +35,10 @@
 - A sample database back-end, based on a fictional retail company  called `Sequel-Mart`.
 - A basic front-end using vanilla HTML, CSS & Javascript with Express.
 - This project aims to show how a basic database-driven relationship to a back-end web server could be managed.
+
+---
+# Project Slides
+- The full slide deck for the project is [available from the following link](https://mcr-digital.github.io/apprentice-boot-camp-databases/public/slides/slide_000/)
 
 ---
 # Screenshot
@@ -120,7 +125,7 @@ In the absence of physical collaboration on a whiteboard, a tool like [Miro](htt
 - A [GitHub account](https://github.com)
 - A code editor (e.g. [VS Code](https://code.visualstudio.com/download))
 - Docker Desktop on [Windows](https://docs.docker.com/desktop/windows/install/) or [Mac](https://docs.docker.com/desktop/mac/install/)
-	+ This is needed to be able to [access the project files and slides](#2.-docker-compose)
+	+ This is needed to be able to [access the project files and slides](#docker-compose)
 	- You may need to [install an update to the Linux Kernal package](https://docs.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package) if prompted
 - Slack on [Windows](https://slack.com/intl/en-gb/downloads/windows) or [Mac](https://slack.com/intl/en-gb/downloads/mac)
 	+ This will enable you to collaborate with other students and mentors on the channel set up for the bootcamp
@@ -138,7 +143,9 @@ In the absence of physical collaboration on a whiteboard, a tool like [Miro](htt
 This section contains a step-by-step guide to installing everything you need to successfully complete the exercises in this boot-camp.
 &nbsp;
 
-## 1. Clone the Repository Locally
+## Clone the Repository Locally
+### 1.0 Clone the Repository
+
 - Create a folder anywhere on one of your local hard-drives
 - Open your preferred code editor and run
 ```
@@ -150,8 +157,8 @@ git clone https://github.com/MCR-Digital/apprentice-boot-camp-databases.git
 cd .\apprentice-boot-camp-databases\
 ```
 
-## 2. Docker Compose
-(Go to [2.1 First time set up](#2.1-first-time-set-up) to set this up.)
+## Docker Compose
+### 2.0 Docker Services
 
 Three services are defined in `docker-compose.yml`:
 
@@ -166,14 +173,15 @@ Three services are defined in `docker-compose.yml`:
   - This requires `npm install` to be run first, as the node modules are copied into the container
 
 ### 2.1 First time set up
-*Make sure `Docker Desktop` is open before running these steps*
+- Open `Docker Desktop` and make sure it is running before continuing
+- If the services listed below are present and running, move on to section 2.2 instead to just restart the services
 - Run `./setup.sh` (if using a Mac) or `./setup.bat` (if using Windows)
-- This will start the database, wait five seconds, populate the database
+- This will start the database.  It will then wait five seconds and populate the database
 
 #### Checks ####
 
 ##### 2.1.1. `Docker Desktop`
-This should contain the following containers / apps:
+This should now contain the following containers / apps:
 - apprentice-boot-camp-databases (RUNNING)
 	- apprentice-boot-camp-databases-database-1 `postgres` (RUNNING)
 	- apprentice-boot-camp-databases-app-1 `node:8` (RUNNING)

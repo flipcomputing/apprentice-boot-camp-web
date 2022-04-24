@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+  </style>
+  <link rel="stylesheet" href="../../css/theme_001.css">
+  <link rel="stylesheet" href="../../css/style.css">
+  <title>Slides</title>
+</head>
+<body>
+  <article class="container">
+        <nav>
+      <h3 class="section__title">Setting Up</h3>
+      <a class="slide__previous" href="../slide_004/"><</a>
+      <link rel="stylesheet" href="../../css/theme_001.css">
+      <a class="slide__next" href="../slide_006/">></a>
+      <h2 class="slide__title">Setting up the Project</h2>
+      <p class="logo"><span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span></p>
+    </nav>
+    <main class=grid-2>
+      <section class="slide__text">
+<h4>Required Downloads</h4>
+<ul>
+<li>Make sure the following has been installed:
+<ul>
+<li><strong>Docker Desktop</strong> for <a href="https://docs.docker.com/desktop/windows/install/">Windows</a> or <a href="https://docs.docker.com/desktop/mac/install/">Mac</a></li>
+<li>A code editor (e.g. <a href="https://code.visualstudio.com/download">VS Code</a>)</li>
+</ul>
+</li>
+</ul>
+<h4>Project Set Up</h4>
+<ul>
+<li>Add a folder somewhere on your computer.  This will store the project.</li>
+<li>Open a terminal window (if using VS Code, the shortcut is <code>ctrl</code>+<code>'</code>).</li>
+<li><code>cd &lt;file path&gt;</code> to the folder you've just created</li>
+<li>Run <code>git clone https://github.com/MCR-Digital/apprentice-boot-camp-databases.git</code>
+<ul>
+<li>If successful, you should be able to see the files in the <a href="https://github.com/MCR-Digital/apprentice-boot-camp-databases">course's Github repo</a></li>
+</ul>
+</li>
+<li>Run <code>cd .\apprentice-boot-camp-databases\</code> to access the root folder</li>
+</ul>
+<h4>Docker Desktop</h4>
+<ul>
+<li>Open Docker Desktop</li>
+<li>Check for a folder called <code>apprentice-boot-camp-databases</code></li>
+<li>If this <strong>does not</strong> exist:
+<ul>
+<li>In your terminal, run <code>./setup.sh</code> (if using a Mac) or <code>./setup.bat</code> (if using Windows)</li>
+</ul>
+</li>
+<li>If this is there but greyed out:
+<ul>
+<li>Run <code>./run.sh</code> (if using a Mac) or <code>./run.bat</code> (if using Windows)</li>
+</ul>
+</li>
+<li>After about 30 seconds, check the services are running as per screenshot 1</li>
+<li>You can stop the services at any time by hitting <code>ctrl</code>+<code>c</code> or <code>cmd</code>+<code>c</code> on the terminal session and terminating the batch job if prompted.</li>
+</ul>
+<h4>Project Locations</h4>
+<ul>
+<li>Sequel-Mart frontend should be on <a href="http://localhost:5001/">http://localhost:5001/</a></li>
+<li>pgAdmin 4 (PostgreSQL's Managed Database Platform) should be on <a href="http://localhost:5050/">http://localhost:5050/</a></li>
+<li>We will eventually populate the Sequel-Mart front-end with data from the PostgreSQL database</li>
+</ul>
+<h4>Accessing PostgreSQL</h4>
+<ul>
+<li>In pgAdmin, expand <code>Servers</code> on the top left</li>
+<li>It will prompt you for a password.  This is <code>MDigital21</code></li>
+<li>You should now see the server group (sequel-mart) and an expandable list called Databases.</li>
+<li>Expand <code>Databases</code> &gt; <code>sequel-mart</code> &gt; <code>Schemas</code> &gt; <code>sequel-mart-schema</code> &gt; <code>tables</code></li>
+<li>There should be 6 tables:
+<ul>
+<li><code>Customers</code>, <code>Dates</code>, <code>Products</code>, <code>Sales_Detail</code>, <code>Sales_Header</code> and <code>Stores</code></li>
+</ul>
+</li>
+</ul>
+</section>
+<section class="slide__images">
+    <caption>1. Docker Desktop (setup complete)</caption>
+    <img src="../../images/001_Docker_Setup.png" />
+    <caption>2. Sequel-Mart web page</caption>
+    <img src="../../images/001_SequelMart_Setup.png" />
+    <caption>3. PostgreSQL on first load</caption>
+    <img src="../../images/001_PostgreSQL_Setup.png" />
+</section>
+    </main>
+        
+    <footer>
+      <h4>Database Bootcamp 6</h4>
+      <p class="slide-number">Slide 5</p>
+    </footer>
+  </article>
+</body>
+</html>

@@ -4,7 +4,7 @@ slide_number: 0
 slide_prev: 'slide_000/'
 slide_next: 'slide_001/'
 section_title: 'Introduction'
-slide_title: 
+slide_title: 'Navigate using the arrows above'
 theme: 'theme_001'
 slide_layout: 'center'
 ---

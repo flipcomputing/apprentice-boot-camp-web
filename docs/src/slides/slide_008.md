@@ -17,7 +17,7 @@ slide_layout: 'grid-2'
 SELECT <value1>, <value2>;
 ```
 
-It's like saying: *"Hey, PostgreSQL; please can I have this returned to me?"*
+It's like saying: <span> "Hey, PostgreSQL; please can I have this returned to me?" </span>
 
 ##### For example:
 - `SELECT 123;` returns the number 123 in the results panel

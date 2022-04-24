@@ -52,7 +52,7 @@ Or change between dates
 ###### Truncation changes (example)
   - `SELECT 42::VARCHAR(1);` will return 4
     - `VARCHAR(1)` can only store one character so PostgreSQL takes only the first digit
-  - `SELECT 42.5::INT;` will return 43
+  - `SELECT 42.5::INT;` will return 43.  `SELECT 42.49::INT;` will return 42
     - The value is rounded to the nearest whole number so it can be a valid `INT`
 
 </section>

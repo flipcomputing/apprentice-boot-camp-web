@@ -18,7 +18,7 @@ SELECT * | <value1>, <value2>
 FROM <table_name>;
 ```
 
-It's like saying: *"Hey, PostgreSQL; please can you find this information for me?  It's in this table in this schema.  When you find this information, please read it back to me"*
+It's like saying: <span> "Hey, PostgreSQL; please can you find this information for me?  It's in this table in this schema.  When you find this information, please read it back to me" </span>
 
 ##### For example:
 Return a list of all products and all of their attributes to the results panel

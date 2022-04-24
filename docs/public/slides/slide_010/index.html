@@ -70,7 +70,7 @@
 <li><code>VARCHAR(1)</code> can only store one character so PostgreSQL takes only the first digit</li>
 </ul>
 </li>
-<li><code>SELECT 42.5::INT;</code> will return 43
+<li><code>SELECT 42.5::INT;</code> will return 43.  <code>SELECT 42.49::INT;</code> will return 42
 <ul>
 <li>The value is rounded to the nearest whole number so it can be a valid <code>INT</code></li>
 </ul>

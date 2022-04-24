@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+  </style>
+  <link rel="stylesheet" href="../../css/theme_002.css">
+  <link rel="stylesheet" href="../../css/style.css">
+  <title>Slides</title>
+</head>
+<body>
+  <article class="container">
+        <nav>
+      <h3 class="section__title">How do we create and query a relational database?</h3>
+      <a class="slide__previous" href="../slide_016/"><</a>
+      <link rel="stylesheet" href="../../css/theme_002.css">
+      <a class="slide__next" href="../slide_018/">></a>
+      <h2 class="slide__title">GROUP BY &amp; HAVING ...</h2>
+      <p class="logo"><span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span></p>
+    </nav>
+    <main class=grid-2>
+      <section class="slide__text">
+<h4>Aggregate some of the data by one or more categories (<code>GROUP BY</code>)</h4>
+<h5>Optionally filter these aggregations (<code>HAVING</code>)</h5>
+<pre><code>SELECT    &lt;field1&gt;, SUM(&lt;field2&gt;) AS SumField2
+FROM      &lt;schema_name&gt;.&lt;table_name&gt; | &lt;view_name&gt;
+WHERE     &lt;field1&gt; = ‘abc’
+GROUP BY  &lt;field1&gt;
+HAVING    SUM(&lt;field2&gt;) &gt; 1
+ORDER BY  &lt;field1&gt; ASC | DESC;
+</code></pre>
+<p>Other functions include <code>COUNT</code>, <code>AVG</code>, <code>MIN</code>, <code>MAX</code> and <code>STDDEV</code></p>
+<ul>
+<li>A <code>GROUP BY</code> will work without a <code>HAVING</code>. It will not work the other way around</li>
+<li>A <code>HAVING</code> is to a <code>GROUP BY</code> what a <code>WHERE</code> is to a <code>SELECT</code></li>
+</ul>
+</section>
+<section class="slide__images">
+<caption>1. GROUP BY Example - Products - distinct list of categories and their count</caption>
+<img src="../../images/002_GROUP_BY_001.png" />
+</section>
+<section class="slide__exercises">
+<hr>
+<h4>Exercises:</h4>
+<ul>
+<li>Practice aggregating on a couple of tables on the Sequel-Mart schema</li>
+<li>Try combinations of aggregators that can include or exclude HAVING and that exclude both GROUP BY and HAVING</li>
+</ul>
+</section>
+    </main>
+        
+    <footer>
+      <h4>Database Bootcamp 6</h4>
+      <p class="slide-number">Slide 17</p>
+    </footer>
+  </article>
+</body>
+</html>

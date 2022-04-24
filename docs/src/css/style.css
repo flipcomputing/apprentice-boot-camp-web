@@ -161,6 +161,9 @@ nav {
 .slide__title {
   grid-area: title;
   font-weight: 400;
+  font-size: var(--font-size-4);
+  text-decoration: none;
+  color: var(--clr-text-main)
 }
 
 .logo {
@@ -172,7 +175,7 @@ nav {
   justify-self: end;
 }
 
-.logo > span {
+.logo > a > span {
   color: var(--clr-text-main-span);
   font-size: var(--font-size-4);
 }

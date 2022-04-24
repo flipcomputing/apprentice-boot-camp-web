@@ -18,88 +18,139 @@
       <a class="slide__previous" href="../slide_009/"><</a>
       <link rel="stylesheet" href="../../css/theme_002.css">
       <a class="slide__next" href="../slide_011/">></a>
-      <h2 class="slide__title">Data Types - Manipulating</h2>
-      <p class="logo"><span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span></p>
+
+      <h2 class="slide__title">
+        <a class="slide__title" href="../slide_002">
+        Data Types
+        </a>
+      </h2>
+
+      <p class="logo">
+        <a class="slide__title" href="../slide_002">
+          <span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span>
+        </a>
+      </p>
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h6>We may find a value is not in the format we need</h6>
-<p>For example, <code>SELECT '42';</code> will return as text</p>
-<p>Of course here we could just remove the quotes. However, when we move to more complicated queries this will often not be an option</p>
-<p>To convert this to an integer we can use either:</p>
-<pre><code>SELECT CAST('42' AS INT);
-</code></pre>
-<p>or the shorter</p>
-<pre><code>SELECT '42'::INT;
-</code></pre>
-<p>We can reverse the process should an integer need to be stored as a string</p>
-<pre><code>SELECT 42::VARCHAR(2);
-</code></pre>
-<p>You can combine these with other data manipulations</p>
+<h5>&quot;Acceptable values that can be returned or stored&quot;</h5>
+<p>Key points:</p>
 <ul>
-<li>e.g. <code>SELECT (42.5 + 20)::NUMERIC(3,1);</code> recognises 20 as 20.0 and returns 60.5</li>
+<li>Regulates input to ensure it’s acceptable</li>
+<li>The data type is included for each returned column in the Query Tool</li>
+<li>Helps to optimise the execution plan by assigning resources appropriately
+<ul>
+<li>e.g. Limiting to a smallint over an int saves 2 bytes per row</li>
+<li>Over a 1 billion row table, that would save ~1GB in storage and memory to query</li>
 </ul>
-<p>Or change between dates</p>
-<ul>
-<li>e.g. <code>SELECT (CURRENT_TIMESTAMP)::DATE;</code> removes the time from the current timestamp</li>
+</li>
 </ul>
 <hr />
-<h5>Notes:</h5>
-<ul>
-<li>You must <code>CAST</code> to a valid data type to avoid an error or results being truncated</li>
-</ul>
-<h6>Errors (examples)</h6>
-<ul>
-<li><code>SELECT 40000::SMALLINT;</code> will return an 'out of range' error
-<ul>
-<li>The maximum value for a <code>SMALLINT</code> is 32767</li>
-</ul>
-</li>
-<li><code>SELECT '42.5'::INT;</code> will return an 'invalid input syntax type' error
-<ul>
-<li>42.5 as <code>TEXT</code> cannot be cast to an <code>INT</code></li>
-<li>Cast as at least <code>SELECT '42.5'::NUMERIC(3,1);</code> instead</li>
-<li><code>NUMERIC(3,1)</code> is valid for a number 3 digits in total with 1 of them a decimal place</li>
-</ul>
-</li>
-</ul>
-<h6>Truncation changes (example)</h6>
-<ul>
-<li><code>SELECT 42::VARCHAR(1);</code> will return 4
-<ul>
-<li><code>VARCHAR(1)</code> can only store one character so PostgreSQL takes only the first digit</li>
-</ul>
-</li>
-<li><code>SELECT 42.5::INT;</code> will return 43.  <code>SELECT 42.49::INT;</code> will return 42
-<ul>
-<li>The value is rounded to the nearest whole number so it can be a valid <code>INT</code></li>
-</ul>
-</li>
-</ul>
+<table>
+  <tr>
+    <th>Common Types</th>
+    <th>Input Accepted</th>
+    <th>Bytes Reserved</th>
+  </tr>
+  <tr>
+    <th>...</th>
+    <th>...</th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Text</th>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>varchar(x)</td>
+    <td>Text, number or other ascii character up to the number in brackets. <br />
+    e.g. (varchar(10) would accept up to 10 characters)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>nvarchar(x)</td>
+    <td>As above but also accepts foreign ascii characters (e.g. ä, é, ø, ü)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <th>...</th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Integer</th>
+    <th>(Whole Numbers)</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>bit</td>
+    <td>Either 0 or 1 (used for yes/no or true/false flags)</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>smallint</td>
+    <td>Any whole number between -32,767 and 32,767</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>int</td>
+    <td>Any whole number between -2,147,483,647 and 2,147,483,647</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>bigint</td>
+    <td>-9,223,372,036,854,775,807 to 9,223,372,036,854,775,807</td>
+    <td>8</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <th>...</th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Numeric</th>
+    <th>(also known as Decimal)</th>
+    <td></td>
+  </tr>
+  <tr>
+    <td>numeric(p, s)</td>
+    <td>Any decimal up to the number of digits (precision) and decimal places (scale) <br /> e.g. (numeric(5,2) would accept a number up to 999.99)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <th>...</th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Timestamp</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>date</td>
+    <td>A date based on the current locale in YYYY-MM-DD format</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>datetime</td>
+    <td>A date based on the current locale in YYYY-MM-DD HH:MM:SS.MS format</td>
+    <td>5-8</td>
+  </tr>
+</table>
 </section>
 <section class="slide__images">
-    <caption>1. Convert a string to an integer (method 1)</caption>
-    <img src="../../images/002_SELECT_Cast.png" />
-    <caption>2. Convert a string to an integer (method 2)</caption>
-    <img src="../../images/002_SELECT_Cast_2.png" />
-    <caption>3. Convert an integer to a string</caption>
-    <img src="../../images/002_SELECT_Cast_3.png" />
-    <caption>4. Casting Overflow Error</caption>
-    <img src="../../images/002_SELECT_Cast_Error_1.png" />
-    <caption>5. Truncation Issue on Conversion</caption>
-    <img src="../../images/002_SELECT_Cast_Error_2.png" />
+    <caption>1. Data Type = 'text'</caption>
+    <img src="../../images/002_SELECT_Text.png" />
+    <caption>2. Data Type = 'integer'</caption>
+    <img src="../../images/002_SELECT_Highlighted.png" />
+    <caption>3. Data Type = 'numeric'</caption>
+    <img src="../../images/002_SELECT_Numeric.png" />
+    <caption>4. Data Type = 'timestamp'</caption>
+    <img src="../../images/002_SELECT_Timestamp.png" />
 </section>
-<section class="slide__exercises">
-<hr>
-<h4>Exercises:</h4>
-<ul>
-<li>Practice casting some other text and numerical values as other data types
-<ul>
-<li>Make a note of any errors you come across and work through them with your mentor</li>
-</ul>
-</li>
-</ul>
-</section>
+
     </main>
         
     <footer>

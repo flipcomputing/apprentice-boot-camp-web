@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+  </style>
+  <link rel="stylesheet" href="../../css/theme_002.css">
+  <link rel="stylesheet" href="../../css/style.css">
+  <title>Slides</title>
+</head>
+<body>
+  <article class="container">
+        <nav>
+      <h3 class="section__title">How do we query a relational database?</h3>
+      <a class="slide__previous" href="../slide_022/"><</a>
+      <link rel="stylesheet" href="../../css/theme_002.css">
+      <a class="slide__next" href="../slide_024/">></a>
+
+      <h2 class="slide__title">
+        <a class="slide__title" href="../slide_002">
+        Nested Statements
+        </a>
+      </h2>
+
+      <p class="logo">
+        <a class="slide__title" href="../slide_002">
+          <span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span>
+        </a>
+      </p>
+    </nav>
+    <main class=grid-2>
+      <section class="slide__text">
+<h5>Include a sub-query inside a SELECT, FROM or WHERE clause</h5>
+<h6>SELECT Nesting</h6>
+<pre><code>SELECT &lt;field1&gt;, (SELECT COUNT | SUM | AVG(DISTINCT &lt;field2&gt;
+                  FROM &lt;schema_name&gt;.&lt;table_name&gt;) AS &lt;alias1&gt;;
+</code></pre>
+</section>
+<section class="slide__images">
+<caption>1. LEFT OUTER JOIN returns matches found in BOTH tables only</caption>
+<img src="../../images/002_LEFT_JOIN_Venn.png" />
+</section>
+<section class="slide__exercises">
+<hr>
+<h4>Exercises:</h4>
+<ol>
+<li>Apart from Amelie M.W.H how many other customers are yet to make a transaction?
+<ul>
+<li>HINT: Add <code>WHERE sh.sale_id IS NULL</code> after your join</li>
+</ul>
+</li>
+</ol>
+</section>
+    </main>
+        
+    <footer>
+      <h4>Database Bootcamp 6</h4>
+      <p class="slide-number">Slide 23</p>
+    </footer>
+  </article>
+</body>
+</html>

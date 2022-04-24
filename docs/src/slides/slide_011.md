@@ -3,53 +3,82 @@ layout: 'base.njk'
 slide_number: 11
 slide_prev: 'slide_010/'
 slide_next: 'slide_012/'
-section_title: 'How do we create and query a relational database?'
-slide_title: 'Sequel-Mart database'
+section_title: 'How do we query a relational database?'
+slide_title: 'Data Types - Manipulating'
 theme: 'theme_002'
 slide_layout: 'grid-2'
 ---
 
 <section class="slide__text">
 
-Now that we have a better idea of data types and how to use `SELECT`, it's time to query some stored data!
+###### We may find a value is not in the format we need
+For example, `SELECT '42';` will return as text
 
-##### Introducing our Sequel-Mart database
-This database stores information about our business in the following 6 tables:
-- Customers - <span>One row per registered customer who has made a purchase</span>
-- Dates - <span>One row per day. Various attributes about each date from 01/01/2020 to 31/12/2023 </span>
-- Products - <span>One row per product available for sale by Sequel-Mart</span>
-- Sales_Detail - <span>One row per basket of products bought per transaction</span>
-- Sales_Head - <span>One row per transaction completed by a customer in a store</span>
-- Stores - <span>One row per store in which a customer can make a transaction</span>
+Of course here we could just remove the quotes. However, when we move to more complicated queries this will often not be an option
 
-The columns in each table can be found by:
-  - On the Browser panel on the left, find `Tables`
-  - Expand this and expand a table to see the list of columns
+To convert this to an integer we can use either:
+```
+SELECT CAST('42' AS INT);
+```
+or the shorter
+```
+SELECT '42'::INT;
+```
 
-##### Entity Relationship
-- It's common to map out how the tables in a database **relate** to each others
-- This will help later on when we want to return information stored in multiple tables in one query
+We can reverse the process should an integer need to be stored as a string
+```
+SELECT 42::VARCHAR(2);
+```
 
-<caption>1. Sequel-Mart's database schema</caption>
-<img src="{{ '../../images/002_Sequel_Mart_Schema.png' | url }}" />
+You can combine these with other data manipulations
+- e.g. `SELECT (42.5 + 20)::NUMERIC(3,1);` recognises 20 as 20.0 and returns 60.5
 
-##### Design considerations
-- Relational tables tend to be designed to store **attributes relating to one distinct category**
-- **Keys or IDs** are made available so we can **relate or join** these tables together
-  - Each product is given an ID of `product_id` (e.g. Alstromeria is given an ID of 1)
-  - This `product_id` is referenced by the `product_id` column in the `Sales_Detail` table
-  - The product only appears once in the `Products` table
-  - However it can appear many times in the `Sales_Detail` table
-  - Therefore it makes sense to only store the ID of the product in `Sales_Detail`
-    - It will take up less storage space
-    - Any changes to a product's attributes only need to take in the `Products` table
-    - It will eliminate potential inconsistencies from product data repeated in `Sales_Detail`
+Or change between dates
+- e.g. `SELECT (CURRENT_TIMESTAMP)::DATE;` removes the time from the current timestamp
+
+<hr />
+
+##### Notes:
+- You must `CAST` to a valid data type to avoid an error or results being truncated
+  
+###### Errors (examples)
+  - `SELECT 40000::SMALLINT;` will return an 'out of range' error
+    - The maximum value for a `SMALLINT` is 32767
+  - `SELECT '42.5'::INT;` will return an 'invalid input syntax type' error
+    - 42.5 as `TEXT` cannot be cast to an `INT`
+    - Cast as at least `SELECT '42.5'::NUMERIC(3,1);` instead
+    - `NUMERIC(3,1)` is valid for a number 3 digits in total with 1 of them a decimal place
+
+###### Truncation changes (example)
+  - `SELECT 42::VARCHAR(1);` will return 4
+    - `VARCHAR(1)` can only store one character so PostgreSQL takes only the first digit
+  - `SELECT 42.5::INT;` will return 43.  `SELECT 42.49::INT;` will return 42
+    - The value is rounded to the nearest whole number so it can be a valid `INT`
 
 </section>
 
 
 <section class="slide__images">
-<caption>2. PostgreSQL's table and column list (Products table)</caption>
-<img src="{{ '../../images/002_DESIGN_Table_List.png' | url }}" />
+    <caption>1. Convert a string to an integer (method 1)</caption>
+    <img src="{{ '../../images/002_SELECT_Cast.png' | url }}" />
+    <caption>2. Convert a string to an integer (method 2)</caption>
+    <img src="{{ '../../images/002_SELECT_Cast_2.png' | url }}" />
+    <caption>3. Convert an integer to a string</caption>
+    <img src="{{ '../../images/002_SELECT_Cast_3.png' | url }}" />
+    <caption>4. Casting Overflow Error</caption>
+    <img src="{{ '../../images/002_SELECT_Cast_Error_1.png' | url }}" />
+    <caption>5. Truncation Issue on Conversion</caption>
+    <img src="{{ '../../images/002_SELECT_Cast_Error_2.png' | url }}" />
+
+</section>
+
+
+<section class="slide__exercises">
+
+---
+
+  #### Exercises:
+- Practice casting some other text and numerical values as other data types
+  - Make a note of any errors you come across and work through them with your mentor
 
 </section>

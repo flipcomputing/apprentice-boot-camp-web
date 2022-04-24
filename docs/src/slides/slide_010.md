@@ -4,81 +4,134 @@ slide_number: 10
 slide_prev: 'slide_009/'
 slide_next: 'slide_011/'
 section_title: 'How do we create and query a relational database?'
-slide_title: 'Data Types - Manipulating'
+slide_title: 'Data Types'
 theme: 'theme_002'
 slide_layout: 'grid-2'
 ---
 
 <section class="slide__text">
 
-###### We may find a value is not in the format we need
-For example, `SELECT '42';` will return as text
+##### "Acceptable values that can be returned or stored"
 
-Of course here we could just remove the quotes. However, when we move to more complicated queries this will often not be an option
-
-To convert this to an integer we can use either:
-```
-SELECT CAST('42' AS INT);
-```
-or the shorter
-```
-SELECT '42'::INT;
-```
-
-We can reverse the process should an integer need to be stored as a string
-```
-SELECT 42::VARCHAR(2);
-```
-
-You can combine these with other data manipulations
-- e.g. `SELECT (42.5 + 20)::NUMERIC(3,1);` recognises 20 as 20.0 and returns 60.5
-
-Or change between dates
-- e.g. `SELECT (CURRENT_TIMESTAMP)::DATE;` removes the time from the current timestamp
+Key points:
+- Regulates input to ensure it’s acceptable
+- The data type is included for each returned column in the Query Tool
+- Helps to optimise the execution plan by assigning resources appropriately
+  - e.g. Limiting to a smallint over an int saves 2 bytes per row
+  - Over a 1 billion row table, that would save ~1GB in storage and memory to query
 
 <hr />
 
-##### Notes:
-- You must `CAST` to a valid data type to avoid an error or results being truncated
-  
-###### Errors (examples)
-  - `SELECT 40000::SMALLINT;` will return an 'out of range' error
-    - The maximum value for a `SMALLINT` is 32767
-  - `SELECT '42.5'::INT;` will return an 'invalid input syntax type' error
-    - 42.5 as `TEXT` cannot be cast to an `INT`
-    - Cast as at least `SELECT '42.5'::NUMERIC(3,1);` instead
-    - `NUMERIC(3,1)` is valid for a number 3 digits in total with 1 of them a decimal place
+<table>
+  <tr>
+    <th>Common Types</th>
+    <th>Input Accepted</th>
+    <th>Bytes Reserved</th>
+  </tr>
 
-###### Truncation changes (example)
-  - `SELECT 42::VARCHAR(1);` will return 4
-    - `VARCHAR(1)` can only store one character so PostgreSQL takes only the first digit
-  - `SELECT 42.5::INT;` will return 43.  `SELECT 42.49::INT;` will return 42
-    - The value is rounded to the nearest whole number so it can be a valid `INT`
+  <tr>
+    <th>...</th>
+    <th>...</th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Text</th>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>varchar(x)</td>
+    <td>Text, number or other ascii character up to the number in brackets. <br />
+    e.g. (varchar(10) would accept up to 10 characters)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>nvarchar(x)</td>
+    <td>As above but also accepts foreign ascii characters (e.g. ä, é, ø, ü)</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <th>...</th>
+    <th>...</th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Integer</th>
+    <th>(Whole Numbers)</th>
+    <th></th>
+  </tr>
+
+  <tr>
+    <td>bit</td>
+    <td>Either 0 or 1 (used for yes/no or true/false flags)</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>smallint</td>
+    <td>Any whole number between -32,767 and 32,767</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>int</td>
+    <td>Any whole number between -2,147,483,647 and 2,147,483,647</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>bigint</td>
+    <td>-9,223,372,036,854,775,807 to 9,223,372,036,854,775,807</td>
+    <td>8</td>
+  </tr>
+
+  <tr>
+    <th>...</th>
+    <th>...</th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Numeric</th>
+    <th>(also known as Decimal)</th>
+    <td></td>
+  </tr>
+  <tr>
+    <td>numeric(p, s)</td>
+    <td>Any decimal up to the number of digits (precision) and decimal places (scale) <br /> e.g. (numeric(5,2) would accept a number up to 999.99)</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <th>...</th>
+    <th>...</th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Timestamp</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>date</td>
+    <td>A date based on the current locale in YYYY-MM-DD format</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>datetime</td>
+    <td>A date based on the current locale in YYYY-MM-DD HH:MM:SS.MS format</td>
+    <td>5-8</td>
+  </tr>
+</table>
 
 </section>
 
 
 <section class="slide__images">
-    <caption>1. Convert a string to an integer (method 1)</caption>
-    <img src="{{ '../../images/002_SELECT_Cast.png' | url }}" />
-    <caption>2. Convert a string to an integer (method 2)</caption>
-    <img src="{{ '../../images/002_SELECT_Cast_2.png' | url }}" />
-    <caption>3. Convert an integer to a string</caption>
-    <img src="{{ '../../images/002_SELECT_Cast_3.png' | url }}" />
-    <caption>4. Casting Overflow Error</caption>
-    <img src="{{ '../../images/002_SELECT_Cast_Error_1.png' | url }}" />
-    <caption>5. Truncation Issue on Conversion</caption>
-    <img src="{{ '../../images/002_SELECT_Cast_Error_2.png' | url }}" />
-
-</section>
-
-
-<section class="slide__exercises">
-
----
-
-  #### Exercises:
-- Practice casting some other text and numerical values as other data types
-  - Make a note of any errors you come across and work through them with your mentor
+    <caption>1. Data Type = 'text'</caption>
+    <img src="{{ '../../images/002_SELECT_Text.png' | url }}" />
+    <caption>2. Data Type = 'integer'</caption>
+    <img src="{{ '../../images/002_SELECT_Highlighted.png' | url }}" />
+    <caption>3. Data Type = 'numeric'</caption>
+    <img src="{{ '../../images/002_SELECT_Numeric.png' | url }}" />
+    <caption>4. Data Type = 'timestamp'</caption>
+    <img src="{{ '../../images/002_SELECT_Timestamp.png' | url }}" />
 
 </section>

@@ -14,133 +14,123 @@
 <body>
   <article class="container">
         <nav>
-      <h3 class="section__title">How do we create and query a relational database?</h3>
+      <h3 class="section__title">How do we query a relational database?</h3>
       <a class="slide__previous" href="../slide_008/"><</a>
       <link rel="stylesheet" href="../../css/theme_002.css">
       <a class="slide__next" href="../slide_010/">></a>
-      <h2 class="slide__title">Data Types</h2>
-      <p class="logo"><span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span></p>
+
+      <h2 class="slide__title">
+        <a class="slide__title" href="../slide_002">
+        SELECT ...
+        </a>
+      </h2>
+
+      <p class="logo">
+        <a class="slide__title" href="../slide_002">
+          <span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span>
+        </a>
+      </p>
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h5>&quot;Acceptable values that can be returned or stored&quot;</h5>
-<p>Key points:</p>
+<h4>Requesting some information</h4>
+<pre><code>SELECT &lt;value1&gt;, &lt;value2&gt;;
+</code></pre>
+<p>It's like saying: <span> &quot;Hey, PostgreSQL; please can I have this returned to me?&quot; </span></p>
+<h5>For example:</h5>
 <ul>
-<li>Regulates input to ensure it’s acceptable</li>
-<li>The data type is included for each returned column in the Query Tool</li>
-<li>Helps to optimise the execution plan by assigning resources appropriately
+<li><code>SELECT 123;</code> returns the number 123 in the results panel</li>
+<li><code>SELECT 'Hello World';</code> returns the text 'Hello'</li>
+</ul>
+<h5>Notes:</h5>
 <ul>
-<li>e.g. Limiting to a smallint over an int saves 2 bytes per row</li>
-<li>Over a 1 billion row table, that would save ~1GB in storage and memory to query</li>
+<li>We can execute the SQL by:
+<ul>
+<li>Clicking the play button on the toolbar at the top</li>
+<li>Using the shortcut <code>F5</code></li>
+</ul>
+</li>
+<li>Note the <strong>semi-colons</strong> at the end of each query:
+<ul>
+<li>This tells PostgreSQL they are two separate queries</li>
+<li>If these are removed and both queries are run, we would get a syntax error</li>
+<li>If multiple queries are in the same session only the last query will return a result</li>
+<li>To run a specific query, highlight it before executing it</li>
+</ul>
+</li>
+<li>Text and Dates need to be surrounded by <strong>single-quotes</strong> (not double-quotes)
+<ul>
+<li>e.g. <code>SELECT 'Hello World';</code></li>
+</ul>
+</li>
+<li>Integers and Numerics can be put in as they are
+<ul>
+<li>e.g. <code>SELECT 123;</code></li>
 </ul>
 </li>
 </ul>
 <hr />
-<table>
-  <tr>
-    <th>Common Types</th>
-    <th>Input Accepted</th>
-    <th>Bytes Reserved</th>
-  </tr>
-  <tr>
-    <th>...</th>
-    <th>...</th>
-    <th></th>
-  </tr>
-  <tr>
-    <th>Text</th>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>varchar(x)</td>
-    <td>Text, number or other ascii character up to the number in brackets. <br />
-    e.g. (varchar(10) would accept up to 10 characters)</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>nvarchar(x)</td>
-    <td>As above but also accepts foreign ascii characters (e.g. ä, é, ø, ü)</td>
-    <td></td>
-  </tr>
-  <tr>
-    <th>...</th>
-    <th>...</th>
-    <th></th>
-  </tr>
-  <tr>
-    <th>Integer</th>
-    <th>(Whole Numbers)</th>
-    <th></th>
-  </tr>
-  <tr>
-    <td>bit</td>
-    <td>Either 0 or 1 (used for yes/no or true/false flags)</td>
-    <td>1</td>
-  </tr>
-  <tr>
-    <td>smallint</td>
-    <td>Any whole number between -32,767 and 32,767</td>
-    <td>2</td>
-  </tr>
-  <tr>
-    <td>int</td>
-    <td>Any whole number between -2,147,483,647 and 2,147,483,647</td>
-    <td>4</td>
-  </tr>
-  <tr>
-    <td>bigint</td>
-    <td>-9,223,372,036,854,775,807 to 9,223,372,036,854,775,807</td>
-    <td>8</td>
-  </tr>
-  <tr>
-    <th>...</th>
-    <th>...</th>
-    <th></th>
-  </tr>
-  <tr>
-    <th>Numeric</th>
-    <th>(also known as Decimal)</th>
-    <td></td>
-  </tr>
-  <tr>
-    <td>numeric(p, s)</td>
-    <td>Any decimal up to the number of digits (precision) and decimal places (scale) <br /> e.g. (numeric(5,2) would accept a number up to 999.99)</td>
-    <td></td>
-  </tr>
-  <tr>
-    <th>...</th>
-    <th>...</th>
-    <th></th>
-  </tr>
-  <tr>
-    <th>Timestamp</th>
-    <th></th>
-    <th></th>
-  </tr>
-  <tr>
-    <td>date</td>
-    <td>A date based on the current locale in YYYY-MM-DD format</td>
-    <td>3</td>
-  </tr>
-  <tr>
-    <td>datetime</td>
-    <td>A date based on the current locale in YYYY-MM-DD HH:MM:SS.MS format</td>
-    <td>5-8</td>
-  </tr>
-</table>
+<p>We can use <code>SELECT</code> to perform calculations</p>
+<ul>
+<li><code>SELECT 12 + 23;</code> returns the number 35 <span> &quot;Hey, PostgreSQL; what is 12 + 23?&quot;</span></li>
+<li><code>SELECT 10 * 8;</code> returns the number 80<span> &quot;Hey, PostgreSQL; what is 10 x 8?&quot;</span></li>
+<li><code>SELECT 3.14 + 2.73;</code> returns the decimal 5.87<span> &quot;Hey, PostgreSQL; what is 3.14 + 2.73?&quot;</span></li>
+<li><code>SELECT 56 - 23 + 12.3;</code> returns the decimal 45.3</li>
+<li><code>SELECT 56 - (23 + 12.3);</code> returns the decimal 20.7 (following <a href="https://en.wikipedia.org/wiki/Order_of_operations">BODMAS</a>)</li>
+</ul>
+<p>We can also include in-built functions to manipulate an input</p>
+<ul>
+<li><code>SELECT CURRENT_TIMESTAMP;</code> returns the current date and time to the millisecond</li>
+<li>The <code>CONCAT</code> function concatenates text input
+<ul>
+<li>e.g. <code>SELECT CONCAT('Hello', ' a b ', 'World');</code> returns 'Hello a b World'</li>
+</ul>
+</li>
+</ul>
+<h6>Booleans (A data type that returns <code>true</code> or <code>false</code>)</h6>
+<ul>
+<li><code>SELECT true</code> returns a boolean true, <code>SELECT false</code> returns a boolean false</li>
+</ul>
+<h6>Aliasing</h6>
+<ul>
+<li>At the moment the column header is <code>?column?</code></li>
+<li>If we include the <code>AS</code> keyword, we can give the column a name
+<ul>
+<li>e.g. <code>SELECT 123 AS my_number</code> replaces <code>?column?</code> with <code>my_number</code></li>
+</ul>
+</li>
+<li>When we query the database the column name of the table will be used by default
+<ul>
+<li>That behaviour can also be overwritten by the <code>AS</code> keyword</li>
+</ul>
+</li>
+</ul>
 </section>
 <section class="slide__images">
-    <caption>1. Data Type = 'text'</caption>
+    <caption>1. Return some text</caption>
     <img src="../../images/002_SELECT_Text.png" />
-    <caption>2. Data Type = 'integer'</caption>
+    <caption>2. Example of a syntax error, missed semicolon</caption>
+    <img src="../../images/002_SELECT_Error.png" />
+    <caption>3. Example of a multi-line select, only returns the last statement</caption>
+    <img src="../../images/002_SELECT_Multi_Line.png" />
+    <caption>4. Example of a multi-line select, running highlighted statement</caption>
     <img src="../../images/002_SELECT_Highlighted.png" />
-    <caption>3. Data Type = 'numeric'</caption>
-    <img src="../../images/002_SELECT_Numeric.png" />
-    <caption>4. Data Type = 'timestamp'</caption>
-    <img src="../../images/002_SELECT_Timestamp.png" />
+    <caption>5. Example of a column name being assigned</caption>
+    <img src="../../images/002_SELECT_As_Alias.png" />
 </section>
-
+<section class="slide__exercises">
+<hr>
+<h4>Exercises:</h4>
+<ul>
+<li>Practice some more sums
+<ul>
+<li>Include minus (-), divide (/) or modulus (%) and combine numbers and/or decimals</li>
+</ul>
+</li>
+<li>Print some text and practice concatination.</li>
+<li>Try selecting a date (e.g. '2021-08-02 11:00:15') or CURRENT_TIMESTAMP</li>
+</ul>
+</section>
     </main>
         
     <footer>

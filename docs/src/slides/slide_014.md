@@ -3,108 +3,88 @@ layout: 'base.njk'
 slide_number: 14
 slide_prev: 'slide_013/'
 slide_next: 'slide_015/'
-section_title: 'How do we create and query a relational database?'
-slide_title: 'WHERE... (logical filters)'
+section_title: 'How do we query a relational database?'
+slide_title: 'WHERE... (comparison filters)'
 theme: 'theme_002'
 slide_layout: 'grid-2'
 ---
 
 <section class="slide__text">
 
-##### Logical Operators
-- `IN` - <span>Operand must be in a list of expressions</span>
+#### Filter the data, return only the rows we need
+
 ```
 SELECT * | <value1>, <value2>
 FROM <table_name>
-WHERE <field1> IN ('abc', def', 'ghi');
+WHERE <field1> = 'abc';
 ```
 
-For example, if we wanted to return all the types of apples and pears we stock:
-```
-SELECT *
-FROM "sequel-mart-schema"."Products"
-WHERE product_item IN ('apples', 'pears');
-```
-<br />
-<hr />
+It's like saying: <span> "Hey, PostgreSQL; please can you find this information for me?  It's in this table in this schema.  When you find it, please **only read back the records that match my criteria**" </span>
 
-- `BETWEEN` - <span>Operand must fall between a range of inputs</span>
-```
-SELECT * | <value1>, <value2>
-FROM <table_name>
-WHERE <field1> BETWEEN <input1> AND <input2>;
-```
-
-For example, let's see 'mid-popularity' products with scores between 50 and 55:
+##### For example:
+Return a list of all products and all attributes but only if `popularity` is more than 80
 ```
 SELECT product_id, product_category, product_item, product_variety, popularity
 FROM "sequel-mart-schema"."Products"
-WHERE Popularity BETWEEN 50 AND 55;
+WHERE popularity > 80;
 ```
 
-This works for text as well.  For example,
+You should see a much smaller set of results, each with a popularity of more than 80
+
+In this case, we are viewing the 12 most popular products out of our inventory of 129
+
+<hr />
+
+##### Comparison Operators 
+We've used **arithmetic operators** (`+`, `-`, `*`, `/` and `%`) already to do maths on static numbers
+
+Like in programming languages we can use **comparison operators** to filter results
+
+These include:
+- `=` - <span>Equal to</span>
+- `>` - <span>Greater than</span>
+- `>=` - <span>Greater than or equal to</span>
+- `<` - <span>Less than</span>
+- `<=` - <span>Less than or equal to</span>
+- `<>` or `!=` - <span>Not equal to</span>
+
+<hr />
+
+##### Multiple clauses
+We can combine filters together using the following keywords:
+- `AND` - <span>Both statements have to be true</span>
+- `OR` - <span>One of the statements has to be true</span>
+
+For example:
 ```
 SELECT product_id, product_category, product_item, product_variety, popularity
 FROM "sequel-mart-schema"."Products"
-WHERE product_item BETWEEN 'gl' AND 'les';
+WHERE popularity > 70 AND product_category = 'cut_flowers';
 ```
-This returns 'gladioli' and 'leeks' as they are greater than `'gl'` alphabetically.  It doesn't include 'lettuce' as that is greater then `'les'`
+Returns:
+- All cut flowers that also have a popularity of more than 70
 
-<br />
-<hr />
-
-- `LIKE` - <span>Operand must match a pattern of input</span>
-```
-SELECT * | <value1>, <value2>
-FROM <table_name>
-WHERE <field1> LIKE 'abc%' | '%abc' | '%abc%';
-```
-
-For example, if we wanted to see all customers whose name starts with Jack we could:
-```
-SELECT *
-FROM "sequel-mart-schema"."Customers"
-WHERE customer_name LIKE ('Jack%');
-```
-Notice that this also returns someone called Jackson as it starts with Jack
-
-Some of our products have varieties with a season at the end.  If we wanted to see these we could query:
-```
-SELECT *
-FROM "sequel-mart-schema"."Products"
-WHERE product_variety LIKE ('%season');
-```
-
-<br />
-<hr />
-
-- `NOT` - <span>Operand must **NOT** match a pattern of input</span>
-
-This can be placed in front of any of the above `NOT IN`, `NOT BETWEEN` and `NOT LIKE`
-
-When used, this will flip the logic around.
+Whereas:
 ```
 SELECT product_id, product_category, product_item, product_variety, popularity
 FROM "sequel-mart-schema"."Products"
-WHERE Popularity NOT BETWEEN 50 AND 55;
+WHERE popularity > 85 OR product_category = 'cut_flowers';
 ```
-Would return any product that did not have a popularity between 50 and 55
+Returns:
+- All cut flowers regardless of popularity
+- Any other product with a popularity of more than 85
+  - In this case, raspberries and strawberries qualify because while they are not cut flowers, their popularity is above 85
 
 </section>
 
 
 <section class="slide__images">
-    <caption>1. List of apples and pears</caption>
-    <img src="{{ '../../images/002_WHERE_Products_Apples_Pears.png' | url }}" />
-    <caption>2. List of products with popularity between 50 and 55</caption>
-    <img src="{{ '../../images/002_WHERE_Products_Pop_50_55.png' | url }}" />
-    <caption>3. List of products with items between gl and les alphabetically</caption>
-    <img src="{{ '../../images/002_WHERE_Products_Item_gl_les.png' | url }}" />
-    <caption>4. List of customers starting with Jack</caption>
-    <img src="{{ '../../images/002_WHERE_Customers_LIKE_Jack.png' | url }}" />
-    <caption>5. List of products ending with 'season'</caption>
-    <img src="{{ '../../images/002_WHERE_Products_LIKE_Season.png' | url }}" />
-
+    <caption>1. Product table Popularity more than 80</caption>
+    <img src="{{ '../../images/002_WHERE_Products_Pop_80.png' | url }}" />
+    <caption>2. Product table Popularity more than 70 AND product is cut flowers</caption>
+    <img src="{{ '../../images/002_WHERE_Products_Pop_70_Flowers.png' | url }}" />
+    <caption>3. Product table Popularity more than 85 OR product is cut flowers</caption>
+    <img src="{{ '../../images/002_WHERE_Products_Pop_85_OR_Flowers.png' | url }}" />
 
 </section>
 
@@ -114,10 +94,10 @@ Would return any product that did not have a popularity between 50 and 55
 ---
 
   #### Exercises:
-1. How many customers joined Sequel-Mart between 1st February 2021 and 28th February 2021?
-2. How many products are sold in pack_sizes of unit, bunch or head?
-3. How many products are not sold by the kilogram (kg), unit, bunch or head?
-4. How many times did customers between 100 and 105 shop in our stores (from Sales_Header)?
-5. How many customers names end with the initials L.K?
+1. How many customers joined Sequel-Mart before 1st February 2021?
+2. How many products are sold by the unit (e.g. in pack_sizes of 'unit')?
+3. How many products are not sold by the kilogram (kg)?
+4. How many times did customer 100 shop in our stores (from Sales_Header)?
+5. How many sales transactions (Sales_Header) had a feedback score of 2?
 
 </section>

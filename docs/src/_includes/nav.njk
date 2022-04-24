@@ -3,6 +3,16 @@
       <a class="slide__previous" href="{{'../'}}{{ slide_prev | url }}"><</a>
       <link rel="stylesheet" href="{{ '../../css/'}}{{ theme }}{{'.css' | url }}">
       <a class="slide__next" href="{{'../'}}{{ slide_next | url }}">></a>
-      <h2 class="slide__title">{{ slide_title }}</h2>
-      <p class="logo"><span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span></p>
+
+      <h2 class="slide__title">
+        <a class="slide__title" href="{{ '../slide_002' | url }}">
+        {{ slide_title }}
+        </a>
+      </h2>
+
+      <p class="logo">
+        <a class="slide__title" href="{{ '../slide_002' | url }}">
+          <span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span>
+        </a>
+      </p>
     </nav>

@@ -3,88 +3,52 @@ layout: 'base.njk'
 slide_number: 13
 slide_prev: 'slide_012/'
 slide_next: 'slide_014/'
-section_title: 'How do we create and query a relational database?'
-slide_title: 'WHERE... (comparison filters)'
+section_title: 'How do we query a relational database?'
+slide_title: 'FROM...'
 theme: 'theme_002'
 slide_layout: 'grid-2'
 ---
 
 <section class="slide__text">
 
-#### Filter the data, return only the rows we need
+#### Tell the server where to look for the data
 
 ```
 SELECT * | <value1>, <value2>
-FROM <table_name>
-WHERE <field1> = 'abc';
+FROM <table_name>;
 ```
 
-It's like saying: <span> "Hey, PostgreSQL; please can you find this information for me?  It's in this table in this schema.  When you find it, please **only read back the records that match my criteria**" </span>
+It's like saying: <span> "Hey, PostgreSQL; please can you find this information for me?  It's in this table in this schema.  When you find this information, please read it back to me" </span>
 
 ##### For example:
-Return a list of all products and all attributes but only if `popularity` is more than 80
+Return a list of all products and all of their attributes to the results panel
 ```
-SELECT product_id, product_category, product_item, product_variety, popularity
-FROM "sequel-mart-schema"."Products"
-WHERE popularity > 80;
+SELECT *
+FROM "sequel-mart-schema"."Products";
+```
+Return a list of all products and some of their attributes to the results panel
+```
+SELECT product_id, product_category, product_item, popularity
+FROM "sequel-mart-schema"."Products";
 ```
 
-You should see a much smaller set of results, each with a popularity of more than 80
-
-In this case, we are viewing the 12 most popular products out of our inventory of 129
-
-<hr />
-
-##### Comparison Operators 
-We've used **arithmetic operators** (`+`, `-`, `*`, `/` and `%`) already to do maths on static numbers
-
-Like in programming languages we can use **comparison operators** to filter results
-
-These include:
-- `=` - <span>Equal to</span>
-- `>` - <span>Greater than</span>
-- `>=` - <span>Greater than or equal to</span>
-- `<` - <span>Less than</span>
-- `<=` - <span>Less than or equal to</span>
-- `<>` or `!=` - <span>Not equal to</span>
-
-<hr />
-
-##### Multiple clauses
-We can combine filters together using the following keywords:
-- `AND` - <span>Both statements have to be true</span>
-- `OR` - <span>One of the statements has to be true</span>
-
-For example:
-```
-SELECT product_id, product_category, product_item, product_variety, popularity
-FROM "sequel-mart-schema"."Products"
-WHERE popularity > 70 AND product_category = 'cut_flowers';
-```
-Returns:
-- All cut flowers that also have a popularity of more than 70
-
-Whereas:
-```
-SELECT product_id, product_category, product_item, product_variety, popularity
-FROM "sequel-mart-schema"."Products"
-WHERE popularity > 85 OR product_category = 'cut_flowers';
-```
-Returns:
-- All cut flowers regardless of popularity
-- Any other product with a popularity of more than 85
-  - In this case, raspberries and strawberries qualify because while they are not cut flowers, their popularity is above 85
+##### Notes:
+- You can drag the table from the browser into the Query Tool panel
+- `SELECT *` is short-hand for 'include every column in the table'
+  - This is good for profiling data in a test environment
+  - For a production environment it is better to only use the columns you need
+- The column names which were previously `?column?` are replaced with the name in the table
+- The data type of the column is included
+  - e.g. `product_item` only accepts varying character strings of no more than 50 characters
 
 </section>
 
 
 <section class="slide__images">
-    <caption>1. Product table Popularity more than 80</caption>
-    <img src="{{ '../../images/002_WHERE_Products_Pop_80.png' | url }}" />
-    <caption>2. Product table Popularity more than 70 AND product is cut flowers</caption>
-    <img src="{{ '../../images/002_WHERE_Products_Pop_70_Flowers.png' | url }}" />
-    <caption>3. Product table Popularity more than 85 OR product is cut flowers</caption>
-    <img src="{{ '../../images/002_WHERE_Products_Pop_85_OR_Flowers.png' | url }}" />
+    <caption>1. Product table (all columns)</caption>
+    <img src="{{ '../../images/002_FROM_Products_All.png' | url }}" />
+    <caption>2. Product table (some of the columns)</caption>
+    <img src="{{ '../../images/002_FROM_Products_Some.png' | url }}" />
 
 </section>
 
@@ -94,10 +58,7 @@ Returns:
 ---
 
   #### Exercises:
-1. How many customers joined Sequel-Mart before 1st February 2021?
-2. How many products are sold by the unit (e.g. in pack_sizes of 'unit')?
-3. How many products are not sold by the kilogram (kg)?
-4. How many times did customer 100 shop in our stores (from Sales_Header)?
-5. How many sales transactions (Sales_Header) had a feedback score of 2?
+- Run SELECT * from each of the other 5 tables
+- Familiarise yourself with the structure, and how it relates to the Entity Relationship diagram on the previous slide
 
 </section>

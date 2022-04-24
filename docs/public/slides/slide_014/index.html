@@ -14,102 +14,100 @@
 <body>
   <article class="container">
         <nav>
-      <h3 class="section__title">How do we create and query a relational database?</h3>
+      <h3 class="section__title">How do we query a relational database?</h3>
       <a class="slide__previous" href="../slide_013/"><</a>
       <link rel="stylesheet" href="../../css/theme_002.css">
       <a class="slide__next" href="../slide_015/">></a>
-      <h2 class="slide__title">WHERE... (logical filters)</h2>
-      <p class="logo"><span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span></p>
+
+      <h2 class="slide__title">
+        <a class="slide__title" href="../slide_002">
+        WHERE... (comparison filters)
+        </a>
+      </h2>
+
+      <p class="logo">
+        <a class="slide__title" href="../slide_002">
+          <span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span>
+        </a>
+      </p>
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h5>Logical Operators</h5>
-<ul>
-<li><code>IN</code> - <span>Operand must be in a list of expressions</span></li>
-</ul>
+<h4>Filter the data, return only the rows we need</h4>
 <pre><code>SELECT * | &lt;value1&gt;, &lt;value2&gt;
 FROM &lt;table_name&gt;
-WHERE &lt;field1&gt; IN ('abc', def', 'ghi');
+WHERE &lt;field1&gt; = 'abc';
 </code></pre>
-<p>For example, if we wanted to return all the types of apples and pears we stock:</p>
-<pre><code>SELECT *
-FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
-WHERE product_item IN ('apples', 'pears');
-</code></pre>
-<br />
-<hr />
-<ul>
-<li><code>BETWEEN</code> - <span>Operand must fall between a range of inputs</span></li>
-</ul>
-<pre><code>SELECT * | &lt;value1&gt;, &lt;value2&gt;
-FROM &lt;table_name&gt;
-WHERE &lt;field1&gt; BETWEEN &lt;input1&gt; AND &lt;input2&gt;;
-</code></pre>
-<p>For example, let's see 'mid-popularity' products with scores between 50 and 55:</p>
+<p>It's like saying: <span> &quot;Hey, PostgreSQL; please can you find this information for me?  It's in this table in this schema.  When you find it, please <strong>only read back the records that match my criteria</strong>&quot; </span></p>
+<h5>For example:</h5>
+<p>Return a list of all products and all attributes but only if <code>popularity</code> is more than 80</p>
 <pre><code>SELECT product_id, product_category, product_item, product_variety, popularity
 FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
-WHERE Popularity BETWEEN 50 AND 55;
+WHERE popularity &gt; 80;
 </code></pre>
-<p>This works for text as well.  For example,</p>
+<p>You should see a much smaller set of results, each with a popularity of more than 80</p>
+<p>In this case, we are viewing the 12 most popular products out of our inventory of 129</p>
+<hr />
+<h5>Comparison Operators</h5>
+<p>We've used <strong>arithmetic operators</strong> (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> and <code>%</code>) already to do maths on static numbers</p>
+<p>Like in programming languages we can use <strong>comparison operators</strong> to filter results</p>
+<p>These include:</p>
+<ul>
+<li><code>=</code> - <span>Equal to</span></li>
+<li><code>&gt;</code> - <span>Greater than</span></li>
+<li><code>&gt;=</code> - <span>Greater than or equal to</span></li>
+<li><code>&lt;</code> - <span>Less than</span></li>
+<li><code>&lt;=</code> - <span>Less than or equal to</span></li>
+<li><code>&lt;&gt;</code> or <code>!=</code> - <span>Not equal to</span></li>
+</ul>
+<hr />
+<h5>Multiple clauses</h5>
+<p>We can combine filters together using the following keywords:</p>
+<ul>
+<li><code>AND</code> - <span>Both statements have to be true</span></li>
+<li><code>OR</code> - <span>One of the statements has to be true</span></li>
+</ul>
+<p>For example:</p>
 <pre><code>SELECT product_id, product_category, product_item, product_variety, popularity
 FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
-WHERE product_item BETWEEN 'gl' AND 'les';
+WHERE popularity &gt; 70 AND product_category = 'cut_flowers';
 </code></pre>
-<p>This returns 'gladioli' and 'leeks' as they are greater than <code>'gl'</code> alphabetically.  It doesn't include 'lettuce' as that is greater then <code>'les'</code></p>
-<br />
-<hr />
+<p>Returns:</p>
 <ul>
-<li><code>LIKE</code> - <span>Operand must match a pattern of input</span></li>
+<li>All cut flowers that also have a popularity of more than 70</li>
 </ul>
-<pre><code>SELECT * | &lt;value1&gt;, &lt;value2&gt;
-FROM &lt;table_name&gt;
-WHERE &lt;field1&gt; LIKE 'abc%' | '%abc' | '%abc%';
-</code></pre>
-<p>For example, if we wanted to see all customers whose name starts with Jack we could:</p>
-<pre><code>SELECT *
-FROM &quot;sequel-mart-schema&quot;.&quot;Customers&quot;
-WHERE customer_name LIKE ('Jack%');
-</code></pre>
-<p>Notice that this also returns someone called Jackson as it starts with Jack</p>
-<p>Some of our products have varieties with a season at the end.  If we wanted to see these we could query:</p>
-<pre><code>SELECT *
-FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
-WHERE product_variety LIKE ('%season');
-</code></pre>
-<br />
-<hr />
-<ul>
-<li><code>NOT</code> - <span>Operand must <strong>NOT</strong> match a pattern of input</span></li>
-</ul>
-<p>This can be placed in front of any of the above <code>NOT IN</code>, <code>NOT BETWEEN</code> and <code>NOT LIKE</code></p>
-<p>When used, this will flip the logic around.</p>
+<p>Whereas:</p>
 <pre><code>SELECT product_id, product_category, product_item, product_variety, popularity
 FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
-WHERE Popularity NOT BETWEEN 50 AND 55;
+WHERE popularity &gt; 85 OR product_category = 'cut_flowers';
 </code></pre>
-<p>Would return any product that did not have a popularity between 50 and 55</p>
+<p>Returns:</p>
+<ul>
+<li>All cut flowers regardless of popularity</li>
+<li>Any other product with a popularity of more than 85
+<ul>
+<li>In this case, raspberries and strawberries qualify because while they are not cut flowers, their popularity is above 85</li>
+</ul>
+</li>
+</ul>
 </section>
 <section class="slide__images">
-    <caption>1. List of apples and pears</caption>
-    <img src="../../images/002_WHERE_Products_Apples_Pears.png" />
-    <caption>2. List of products with popularity between 50 and 55</caption>
-    <img src="../../images/002_WHERE_Products_Pop_50_55.png" />
-    <caption>3. List of products with items between gl and les alphabetically</caption>
-    <img src="../../images/002_WHERE_Products_Item_gl_les.png" />
-    <caption>4. List of customers starting with Jack</caption>
-    <img src="../../images/002_WHERE_Customers_LIKE_Jack.png" />
-    <caption>5. List of products ending with 'season'</caption>
-    <img src="../../images/002_WHERE_Products_LIKE_Season.png" />
+    <caption>1. Product table Popularity more than 80</caption>
+    <img src="../../images/002_WHERE_Products_Pop_80.png" />
+    <caption>2. Product table Popularity more than 70 AND product is cut flowers</caption>
+    <img src="../../images/002_WHERE_Products_Pop_70_Flowers.png" />
+    <caption>3. Product table Popularity more than 85 OR product is cut flowers</caption>
+    <img src="../../images/002_WHERE_Products_Pop_85_OR_Flowers.png" />
 </section>
 <section class="slide__exercises">
 <hr>
 <h4>Exercises:</h4>
 <ol>
-<li>How many customers joined Sequel-Mart between 1st February 2021 and 28th February 2021?</li>
-<li>How many products are sold in pack_sizes of unit, bunch or head?</li>
-<li>How many products are not sold by the kilogram (kg), unit, bunch or head?</li>
-<li>How many times did customers between 100 and 105 shop in our stores (from Sales_Header)?</li>
-<li>How many customers names end with the initials L.K?</li>
+<li>How many customers joined Sequel-Mart before 1st February 2021?</li>
+<li>How many products are sold by the unit (e.g. in pack_sizes of 'unit')?</li>
+<li>How many products are not sold by the kilogram (kg)?</li>
+<li>How many times did customer 100 shop in our stores (from Sales_Header)?</li>
+<li>How many sales transactions (Sales_Header) had a feedback score of 2?</li>
 </ol>
 </section>
     </main>

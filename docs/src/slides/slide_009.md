@@ -3,135 +3,90 @@ layout: 'base.njk'
 slide_number: 9
 slide_prev: 'slide_008/'
 slide_next: 'slide_010/'
-section_title: 'How do we create and query a relational database?'
-slide_title: 'Data Types'
+section_title: 'How do we query a relational database?'
+slide_title: 'SELECT ...'
 theme: 'theme_002'
 slide_layout: 'grid-2'
 ---
 
 <section class="slide__text">
 
-##### "Acceptable values that can be returned or stored"
+#### Requesting some information
 
-Key points:
-- Regulates input to ensure it’s acceptable
-- The data type is included for each returned column in the Query Tool
-- Helps to optimise the execution plan by assigning resources appropriately
-  - e.g. Limiting to a smallint over an int saves 2 bytes per row
-  - Over a 1 billion row table, that would save ~1GB in storage and memory to query
+```
+SELECT <value1>, <value2>;
+```
+
+It's like saying: <span> "Hey, PostgreSQL; please can I have this returned to me?" </span>
+
+##### For example:
+- `SELECT 123;` returns the number 123 in the results panel
+- `SELECT 'Hello World';` returns the text 'Hello'
+
+##### Notes:
+- We can execute the SQL by:
+  - Clicking the play button on the toolbar at the top
+  - Using the shortcut `F5`
+- Note the **semi-colons** at the end of each query:
+  - This tells PostgreSQL they are two separate queries
+  - If these are removed and both queries are run, we would get a syntax error
+  - If multiple queries are in the same session only the last query will return a result
+  - To run a specific query, highlight it before executing it
+- Text and Dates need to be surrounded by **single-quotes** (not double-quotes)
+  - e.g. `SELECT 'Hello World';`
+- Integers and Numerics can be put in as they are
+  - e.g. `SELECT 123;`
 
 <hr />
 
-<table>
-  <tr>
-    <th>Common Types</th>
-    <th>Input Accepted</th>
-    <th>Bytes Reserved</th>
-  </tr>
+We can use `SELECT` to perform calculations
 
-  <tr>
-    <th>...</th>
-    <th>...</th>
-    <th></th>
-  </tr>
-  <tr>
-    <th>Text</th>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>varchar(x)</td>
-    <td>Text, number or other ascii character up to the number in brackets. <br />
-    e.g. (varchar(10) would accept up to 10 characters)</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>nvarchar(x)</td>
-    <td>As above but also accepts foreign ascii characters (e.g. ä, é, ø, ü)</td>
-    <td></td>
-  </tr>
+- `SELECT 12 + 23;` returns the number 35 <span> "Hey, PostgreSQL; what is 12 + 23?"</span>
+- `SELECT 10 * 8;` returns the number 80<span> "Hey, PostgreSQL; what is 10 x 8?"</span>
+- `SELECT 3.14 + 2.73;` returns the decimal 5.87<span> "Hey, PostgreSQL; what is 3.14 + 2.73?"</span>
+- `SELECT 56 - 23 + 12.3;` returns the decimal 45.3
+- `SELECT 56 - (23 + 12.3);` returns the decimal 20.7 (following [BODMAS](https://en.wikipedia.org/wiki/Order_of_operations))
 
-  <tr>
-    <th>...</th>
-    <th>...</th>
-    <th></th>
-  </tr>
-  <tr>
-    <th>Integer</th>
-    <th>(Whole Numbers)</th>
-    <th></th>
-  </tr>
+We can also include in-built functions to manipulate an input
+- `SELECT CURRENT_TIMESTAMP;` returns the current date and time to the millisecond
+- The `CONCAT` function concatenates text input
+  - e.g. `SELECT CONCAT('Hello', ' a b ', 'World');` returns 'Hello a b World'
 
-  <tr>
-    <td>bit</td>
-    <td>Either 0 or 1 (used for yes/no or true/false flags)</td>
-    <td>1</td>
-  </tr>
-  <tr>
-    <td>smallint</td>
-    <td>Any whole number between -32,767 and 32,767</td>
-    <td>2</td>
-  </tr>
-  <tr>
-    <td>int</td>
-    <td>Any whole number between -2,147,483,647 and 2,147,483,647</td>
-    <td>4</td>
-  </tr>
-  <tr>
-    <td>bigint</td>
-    <td>-9,223,372,036,854,775,807 to 9,223,372,036,854,775,807</td>
-    <td>8</td>
-  </tr>
+###### Booleans (A data type that returns `true` or `false`)
+- `SELECT true` returns a boolean true, `SELECT false` returns a boolean false
 
-  <tr>
-    <th>...</th>
-    <th>...</th>
-    <th></th>
-  </tr>
-  <tr>
-    <th>Numeric</th>
-    <th>(also known as Decimal)</th>
-    <td></td>
-  </tr>
-  <tr>
-    <td>numeric(p, s)</td>
-    <td>Any decimal up to the number of digits (precision) and decimal places (scale) <br /> e.g. (numeric(5,2) would accept a number up to 999.99)</td>
-    <td></td>
-  </tr>
-
-  <tr>
-    <th>...</th>
-    <th>...</th>
-    <th></th>
-  </tr>
-  <tr>
-    <th>Timestamp</th>
-    <th></th>
-    <th></th>
-  </tr>
-  <tr>
-    <td>date</td>
-    <td>A date based on the current locale in YYYY-MM-DD format</td>
-    <td>3</td>
-  </tr>
-  <tr>
-    <td>datetime</td>
-    <td>A date based on the current locale in YYYY-MM-DD HH:MM:SS.MS format</td>
-    <td>5-8</td>
-  </tr>
-</table>
+###### Aliasing
+- At the moment the column header is `?column?`
+- If we include the `AS` keyword, we can give the column a name
+  - e.g. `SELECT 123 AS my_number` replaces `?column?` with `my_number`
+- When we query the database the column name of the table will be used by default
+  - That behaviour can also be overwritten by the `AS` keyword
 
 </section>
 
 
 <section class="slide__images">
-    <caption>1. Data Type = 'text'</caption>
+    <caption>1. Return some text</caption>
     <img src="{{ '../../images/002_SELECT_Text.png' | url }}" />
-    <caption>2. Data Type = 'integer'</caption>
+    <caption>2. Example of a syntax error, missed semicolon</caption>
+    <img src="{{ '../../images/002_SELECT_Error.png' | url }}" />
+    <caption>3. Example of a multi-line select, only returns the last statement</caption>
+    <img src="{{ '../../images/002_SELECT_Multi_Line.png' | url }}" />
+    <caption>4. Example of a multi-line select, running highlighted statement</caption>
     <img src="{{ '../../images/002_SELECT_Highlighted.png' | url }}" />
-    <caption>3. Data Type = 'numeric'</caption>
-    <img src="{{ '../../images/002_SELECT_Numeric.png' | url }}" />
-    <caption>4. Data Type = 'timestamp'</caption>
-    <img src="{{ '../../images/002_SELECT_Timestamp.png' | url }}" />
+    <caption>5. Example of a column name being assigned</caption>
+    <img src="{{ '../../images/002_SELECT_As_Alias.png' | url }}" />
+</section>
+
+
+<section class="slide__exercises">
+
+---
+
+  #### Exercises:
+- Practice some more sums
+  - Include minus (-), divide (/) or modulus (%) and combine numbers and/or decimals
+- Print some text and practice concatination.
+- Try selecting a date (e.g. '2021-08-02 11:00:15') or CURRENT_TIMESTAMP
 
 </section>

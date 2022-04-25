@@ -14,19 +14,26 @@
 <body>
   <article class="container">
         <nav>
-      <h3 class="section__title">Setting Up</h3>
+      
+      
+      <h3 class="section__title">
+        <a class="slide__title" href="../slide_001">
+        Setting Up
+        </a>
+      </h3>
+      
       <a class="slide__previous" href="../slide_004/"><</a>
       <link rel="stylesheet" href="../../css/theme_001.css">
       <a class="slide__next" href="../slide_006/">></a>
 
       <h2 class="slide__title">
-        <a class="slide__title" href="../slide_002">
+        <a class="slide__title" href="../slide_001">
         Setting up the Project
         </a>
       </h2>
 
       <p class="logo">
-        <a class="slide__title" href="../slide_002">
+        <a class="slide__title" href="../slide_001">
           <span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span>
         </a>
       </p>
@@ -58,18 +65,29 @@
 <ul>
 <li>Open Docker Desktop</li>
 <li>Check for a folder called <code>apprentice-boot-camp-databases</code></li>
-<li>If this <strong>does not</strong> exist:
+</ul>
+<hr />
+<ul>
+<li>If this Docker folder <strong>does not exist</strong>:
 <ul>
 <li>In your terminal, run <code>./setup.sh</code> (if using a Mac) or <code>./setup.bat</code> (if using Windows)</li>
 </ul>
 </li>
-<li>If this is there but greyed out:
+</ul>
+<hr />
 <ul>
-<li>Run <code>./run.sh</code> (if using a Mac) or <code>./run.bat</code> (if using Windows)</li>
+<li>If this Docker folder <strong>does exist</strong> but is greyed out:
+<ul>
+<li>In your terminal, run <code>./run.sh</code> (if using a Mac) or <code>./run.bat</code> (if using Windows)</li>
 </ul>
 </li>
+</ul>
+<hr />
+<ul>
 <li>After about 30 seconds, check the services are running as per screenshot 1</li>
 <li>You can stop the services at any time by hitting <code>ctrl</code>+<code>c</code> or <code>cmd</code>+<code>c</code> on the terminal session and terminating the batch job if prompted.</li>
+<li>Stopping the services will not remove them from Docker Desktop.</li>
+<li>They can be restarted with <code>./run.sh</code> or <code>./run.bat</code> as above.</li>
 </ul>
 <h4>Project Locations</h4>
 <ul>
@@ -89,6 +107,12 @@
 </ul>
 </li>
 </ul>
+<h4>Tearing Down the Project</h4>
+<ul>
+<li><span>When you no longer need the project on your machine:</span></li>
+<li><span>In your terminal, run <code>./teardown.sh</code> (if using a Mac) or <code>./teardown.bat</code> (if using Windows)</span></li>
+<li><span>They can be recreated with <code>./setup.sh</code> or <code>./setup.bat</code> as above if needed.</span></li>
+</ul>
 </section>
 <section class="slide__images">
     <caption>1. Docker Desktop (setup complete)</caption>
@@ -101,7 +125,15 @@
     </main>
         
     <footer>
-      <h4>Database Bootcamp 6</h4>
+      
+
+      <h4>
+        <a class="slide__title" href="../slide_001">
+        Database Bootcamp 6
+        </a>
+      </h4>
+
+
       <p class="slide-number">Slide 5</p>
     </footer>
   </article>

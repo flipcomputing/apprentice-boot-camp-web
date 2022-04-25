@@ -1,4 +1,4 @@
-## WHERE... (Single Filters)
+## WHERE... (Comparison Filters)
 
 1. Q: How many customers joined Sequel-Mart before 1st February 2021?
 1. A: 20 customers joined before 1st February 2021

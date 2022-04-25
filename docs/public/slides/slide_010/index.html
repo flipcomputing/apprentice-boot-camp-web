@@ -14,19 +14,26 @@
 <body>
   <article class="container">
         <nav>
-      <h3 class="section__title">How do we create and query a relational database?</h3>
+      
+      
+      <h3 class="section__title">
+        <a class="slide__title" href="../slide_001">
+        How do we create and query a relational database?
+        </a>
+      </h3>
+      
       <a class="slide__previous" href="../slide_009/"><</a>
       <link rel="stylesheet" href="../../css/theme_002.css">
       <a class="slide__next" href="../slide_011/">></a>
 
       <h2 class="slide__title">
-        <a class="slide__title" href="../slide_002">
+        <a class="slide__title" href="../slide_001">
         Data Types
         </a>
       </h2>
 
       <p class="logo">
-        <a class="slide__title" href="../slide_002">
+        <a class="slide__title" href="../slide_001">
           <span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span>
         </a>
       </p>
@@ -55,7 +62,7 @@
   <tr>
     <th>...</th>
     <th>...</th>
-    <th></th>
+    <th>...</th>
   </tr>
   <tr>
     <th>Text</th>
@@ -66,17 +73,17 @@
     <td>varchar(x)</td>
     <td>Text, number or other ascii character up to the number in brackets. <br />
     e.g. (varchar(10) would accept up to 10 characters)</td>
-    <td></td>
+    <td>chars+1</td>
   </tr>
   <tr>
     <td>nvarchar(x)</td>
     <td>As above but also accepts foreign ascii characters (e.g. ä, é, ø, ü)</td>
-    <td></td>
+    <td>2*chars+1</td>
   </tr>
   <tr>
     <th>...</th>
     <th>...</th>
-    <th></th>
+    <th>...</th>
   </tr>
   <tr>
     <th>Integer</th>
@@ -106,7 +113,7 @@
   <tr>
     <th>...</th>
     <th>...</th>
-    <th></th>
+    <th>...</th>
   </tr>
   <tr>
     <th>Numeric</th>
@@ -116,12 +123,12 @@
   <tr>
     <td>numeric(p, s)</td>
     <td>Any decimal up to the number of digits (precision) and decimal places (scale) <br /> e.g. (numeric(5,2) would accept a number up to 999.99)</td>
-    <td></td>
+    <td>5-17</td>
   </tr>
   <tr>
     <th>...</th>
     <th>...</th>
-    <th></th>
+    <th>...</th>
   </tr>
   <tr>
     <th>Timestamp</th>
@@ -154,7 +161,15 @@
     </main>
         
     <footer>
-      <h4>Database Bootcamp 6</h4>
+      
+
+      <h4>
+        <a class="slide__title" href="../slide_001">
+        Database Bootcamp 6
+        </a>
+      </h4>
+
+
       <p class="slide-number">Slide 10</p>
     </footer>
   </article>

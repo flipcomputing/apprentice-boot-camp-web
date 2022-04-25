@@ -14,19 +14,26 @@
 <body>
   <article class="container">
         <nav>
-      <h3 class="section__title">How do we query a relational database?</h3>
+      
+      
+      <h3 class="section__title">
+        <a class="slide__title" href="../slide_001">
+        How do we query a relational database?
+        </a>
+      </h3>
+      
       <a class="slide__previous" href="../slide_013/"><</a>
       <link rel="stylesheet" href="../../css/theme_002.css">
       <a class="slide__next" href="../slide_015/">></a>
 
       <h2 class="slide__title">
-        <a class="slide__title" href="../slide_002">
+        <a class="slide__title" href="../slide_001">
         WHERE... (comparison filters)
         </a>
       </h2>
 
       <p class="logo">
-        <a class="slide__title" href="../slide_002">
+        <a class="slide__title" href="../slide_001">
           <span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span>
         </a>
       </p>
@@ -70,7 +77,7 @@ WHERE popularity &gt; 80;
 <p>For example:</p>
 <pre><code>SELECT product_id, product_category, product_item, product_variety, popularity
 FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
-WHERE popularity &gt; 70 AND product_category = 'cut_flowers';
+WHERE product_category = 'cut_flowers' AND popularity &gt; 70;
 </code></pre>
 <p>Returns:</p>
 <ul>
@@ -79,7 +86,7 @@ WHERE popularity &gt; 70 AND product_category = 'cut_flowers';
 <p>Whereas:</p>
 <pre><code>SELECT product_id, product_category, product_item, product_variety, popularity
 FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
-WHERE popularity &gt; 85 OR product_category = 'cut_flowers';
+WHERE product_category = 'cut_flowers' OR popularity &gt; 85;
 </code></pre>
 <p>Returns:</p>
 <ul>
@@ -113,7 +120,15 @@ WHERE popularity &gt; 85 OR product_category = 'cut_flowers';
     </main>
         
     <footer>
-      <h4>Database Bootcamp 6</h4>
+      
+
+      <h4>
+        <a class="slide__title" href="../slide_001">
+        Database Bootcamp 6
+        </a>
+      </h4>
+
+
       <p class="slide-number">Slide 14</p>
     </footer>
   </article>

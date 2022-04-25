@@ -14,19 +14,26 @@
 <body>
   <article class="container">
         <nav>
-      <h3 class="section__title">How do we query a relational database?</h3>
+      
+      
+      <h3 class="section__title">
+        <a class="slide__title" href="../slide_001">
+        How do we query a relational database?
+        </a>
+      </h3>
+      
       <a class="slide__previous" href="../slide_015/"><</a>
       <link rel="stylesheet" href="../../css/theme_002.css">
       <a class="slide__next" href="../slide_017/">></a>
 
       <h2 class="slide__title">
-        <a class="slide__title" href="../slide_002">
+        <a class="slide__title" href="../slide_001">
         ORDER BY...
         </a>
       </h2>
 
       <p class="logo">
-        <a class="slide__title" href="../slide_002">
+        <a class="slide__title" href="../slide_001">
           <span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span>
         </a>
       </p>
@@ -51,14 +58,14 @@ ORDER BY popularity DESC;
 </code></pre>
 <p>Note the <code>DESC</code> on the end of the second statement.</p>
 <ul>
-<li>This shows we are sorting by popularity in descending order.</li>
+<li><code>DESC</code> shows we are sorting by popularity in descending order.</li>
 <li>We could add <code>ASC</code> at the end of the first statement but <code>ORDER BY</code> orders ascending by default so this is not required</li>
 </ul>
 <h5>Combining with WHERE...</h5>
 <p>If we want to know the highest and lowest values for a specific subset of the data we can combine them with the <code>WHERE</code> clause</p>
 <h5>Advice for usage</h5>
-<p>While <code>ORDER BY</code> is useful, it is discouraged for large-scale production environments:</p>
 <ul>
+<li>While <code>ORDER BY</code> is useful, it is discouraged for large-scale production environments:</li>
 <li>Sorting tends to be resource intensive on very large tables</li>
 <li>It is a bottleneck in the execution plan</li>
 <li>Front-end systems are often better at sorting data once it's been pulled in</li>
@@ -83,7 +90,15 @@ ORDER BY popularity DESC;
     </main>
         
     <footer>
-      <h4>Database Bootcamp 6</h4>
+      
+
+      <h4>
+        <a class="slide__title" href="../slide_001">
+        Database Bootcamp 6
+        </a>
+      </h4>
+
+
       <p class="slide-number">Slide 16</p>
     </footer>
   </article>

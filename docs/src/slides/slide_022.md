@@ -14,10 +14,10 @@ slide_layout: 'grid-2'
 ##### Join 2 tables, all values from 1 table, matches only from the other
 
 ```
-SELECT           a.<field1>, a.<field2>, b.<field1>, b.<field2>
-FROM             <schema_name>.<table_name> | <view_name> AS a
-LEFT OUTER JOIN  <schema_name>.<table_name> | <view_name> AS b
-            ON a.<field1> = b.<field1>;
+SELECT           l.<field1>, l.<field2>, r.<field1>, r.<field2>
+FROM             <schema_name>.<table_name> | <view_name> AS l
+LEFT OUTER JOIN  <schema_name>.<table_name> | <view_name> AS r
+            ON l.<field1> = r.<field1> AND l.<field2> = r.<field2>;
 ```
 
 ###### Terms

@@ -48,6 +48,7 @@ FROM "sequel-mart-schema"."Customers" AS cu;
 This is for the following reasons:
 - It makes the SQL shorter and more concise
 - It makes it easier to follow the path of table joins
+- It helps the database engine to locate the data faster
 - If the table name changes, we only have to change it in one place per query
 
 </section>

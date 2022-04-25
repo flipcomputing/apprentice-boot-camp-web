@@ -25,6 +25,13 @@ SELECT *
 FROM "sequel-mart-schema"."Products"
 WHERE product_item IN ('apples', 'pears');
 ```
+
+This is a short-hand equivalent of:
+```
+SELECT *
+FROM "sequel-mart-schema"."Products"
+WHERE product_item = 'apples' OR  product_item = 'pears';
+```
 <br />
 <hr />
 
@@ -41,6 +48,14 @@ SELECT product_id, product_category, product_item, product_variety, popularity
 FROM "sequel-mart-schema"."Products"
 WHERE Popularity BETWEEN 50 AND 55;
 ```
+
+This is a short-hand equivalent of:
+```
+SELECT product_id, product_category, product_item, product_variety, popularity
+FROM "sequel-mart-schema"."Products"
+WHERE Popularity >= 50 AND Popularity <= 55;
+```
+
 
 This works for text as well.  For example,
 ```

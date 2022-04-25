@@ -32,7 +32,7 @@ Key points:
   <tr>
     <th>...</th>
     <th>...</th>
-    <th></th>
+    <th>...</th>
   </tr>
   <tr>
     <th>Text</th>
@@ -43,18 +43,18 @@ Key points:
     <td>varchar(x)</td>
     <td>Text, number or other ascii character up to the number in brackets. <br />
     e.g. (varchar(10) would accept up to 10 characters)</td>
-    <td></td>
+    <td>chars+1</td>
   </tr>
   <tr>
     <td>nvarchar(x)</td>
     <td>As above but also accepts foreign ascii characters (e.g. ä, é, ø, ü)</td>
-    <td></td>
+    <td>2*chars+1</td>
   </tr>
 
   <tr>
     <th>...</th>
     <th>...</th>
-    <th></th>
+    <th>...</th>
   </tr>
   <tr>
     <th>Integer</th>
@@ -86,7 +86,7 @@ Key points:
   <tr>
     <th>...</th>
     <th>...</th>
-    <th></th>
+    <th>...</th>
   </tr>
   <tr>
     <th>Numeric</th>
@@ -96,13 +96,13 @@ Key points:
   <tr>
     <td>numeric(p, s)</td>
     <td>Any decimal up to the number of digits (precision) and decimal places (scale) <br /> e.g. (numeric(5,2) would accept a number up to 999.99)</td>
-    <td></td>
+    <td>5-17</td>
   </tr>
 
   <tr>
     <th>...</th>
     <th>...</th>
-    <th></th>
+    <th>...</th>
   </tr>
   <tr>
     <th>Timestamp</th>

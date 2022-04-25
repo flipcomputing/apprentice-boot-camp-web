@@ -17,11 +17,15 @@ slide_layout: 'grid-2'
 - One of the main strengths of a relational database is the ability to join tables together
 - This enables us to piece data together from different places to answer a question
 
+Think of a join as a left and right table:
+- **Left** - The first table in the join (on the `FROM` line)
+- **Right** - The second table in the join (on the `INNER JOIN` line)
+
 ```
-SELECT      a.<field1>, a.<field2>, b.<field1>, b.<field2>
-FROM        <schema_name>.<table_name> | <view_name> AS a
-INNER JOIN  <schema_name>.<table_name> | <view_name> AS b
-            ON a.<field1> = b.<field1>;
+SELECT      l.<field1>, l.<field2>, l.<field3>, r.<field1>, r.<field2>, r.<field3>
+FROM        <schema_name>.<table_name> | <view_name> AS l
+INNER JOIN  <schema_name>.<table_name> | <view_name> AS r
+            ON l.<field1> = r.<field1> AND l.<field2> = r.<field2>;
 ```
 
 ###### Terms
@@ -48,7 +52,7 @@ Let's look at the ERD:
 SELECT *
 FROM "sequel-mart-schema"."Sales_Header" AS sh 
 INNER JOIN "sequel-mart-schema"."Customers" AS cu
-    ON cu.customer_id = sh.customer_id;
+    ON sh.customer_id = cu.customer_id;
 ```
 
 - This returns transactions from the `Sales_Header` and more detailed information about each customer from `Customers`
@@ -62,6 +66,8 @@ INNER JOIN "sequel-mart-schema"."Customers" AS cu
 ##### Notes:
 - `INNER JOIN` is the longer form of this type of join.
 - We can just use `JOIN` and the queries would run in the same way
+- Beware that `INNER JOIN` only returns where records exist in **both** tables
+    - If something is in one table and not the other it will not be returned
 
 </section>
 

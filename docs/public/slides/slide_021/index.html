@@ -14,19 +14,26 @@
 <body>
   <article class="container">
         <nav>
-      <h3 class="section__title">How do we query a relational database?</h3>
+      
+      
+      <h3 class="section__title">
+        <a class="slide__title" href="../slide_001">
+        How do we query a relational database?
+        </a>
+      </h3>
+      
       <a class="slide__previous" href="../slide_020/"><</a>
       <link rel="stylesheet" href="../../css/theme_002.css">
       <a class="slide__next" href="../slide_022/">></a>
 
       <h2 class="slide__title">
-        <a class="slide__title" href="../slide_002">
+        <a class="slide__title" href="../slide_001">
         INNER JOIN...
         </a>
       </h2>
 
       <p class="logo">
-        <a class="slide__title" href="../slide_002">
+        <a class="slide__title" href="../slide_001">
           <span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span>
         </a>
       </p>
@@ -39,10 +46,15 @@
 <li>One of the main strengths of a relational database is the ability to join tables together</li>
 <li>This enables us to piece data together from different places to answer a question</li>
 </ul>
-<pre><code>SELECT      a.&lt;field1&gt;, a.&lt;field2&gt;, b.&lt;field1&gt;, b.&lt;field2&gt;
-FROM        &lt;schema_name&gt;.&lt;table_name&gt; | &lt;view_name&gt; AS a
-INNER JOIN  &lt;schema_name&gt;.&lt;table_name&gt; | &lt;view_name&gt; AS b
-            ON a.&lt;field1&gt; = b.&lt;field1&gt;;
+<p>Think of a join as a left and right table:</p>
+<ul>
+<li><strong>Left</strong> - The first table in the join (on the <code>FROM</code> line)</li>
+<li><strong>Right</strong> - The second table in the join (on the <code>INNER JOIN</code> line)</li>
+</ul>
+<pre><code>SELECT      l.&lt;field1&gt;, l.&lt;field2&gt;, l.&lt;field3&gt;, r.&lt;field1&gt;, r.&lt;field2&gt;, r.&lt;field3&gt;
+FROM        &lt;schema_name&gt;.&lt;table_name&gt; | &lt;view_name&gt; AS l
+INNER JOIN  &lt;schema_name&gt;.&lt;table_name&gt; | &lt;view_name&gt; AS r
+            ON l.&lt;field1&gt; = r.&lt;field1&gt; AND l.&lt;field2&gt; = r.&lt;field2&gt;;
 </code></pre>
 <h6>Terms</h6>
 <ul>
@@ -70,7 +82,7 @@ INNER JOIN  &lt;schema_name&gt;.&lt;table_name&gt; | &lt;view_name&gt; AS b
 <pre><code>SELECT *
 FROM &quot;sequel-mart-schema&quot;.&quot;Sales_Header&quot; AS sh 
 INNER JOIN &quot;sequel-mart-schema&quot;.&quot;Customers&quot; AS cu
-    ON cu.customer_id = sh.customer_id;
+    ON sh.customer_id = cu.customer_id;
 </code></pre>
 <ul>
 <li>This returns transactions from the <code>Sales_Header</code> and more detailed information about each customer from <code>Customers</code></li>
@@ -87,6 +99,11 @@ INNER JOIN &quot;sequel-mart-schema&quot;.&quot;Customers&quot; AS cu
 <ul>
 <li><code>INNER JOIN</code> is the longer form of this type of join.</li>
 <li>We can just use <code>JOIN</code> and the queries would run in the same way</li>
+<li>Beware that <code>INNER JOIN</code> only returns where records exist in <strong>both</strong> tables
+<ul>
+<li>If something is in one table and not the other it will not be returned</li>
+</ul>
+</li>
 </ul>
 </section>
 <section class="slide__images">
@@ -108,7 +125,15 @@ INNER JOIN &quot;sequel-mart-schema&quot;.&quot;Customers&quot; AS cu
     </main>
         
     <footer>
-      <h4>Database Bootcamp 6</h4>
+      
+
+      <h4>
+        <a class="slide__title" href="../slide_001">
+        Database Bootcamp 6
+        </a>
+      </h4>
+
+
       <p class="slide-number">Slide 21</p>
     </footer>
   </article>

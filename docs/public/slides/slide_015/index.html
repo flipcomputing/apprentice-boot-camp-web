@@ -14,19 +14,26 @@
 <body>
   <article class="container">
         <nav>
-      <h3 class="section__title">How do we query a relational database?</h3>
+      
+      
+      <h3 class="section__title">
+        <a class="slide__title" href="../slide_001">
+        How do we query a relational database?
+        </a>
+      </h3>
+      
       <a class="slide__previous" href="../slide_014/"><</a>
       <link rel="stylesheet" href="../../css/theme_002.css">
       <a class="slide__next" href="../slide_016/">></a>
 
       <h2 class="slide__title">
-        <a class="slide__title" href="../slide_002">
+        <a class="slide__title" href="../slide_001">
         WHERE... (logical filters)
         </a>
       </h2>
 
       <p class="logo">
-        <a class="slide__title" href="../slide_002">
+        <a class="slide__title" href="../slide_001">
           <span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span>
         </a>
       </p>
@@ -46,6 +53,11 @@ WHERE &lt;field1&gt; IN ('abc', def', 'ghi');
 FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
 WHERE product_item IN ('apples', 'pears');
 </code></pre>
+<p>This is a short-hand equivalent of:</p>
+<pre><code>SELECT *
+FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
+WHERE product_item = 'apples' OR  product_item = 'pears';
+</code></pre>
 <br />
 <hr />
 <ul>
@@ -59,6 +71,11 @@ WHERE &lt;field1&gt; BETWEEN &lt;input1&gt; AND &lt;input2&gt;;
 <pre><code>SELECT product_id, product_category, product_item, product_variety, popularity
 FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
 WHERE Popularity BETWEEN 50 AND 55;
+</code></pre>
+<p>This is a short-hand equivalent of:</p>
+<pre><code>SELECT product_id, product_category, product_item, product_variety, popularity
+FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
+WHERE Popularity &gt;= 50 AND Popularity &lt;= 55;
 </code></pre>
 <p>This works for text as well.  For example,</p>
 <pre><code>SELECT product_id, product_category, product_item, product_variety, popularity
@@ -125,7 +142,15 @@ WHERE Popularity NOT BETWEEN 50 AND 55;
     </main>
         
     <footer>
-      <h4>Database Bootcamp 6</h4>
+      
+
+      <h4>
+        <a class="slide__title" href="../slide_001">
+        Database Bootcamp 6
+        </a>
+      </h4>
+
+
       <p class="slide-number">Slide 15</p>
     </footer>
   </article>

@@ -36,14 +36,14 @@ ORDER BY popularity DESC;
 ```
 
 Note the `DESC` on the end of the second statement.
-  - This shows we are sorting by popularity in descending order.
+  - `DESC` shows we are sorting by popularity in descending order.
   - We could add `ASC` at the end of the first statement but `ORDER BY` orders ascending by default so this is not required
 
 ##### Combining with WHERE...
 If we want to know the highest and lowest values for a specific subset of the data we can combine them with the `WHERE` clause
 
 ##### Advice for usage
-While `ORDER BY` is useful, it is discouraged for large-scale production environments:
+- While `ORDER BY` is useful, it is discouraged for large-scale production environments:
 - Sorting tends to be resource intensive on very large tables
 - It is a bottleneck in the execution plan
 - Front-end systems are often better at sorting data once it's been pulled in

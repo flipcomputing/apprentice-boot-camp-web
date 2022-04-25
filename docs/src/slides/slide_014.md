@@ -59,7 +59,7 @@ For example:
 ```
 SELECT product_id, product_category, product_item, product_variety, popularity
 FROM "sequel-mart-schema"."Products"
-WHERE popularity > 70 AND product_category = 'cut_flowers';
+WHERE product_category = 'cut_flowers' AND popularity > 70;
 ```
 Returns:
 - All cut flowers that also have a popularity of more than 70
@@ -68,7 +68,7 @@ Whereas:
 ```
 SELECT product_id, product_category, product_item, product_variety, popularity
 FROM "sequel-mart-schema"."Products"
-WHERE popularity > 85 OR product_category = 'cut_flowers';
+WHERE product_category = 'cut_flowers' OR popularity > 85;
 ```
 Returns:
 - All cut flowers regardless of popularity

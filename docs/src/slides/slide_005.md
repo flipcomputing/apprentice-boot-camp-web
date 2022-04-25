@@ -27,12 +27,23 @@ slide_layout: 'grid-2'
 #### Docker Desktop
 - Open Docker Desktop
 - Check for a folder called `apprentice-boot-camp-databases`
-- If this **does not** exist:
+
+<hr />
+
+- If this Docker folder **does not exist**:
     - In your terminal, run `./setup.sh` (if using a Mac) or `./setup.bat` (if using Windows)
-- If this is there but greyed out:
-    - Run `./run.sh` (if using a Mac) or `./run.bat` (if using Windows)
+
+<hr />
+
+- If this Docker folder **does exist** but is greyed out:
+    - In your terminal, run `./run.sh` (if using a Mac) or `./run.bat` (if using Windows)
+
+<hr />
+
 - After about 30 seconds, check the services are running as per screenshot 1
 - You can stop the services at any time by hitting `ctrl`+`c` or `cmd`+`c` on the terminal session and terminating the batch job if prompted.
+- Stopping the services will not remove them from Docker Desktop.
+- They can be restarted with `./run.sh` or `./run.bat` as above.
 
 #### Project Locations
 - Sequel-Mart frontend should be on [http://localhost:5001/](http://localhost:5001/)
@@ -46,6 +57,12 @@ slide_layout: 'grid-2'
 - Expand `Databases` > `sequel-mart` > `Schemas` > `sequel-mart-schema` > `tables`
 - There should be 6 tables:
     - `Customers`, `Dates`, `Products`, `Sales_Detail`, `Sales_Header` and `Stores`
+
+
+#### Tearing Down the Project
+- <span>When you no longer need the project on your machine:</span>
+- <span>In your terminal, run `./teardown.sh` (if using a Mac) or `./teardown.bat` (if using Windows)</span>
+- <span>They can be recreated with `./setup.sh` or `./setup.bat` as above if needed.</span>
 </section>
 
 <section class="slide__images">

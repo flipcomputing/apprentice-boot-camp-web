@@ -14,19 +14,26 @@
 <body>
   <article class="container">
         <nav>
-      <h3 class="section__title">How do we query a relational database?</h3>
+      
+      
+      <h3 class="section__title">
+        <a class="slide__title" href="../slide_001">
+        How do we query a relational database?
+        </a>
+      </h3>
+      
       <a class="slide__previous" href="../slide_021/"><</a>
       <link rel="stylesheet" href="../../css/theme_002.css">
       <a class="slide__next" href="../slide_023/">></a>
 
       <h2 class="slide__title">
-        <a class="slide__title" href="../slide_002">
+        <a class="slide__title" href="../slide_001">
         LEFT OUTER JOIN...
         </a>
       </h2>
 
       <p class="logo">
-        <a class="slide__title" href="../slide_002">
+        <a class="slide__title" href="../slide_001">
           <span>(“</span>Manchester<span>”)+<br></span><span>(“</span>Digital<span>”)></span>
         </a>
       </p>
@@ -34,10 +41,10 @@
     <main class=grid-2>
       <section class="slide__text">
 <h5>Join 2 tables, all values from 1 table, matches only from the other</h5>
-<pre><code>SELECT           a.&lt;field1&gt;, a.&lt;field2&gt;, b.&lt;field1&gt;, b.&lt;field2&gt;
-FROM             &lt;schema_name&gt;.&lt;table_name&gt; | &lt;view_name&gt; AS a
-LEFT OUTER JOIN  &lt;schema_name&gt;.&lt;table_name&gt; | &lt;view_name&gt; AS b
-            ON a.&lt;field1&gt; = b.&lt;field1&gt;;
+<pre><code>SELECT           l.&lt;field1&gt;, l.&lt;field2&gt;, r.&lt;field1&gt;, r.&lt;field2&gt;
+FROM             &lt;schema_name&gt;.&lt;table_name&gt; | &lt;view_name&gt; AS l
+LEFT OUTER JOIN  &lt;schema_name&gt;.&lt;table_name&gt; | &lt;view_name&gt; AS r
+            ON l.&lt;field1&gt; = r.&lt;field1&gt; AND l.&lt;field2&gt; = r.&lt;field2&gt;;
 </code></pre>
 <h6>Terms</h6>
 <ul>
@@ -116,7 +123,15 @@ WHERE cu.customer_name LIKE 'Amelie%';
     </main>
         
     <footer>
-      <h4>Database Bootcamp 6</h4>
+      
+
+      <h4>
+        <a class="slide__title" href="../slide_001">
+        Database Bootcamp 6
+        </a>
+      </h4>
+
+
       <p class="slide-number">Slide 22</p>
     </footer>
   </article>

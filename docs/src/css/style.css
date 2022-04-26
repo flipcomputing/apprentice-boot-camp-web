@@ -254,6 +254,12 @@ main > * {
   color: var(--clr-text-sect);
   background-color: var(--clr-bg-sect);
   text-align: center;
+  box-shadow: 2px 2px 4px var(--clr-text-shadow-2);
+}
+
+.slide__contents-1:hover, .slide__contents-2:hover:hover, .slide__contents-3:hover, .slide__contents-4:hover, .slide__contents-5:hover, .slide__contents-6:hover {
+  transform: scale(0.98);
+  box-shadow: 1px 1px 5px var(--clr-text-shadow-2);
 }
 
 .slide__contents-2 {
@@ -350,8 +356,26 @@ footer {
     --font-size-2: 3.4rem;
   }
 
+  h3, h4, h5, h6, p {
+    line-height: 3.5rem;
+    margin-top: var(--margin-9);
+    margin-bottom: var(--margin-9);
+  }
+
   img {
     max-height: 40em;
+  }
+
+  nav {
+    grid-template-columns: 5% 75% 15% 5%;
+    margin: 0;
+
+  }
+
+  nav > a {
+    font-size: var(--font-size-4);
+    font-weight: 700;
+    padding: 0 1rem;
   }
 
   .grid-2 {
@@ -363,10 +387,10 @@ footer {
   }
   
   .section__title > a {
-    font-size: var(--font-size-7);
+    font-size: var(--font-size-6);
   }
   
-  .logo, .logo > span {
+  .logo, .logo > a > span {
     font-size: var(--font-size-6);
   }
 }

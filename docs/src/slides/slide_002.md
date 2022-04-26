@@ -13,9 +13,9 @@ slide_layout: 'center'
 
 ### To answer 4 questions...
 
-What are databases & where do they fit into the development model?
+What are databases (and where do they fit into the development model)?
 
-How do we create and query a relational database?
+How do we query a relational database?
 
 How do we change content?
 

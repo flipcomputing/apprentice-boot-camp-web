@@ -3,7 +3,7 @@ layout: 'base.njk'
 slide_number: 3
 slide_prev: 'slide_002/'
 slide_next: 'slide_004/'
-section_title: 'What are databases & where do they fit into the development model?'
+section_title: 'Where do databases fit in the development model?'
 slide_title: 'Frontend & Backend'
 theme: 'theme_001'
 slide_layout: 'grid-2'

@@ -3,7 +3,7 @@ layout: 'base.njk'
 slide_number: 4
 slide_prev: 'slide_003/'
 slide_next: 'slide_005/'
-section_title: 'What are databases & where do they fit into the development model?'
+section_title: 'Where do databases fit in the development model?'
 slide_title: 'Database Types'
 theme: 'theme_001'
 slide_layout: 'grid-2'

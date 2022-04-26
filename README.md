@@ -2,8 +2,8 @@
 ---
 ## Table of contents
 ---
-- [Overview](#overview)
 - [Project Slides](#project-slides)
+- [Overview](#overview)
 - [Screenshot](#screenshot)
 ---
 - [What you can expect](#what-you-can-expect)
@@ -31,16 +31,18 @@
 
 &nbsp;
 
+# Project Slides
+- The full slide deck for the project is [available from the following link](https://mcr-digital.github.io/apprentice-boot-camp-databases/public/slides/slide_000/)
+
+---
+
 # Overview
 - A sample database back-end, based on a fictional retail company  called `Sequel-Mart`.
 - A basic front-end using vanilla HTML, CSS & Javascript with Express.
 - This project aims to show how a basic database-driven relationship to a back-end web server could be managed.
 
 ---
-# Project Slides
-- The full slide deck for the project is [available from the following link](https://mcr-digital.github.io/apprentice-boot-camp-databases/public/slides/slide_000/)
 
----
 # Screenshot
 
 Completed Sequel-Mart project web page:

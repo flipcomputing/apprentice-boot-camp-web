@@ -11,7 +11,7 @@ slide_layout: 'grid-2'
 
 <section class="slide__text">
 
-###### We may find a value is not in the format we need
+##### We may find a value is not in the format we need
 For example, `SELECT '42';` will return as text
 
 Of course here we could just remove the quotes. However, when we move to more complicated queries this will often not be an option
@@ -34,7 +34,7 @@ You can combine these with other data manipulations
 - e.g. `SELECT (42.5 + 20)::NUMERIC(3,1);` recognises 20 as 20.0 and returns 60.5
 
 Or change between dates
-- e.g. `SELECT (CURRENT_TIMESTAMP)::DATE;` removes the time from the current timestamp
+- e.g. `SELECT '2021-08-02 10:05:12'::DATE;` removes the time and just returns the date
 
 <hr />
 

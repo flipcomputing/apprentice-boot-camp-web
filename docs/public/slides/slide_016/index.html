@@ -28,7 +28,7 @@
 
       <h2 class="slide__title">
         <a class="slide__title" href="../slide_001">
-        ORDER BY...
+        WHERE... (logical filters)
         </a>
       </h2>
 
@@ -40,51 +40,103 @@
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h4>Return the data in a specific order</h4>
+<h5>Logical Operators</h5>
+<ul>
+<li><code>IN</code> - <span>Operand must be in a list of expressions</span></li>
+</ul>
 <pre><code>SELECT * | &lt;value1&gt;, &lt;value2&gt;
 FROM &lt;table_name&gt;
-ORDER BY &lt;field1&gt; ASC | DESC;
+WHERE &lt;field1&gt; IN ('abc', def', 'ghi');
 </code></pre>
-<p>It's like saying: <span> &quot;Hey, PostgreSQL; please can you find this information for me?  It's in this table in this schema.  When you find it, please <strong>sort it by something and read it back in that order</strong>&quot; </span></p>
-<p>For example, if we wanted to return all products and order by least popular:</p>
+<p>For example, if we wanted to return all the types of apples and pears we stock:</p>
+<pre><code>SELECT *
+FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
+WHERE product_item IN ('apples', 'pears');
+</code></pre>
+<p>This is a short-hand equivalent of:</p>
+<pre><code>SELECT *
+FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
+WHERE product_item = 'apples' OR  product_item = 'pears';
+</code></pre>
+<br />
+<hr />
+<ul>
+<li><code>BETWEEN</code> - <span>Operand must fall between a range of inputs</span></li>
+</ul>
+<pre><code>SELECT * | &lt;value1&gt;, &lt;value2&gt;
+FROM &lt;table_name&gt;
+WHERE &lt;field1&gt; BETWEEN &lt;input1&gt; AND &lt;input2&gt;;
+</code></pre>
+<p>For example, let's see 'mid-popularity' products with scores between 50 and 55:</p>
 <pre><code>SELECT product_id, product_category, product_item, product_variety, popularity
 FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
-ORDER BY popularity;
+WHERE Popularity BETWEEN 50 AND 55;
 </code></pre>
-<p>Or most popular:</p>
+<p>This is a short-hand equivalent of:</p>
 <pre><code>SELECT product_id, product_category, product_item, product_variety, popularity
 FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
-ORDER BY popularity DESC;
+WHERE Popularity &gt;= 50 AND Popularity &lt;= 55;
 </code></pre>
-<p>Note the <code>DESC</code> on the end of the second statement.</p>
+<p>This works for text as well.  For example,</p>
+<pre><code>SELECT product_id, product_category, product_item, product_variety, popularity
+FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
+WHERE product_item BETWEEN 'gl' AND 'les';
+</code></pre>
+<p>This returns 'gladioli' and 'leeks' as they are greater than <code>'gl'</code> alphabetically.  It doesn't include 'lettuce' as that is greater then <code>'les'</code></p>
+<br />
+<hr />
 <ul>
-<li><code>DESC</code> shows we are sorting by popularity in descending order.</li>
-<li>We could add <code>ASC</code> at the end of the first statement but <code>ORDER BY</code> orders ascending by default so this is not required</li>
+<li><code>LIKE</code> - <span>Operand must match a pattern of input</span></li>
 </ul>
-<h5>Combining with WHERE...</h5>
-<p>If we want to know the highest and lowest values for a specific subset of the data we can combine them with the <code>WHERE</code> clause</p>
-<h5>Advice for usage</h5>
+<pre><code>SELECT * | &lt;value1&gt;, &lt;value2&gt;
+FROM &lt;table_name&gt;
+WHERE &lt;field1&gt; LIKE 'abc%' | '%abc' | '%abc%';
+</code></pre>
+<p>For example, if we wanted to see all customers whose name starts with Jack we could:</p>
+<pre><code>SELECT *
+FROM &quot;sequel-mart-schema&quot;.&quot;Customers&quot;
+WHERE customer_name LIKE ('Jack%');
+</code></pre>
+<p>Notice that this also returns someone called Jackson as it starts with Jack</p>
+<p>Some of our products have varieties with a season at the end.  If we wanted to see these we could query:</p>
+<pre><code>SELECT *
+FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
+WHERE product_variety LIKE ('%season');
+</code></pre>
+<br />
+<hr />
 <ul>
-<li>While <code>ORDER BY</code> is useful, it is discouraged for large-scale production environments:</li>
-<li>Sorting tends to be resource intensive on very large tables</li>
-<li>It is a bottleneck in the execution plan</li>
-<li>Front-end systems are often better at sorting data once it's been pulled in</li>
+<li><code>NOT</code> - <span>Operand must <strong>NOT</strong> match a pattern of input</span></li>
 </ul>
+<p>This can be placed in front of any of the above <code>NOT IN</code>, <code>NOT BETWEEN</code> and <code>NOT LIKE</code></p>
+<p>When used, this will flip the logic around.</p>
+<pre><code>SELECT product_id, product_category, product_item, product_variety, popularity
+FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
+WHERE Popularity NOT BETWEEN 50 AND 55;
+</code></pre>
+<p>Would return any product that did not have a popularity between 50 and 55</p>
 </section>
 <section class="slide__images">
-    <caption>1. List of products, least popular first</caption>
-    <img src="../../images/002_ORDER_Products_Pop_Asc.png" />
-    <caption>2. List of products, most popular first</caption>
-    <img src="../../images/002_ORDER_Products_Pop_Desc.png" />
+    <caption>1. List of apples and pears</caption>
+    <img src="../../images/002_WHERE_Products_Apples_Pears.png" />
+    <caption>2. List of products with popularity between 50 and 55</caption>
+    <img src="../../images/002_WHERE_Products_Pop_50_55.png" />
+    <caption>3. List of products with items between gl and les alphabetically</caption>
+    <img src="../../images/002_WHERE_Products_Item_gl_les.png" />
+    <caption>4. List of customers starting with Jack</caption>
+    <img src="../../images/002_WHERE_Customers_LIKE_Jack.png" />
+    <caption>5. List of products ending with 'season'</caption>
+    <img src="../../images/002_WHERE_Products_LIKE_Season.png" />
 </section>
 <section class="slide__exercises">
 <hr>
 <h4>Exercises:</h4>
 <ol>
-<li>When did the first customer and last customer join us?</li>
-<li>What is the most expensive wholesale_price for products that are not sold by the kg?</li>
-<li>What is the most expensive unit_sales_price for products that have a popularity below 65?</li>
-<li>What is the lowest revenue for a sale (Sales_Detail) where there were more than 6 items_sold AND the cost_of_sales was more than 10?</li>
+<li>How many customers joined Sequel-Mart between 1st February 2021 and 28th February 2021?</li>
+<li>How many products are sold in pack_sizes of unit, bunch or head?</li>
+<li>How many products are not sold by the kilogram (kg), unit, bunch or head?</li>
+<li>How many times did customers between 100 and 105 shop in our stores (from Sales_Header)?</li>
+<li>How many customers names end with the initials L.K?</li>
 </ol>
 </section>
     </main>
@@ -92,15 +144,14 @@ ORDER BY popularity DESC;
     <footer>
       
 
-      <h4>
+      <h3>
         <a class="slide__title" href="../slide_001">
         Database Bootcamp 6
         </a>
-      </h4>
+      </h3>
 
-      <h5>
+      <h5 class="slide__copy">
         <span>© Thomas Steeples 2022</span>
-        </a>
       </h5>
 
 

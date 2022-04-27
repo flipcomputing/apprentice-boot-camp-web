@@ -77,22 +77,13 @@
 </li>
 </ul>
 <hr />
-<p>We can use <code>SELECT</code> to perform calculations</p>
+<p>We can use <code>SELECT</code> to perform calculations with <strong>arithmetic operators</strong></p>
 <ul>
 <li><code>SELECT 12 + 23;</code> returns the number 35 <span> &quot;Hey, PostgreSQL; what is 12 + 23?&quot;</span></li>
 <li><code>SELECT 10 * 8;</code> returns the number 80<span> &quot;Hey, PostgreSQL; what is 10 x 8?&quot;</span></li>
 <li><code>SELECT 3.14 + 2.73;</code> returns the decimal 5.87<span> &quot;Hey, PostgreSQL; what is 3.14 + 2.73?&quot;</span></li>
 <li><code>SELECT 56 - 23 + 12.3;</code> returns the decimal 45.3</li>
 <li><code>SELECT 56 - (23 + 12.3);</code> returns the decimal 20.7 (following <a href="https://en.wikipedia.org/wiki/Order_of_operations">BODMAS</a>)</li>
-</ul>
-<p>We can also include in-built functions to manipulate an input</p>
-<ul>
-<li><code>SELECT CURRENT_TIMESTAMP;</code> returns the current date and time to the millisecond</li>
-<li>The <code>CONCAT</code> function concatenates text input
-<ul>
-<li>e.g. <code>SELECT CONCAT('Hello', ' a b ', 'World');</code> returns 'Hello a b World'</li>
-</ul>
-</li>
 </ul>
 <h6>Booleans (A data type that returns <code>true</code> or <code>false</code>)</h6>
 <ul>
@@ -134,8 +125,6 @@
 <li>Include minus (-), divide (/) or modulus (%) and combine numbers and/or decimals</li>
 </ul>
 </li>
-<li>Print some text and practice concatination.</li>
-<li>Try selecting a date (e.g. '2021-08-02 11:00:15') or CURRENT_TIMESTAMP</li>
 </ul>
 </section>
     </main>
@@ -143,15 +132,14 @@
     <footer>
       
 
-      <h4>
+      <h3>
         <a class="slide__title" href="../slide_001">
         Database Bootcamp 6
         </a>
-      </h4>
+      </h3>
 
-      <h5>
+      <h5 class="slide__copy">
         <span>© Thomas Steeples 2022</span>
-        </a>
       </h5>
 
 

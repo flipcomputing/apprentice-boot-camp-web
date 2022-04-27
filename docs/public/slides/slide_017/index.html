@@ -28,7 +28,7 @@
 
       <h2 class="slide__title">
         <a class="slide__title" href="../slide_001">
-        LIMIT...
+        ORDER BY...
         </a>
       </h2>
 
@@ -40,60 +40,66 @@
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h4>Return only the first <em>x</em> rows we need</h4>
+<h4>Return the data in a specific order</h4>
 <pre><code>SELECT * | &lt;value1&gt;, &lt;value2&gt;
 FROM &lt;table_name&gt;
-LIMIT &lt;n&gt;;
+ORDER BY &lt;field1&gt; ASC | DESC;
 </code></pre>
-<p>It's like saying: <span> &quot;Hey, PostgreSQL; please can you find this information for me?  It's in this table in this schema.  When you find it, please <strong>only read back the first few records that match my criteria</strong>&quot; </span></p>
-<p>For example, if we wanted to return the first 5 customers in the table:</p>
-<pre><code>SELECT *
-FROM &quot;sequel-mart-schema&quot;.&quot;Customers&quot;
-LIMIT 5;
+<p>It's like saying: <span> &quot;Hey, PostgreSQL; please can you find this information for me?  It's in this table in this schema.  When you find it, please <strong>sort it by something and read it back in that order</strong>&quot; </span></p>
+<p>For example, if we wanted to return all products and order by least popular:</p>
+<pre><code>SELECT product_id, product_category, product_item, product_variety, popularity
+FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
+ORDER BY popularity;
 </code></pre>
-<p>We can combine this with the <code>WHERE</code> clause to return a sample of matching data</p>
-<pre><code>SELECT *
-FROM &quot;sequel-mart-schema&quot;.&quot;Customers&quot;
-WHERE date_joined &gt;= '2021-08-01'
-LIMIT 5;
+<p>Or most popular:</p>
+<pre><code>SELECT product_id, product_category, product_item, product_variety, popularity
+FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
+ORDER BY popularity DESC;
 </code></pre>
-<p>Returns the first 5 customers in the table who joined after 1st August 2021</p>
-<p>We can also combine this with the <code>ORDER BY</code> clause to return the 5 most recent customers</p>
-<pre><code>SELECT *
-FROM &quot;sequel-mart-schema&quot;.&quot;Customers&quot;
-WHERE date_joined &gt;= '2021-08-01'
-ORDER BY date_joined DESC
-LIMIT 5;
-</code></pre>
-<h5>Notes:</h5>
+<p>Note the <code>DESC</code> on the end of the second statement.</p>
 <ul>
-<li>This dramatically reduces the time it takes to return results from a large table</li>
-<li>It also consumes fewer resources</li>
+<li><code>DESC</code> shows we are sorting by popularity in descending order.</li>
+<li>We could add <code>ASC</code> at the end of the first statement but <code>ORDER BY</code> orders ascending by default so this is not required</li>
+</ul>
+<h5>Combining with WHERE...</h5>
+<p>If we want to know the highest and lowest values for a specific subset of the data we can combine them with the <code>WHERE</code> clause</p>
+<h5>Advice for usage</h5>
+<ul>
+<li>While <code>ORDER BY</code> is useful, it is discouraged for large-scale production environments:</li>
+<li>Sorting tends to be resource intensive on very large tables</li>
+<li>It is a bottleneck in the execution plan</li>
+<li>Front-end systems are often better at sorting data once it's been pulled in</li>
 </ul>
 </section>
 <section class="slide__images">
-    <caption>1. List of first 5 customers</caption>
-    <img src="../../images/002_LIMIT_Customers_5.png" />
-    <caption>2. List of first 5 customers who joined after 1st August 2021</caption>
-    <img src="../../images/002_LIMIT_Customers_5_Date_Joined.png" />
-    <caption>3. List of first 5 customers who joined after 1st August 2021 ordered by recency</caption>
-    <img src="../../images/002_LIMIT_Customers_5_Date_Joined_DESC.png" />
+    <caption>1. List of products, least popular first</caption>
+    <img src="../../images/002_ORDER_Products_Pop_Asc.png" />
+    <caption>2. List of products, most popular first</caption>
+    <img src="../../images/002_ORDER_Products_Pop_Desc.png" />
 </section>
-
+<section class="slide__exercises">
+<hr>
+<h4>Exercises:</h4>
+<ol>
+<li>When did the first customer and last customer join us?</li>
+<li>What is the most expensive wholesale_price for products that are not sold by the kg?</li>
+<li>What is the most expensive unit_sales_price for products that have a popularity below 65?</li>
+<li>What is the lowest revenue for a sale (Sales_Detail) where there were more than 6 items_sold AND the cost_of_sales was more than 10?</li>
+</ol>
+</section>
     </main>
         
     <footer>
       
 
-      <h4>
+      <h3>
         <a class="slide__title" href="../slide_001">
         Database Bootcamp 6
         </a>
-      </h4>
+      </h3>
 
-      <h5>
+      <h5 class="slide__copy">
         <span>© Thomas Steeples 2022</span>
-        </a>
       </h5>
 
 

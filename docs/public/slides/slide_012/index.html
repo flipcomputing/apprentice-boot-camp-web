@@ -28,7 +28,7 @@
 
       <h2 class="slide__title">
         <a class="slide__title" href="../slide_001">
-        Sequel-Mart database
+        SQL SELECT Functions
         </a>
       </h2>
 
@@ -40,67 +40,109 @@
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<p>Now that we have a better idea of data types and how to use <code>SELECT</code>, it's time to query some stored data!</p>
-<h5>Introducing our Sequel-Mart database</h5>
-<p>This database stores information about our business in the following 6 tables:</p>
+<h5>Change output with functions</h5>
+<p>There are a lot of baked-in functions we can use to change the output</p>
+<p>We'll only go through a few in this Bootcamp</p>
+<p>The most common string and date functions are listed below</p>
+<p>We will use some Math-based functions when we explore our database.</p>
+<h6>CURRENT_DATE</h6>
+<p>Return the current date in 'YYYY-MM-DD' format</p>
+<pre><code>SELECT CURRENT_DATE;
+</code></pre>
+<h6>CURRENT_TIMESTAMP</h6>
+<p>Return the current date and time to the millisecond ('YYYY-MM-DD HH:mm:ss.ms)</p>
+<pre><code>SELECT CURRENT_TIMESTAMP;
+</code></pre>
+<h6>Date INTERVAL</h6>
+<p>Returns a date relative to the one you input</p>
+<pre><code>SELECT &lt;date&gt; + | - INTERVAL '&lt;interval&gt;';
+</code></pre>
+<p>The interval can be 'day', 'week', 'month', or 'year'</p>
+<p>For example</p>
 <ul>
-<li>Customers - <span>One row per registered customer who has made a purchase</span></li>
-<li>Dates - <span>One row per day. Various attributes about each date from 01/01/2020 to 31/12/2023 </span></li>
-<li>Products - <span>One row per product available for sale by Sequel-Mart</span></li>
-<li>Sales_Detail - <span>One row per basket of products bought per transaction</span></li>
-<li>Sales_Head - <span>One row per transaction completed by a customer in a store</span></li>
-<li>Stores - <span>One row per store in which a customer can make a transaction</span></li>
-</ul>
-<p>The columns in each table can be found by:</p>
+<li><code>SELECT CURRENT_TIMESTAMP + INTERVAL '1 day';</code> returns a tomorrow's date and time</li>
+<li><code>SELECT '2022-03-27 10:15:54'::TIMESTAMP - INTERVAL '2 months';</code> returns a date and time exactly 2 months before the input (27th January 2022 @ 10:15:54 in this case)
 <ul>
-<li>On the Browser panel on the left, find <code>Tables</code></li>
-<li>Expand this and expand a table to see the list of columns</li>
-</ul>
-<h5>Entity Relationship</h5>
-<ul>
-<li>It's common to map out how the tables in a database <strong>relate</strong> to each others</li>
-<li>This will help later on when we want to return information stored in multiple tables in one query</li>
-</ul>
-<caption>1. Sequel-Mart's database schema</caption>
-<img src="../../images/002_Sequel_Mart_Schema.png" />
-<h5>Design considerations</h5>
-<ul>
-<li>Relational tables tend to be designed to store <strong>attributes relating to one distinct category</strong></li>
-<li><strong>Keys or IDs</strong> are made available so we can <strong>relate or join</strong> these tables together
-<ul>
-<li>Each product is given an ID of <code>product_id</code> (e.g. Alstromeria is given an ID of 1)</li>
-<li>This <code>product_id</code> is referenced by the <code>product_id</code> column in the <code>Sales_Detail</code> table</li>
-<li>The product only appears once in the <code>Products</code> table</li>
-<li>However it can appear many times in the <code>Sales_Detail</code> table</li>
-<li>Therefore it makes sense to only store the ID of the product in <code>Sales_Detail</code>
-<ul>
-<li>It will take up less storage space</li>
-<li>Any changes to a product's attributes only need to take in the <code>Products</code> table</li>
-<li>It will eliminate potential inconsistencies from product data repeated in <code>Sales_Detail</code></li>
+<li>Note that we have to convert the string date to a date or a timestamp for this function to work</li>
 </ul>
 </li>
 </ul>
-</li>
+<h6>LENGTH()</h6>
+<p>Counts the number of characters in an input</p>
+<pre><code>SELECT LENGTH(&lt;input&gt;);
+</code></pre>
+<p>For example, <code>SELECT LENGTH('abcdefgh');</code> is 8 characters long and so returns 8.</p>
+<h6>LEFT()</h6>
+<p>Return the start of a string</p>
+<pre><code>SELECT LEFT(&lt;input&gt;, &lt;characters&gt;);
+</code></pre>
+<p>For example <code>SELECT LEFT('abcdefgh', 3);</code> returns the first 3 characters 'abc'</p>
+<h6>RIGHT()</h6>
+<p>Return the end of a string</p>
+<pre><code>SELECT RIGHT(&lt;input&gt;, &lt;characters&gt;);
+</code></pre>
+<p>For example <code>SELECT RIGHT('abcdefgh', 3);</code> returns the last 3 characters 'fgh'</p>
+<h6>SUBSTRING()</h6>
+<p>Return part of a string</p>
+<pre><code>SELECT SUBSTRING(&lt;input&gt;, &lt;start char&gt;, &lt;num of chars&gt;);
+</code></pre>
+<p>For example <code>SELECT SUBSTRING('abcdefgh', 3, 4);</code></p>
+<ul>
+<li>Starts at the 3rd character</li>
+<li>Returns 4 characters from there, so 3rd, 4th, 5th and 6th characters 'cdef'</li>
 </ul>
+<h6>CONCAT()</h6>
+<p>Merge different strings together</p>
+<pre><code>SELECT CONCAT(&lt;input&gt;, &lt;start char&gt;, &lt;num of chars&gt;);
+</code></pre>
+<p>For example, <code>SELECT CONCAT('abcdefgh', ' ijkl ', 'mnop');</code> returns 'abcdefgh ijkl mnop'</p>
 </section>
 <section class="slide__images">
-<caption>2. PostgreSQL's table and column list (Products table)</caption>
-<img src="../../images/002_DESIGN_Table_List.png" />
+    <caption>1. Date Interval (Difference) function</caption>
+    <img src="../../images/002_SELECT_Function_Date_Interval.png" />
+    <caption>2. LENGTH function</caption>
+    <img src="../../images/002_SELECT_Function_Length.png" />
+    <caption>3. LEFT function</caption>
+    <img src="../../images/002_SELECT_Function_Left.png" />
+    <caption>4. RIGHT function</caption>
+    <img src="../../images/002_SELECT_Function_Right.png" />
+    <caption>5. SUBSTRING function</caption>
+    <img src="../../images/002_SELECT_Function_Substring.png" />
+    <caption>6. CONCAT function</caption>
+    <img src="../../images/002_SELECT_Function_Concat.png" />
+</section>
+<section class="slide__exercises">
+<hr>
+<h4>Exercises:</h4>
+<ol>
+<li>Consider the text 'Manchester Digital Database Bootcamp'</li>
+</ol>
+<ul>
+<li>How long is this text in characters?</li>
+<li>Extract the word 'Bootcamp' from the text</li>
+<li>Extract the word 'Database' from the text</li>
+</ul>
+<ol start="2">
+<li>Using the CURRENT_TIMESTAMP</li>
+</ol>
+<ul>
+<li>Return a timestamp from 6 weeks ago</li>
+<li>Return a timestamp 2 years into the future</li>
+</ul>
 </section>
     </main>
         
     <footer>
       
 
-      <h4>
+      <h3>
         <a class="slide__title" href="../slide_001">
         Database Bootcamp 6
         </a>
-      </h4>
+      </h3>
 
-      <h5>
+      <h5 class="slide__copy">
         <span>© Thomas Steeples 2022</span>
-        </a>
       </h5>
 
 

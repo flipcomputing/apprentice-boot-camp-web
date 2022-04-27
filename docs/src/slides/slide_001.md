@@ -20,18 +20,21 @@ slide_layout: 'grid-5'
 <h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_009' | url }}">SELECT...</a><h3>
 <h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_010' | url }}">Data Types</a><h3>
 <h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_011' | url }}">Data Types - Manipulating</a><h3>
-<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_012' | url }}">Sequel-Mart Database</a><h3>
-<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_013' | url }}">FROM...</a><h3>
-<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_014' | url }}">WHERE... (Comparison)</a><h3>
-<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_015' | url }}">WHERE... (Logical)</a><h3>
-<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_016' | url }}">ORDER BY...</a><h3>
-<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_017' | url }}">LIMIT...</a><h3>
-<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_018' | url }}">GROUP BY...</a><h3>
-<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_019' | url }}">HAVING...</a><h3>
-<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_020' | url }}">Aliasing Revisited</a><h3>
-<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_021' | url }}">INNER JOIN...</a><h3>
-<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_022' | url }}">LEFT OUTER JOIN...</a><h3>
-<h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_023' | url }}">How Do We Change Content?</a><h3>
-<h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_024' | url }}">CREATE TABLE...</a><h3>
-<h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_025' | url }}">CREATE TABLE... Example</a><h3>
-<h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_026' | url }}">INSERT INTO...</a><h3>
+<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_012' | url }}">SQL SELECT Functions</a><h3>
+<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_013' | url }}">Sequel-Mart Database</a><h3>
+<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_014' | url }}">FROM...</a><h3>
+<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_015' | url }}">WHERE... (Comparison)</a><h3>
+<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_016' | url }}">WHERE... (Logical)</a><h3>
+<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_017' | url }}">ORDER BY...</a><h3>
+<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_018' | url }}">LIMIT...</a><h3>
+<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_019' | url }}">GROUP BY...</a><h3>
+<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_020' | url }}">HAVING...</a><h3>
+<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_021' | url }}">Aliasing Revisited</a><h3>
+<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_022' | url }}">INNER JOIN...</a><h3>
+<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_023' | url }}">LEFT OUTER JOIN...</a><h3>
+<h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_024' | url }}">How Do We Change Content?</a><h3>
+<h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_025' | url }}">CREATE TABLE...</a><h3>
+<h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_026' | url }}">CREATE TABLE... Example</a><h3>
+<h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_027' | url }}">INSERT INTO... (Single row)</a><h3>
+<h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_028' | url }}">INSERT INTO... (Multiple row)</a><h3>
+<h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_029' | url }}">UPDATE...</a><h3>

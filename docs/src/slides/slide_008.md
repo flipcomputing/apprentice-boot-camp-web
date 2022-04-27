@@ -3,8 +3,8 @@ layout: 'base.njk'
 slide_number: 8
 slide_prev: 'slide_007/'
 slide_next: 'slide_009/'
-section_title: 'How Do We Query A Relational Database?'
-slide_title: ''
+section_title: 'How do we query a relational database?'
+slide_title: 'Section 2'
 theme: 'theme_002'
 slide_layout: 'center'
 ---

@@ -28,7 +28,7 @@
 
       <h2 class="slide__title">
         <a class="slide__title" href="../slide_001">
-        Aliasing Revisited
+        HAVING...
         </a>
       </h2>
 
@@ -40,58 +40,53 @@
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h4>Table aliasing</h4>
-<p>Earlier on we discussed the idea of assigning a column with an alias</p>
-<p>e.g. <code>SELECT 123 AS my_number</code> replaces <code>?column?</code> with <code>my_number</code></p>
-<p>The same logic can be applied to tables:</p>
-<p>Take the Customers table:</p>
-<pre><code>SELECT customer_id, customer_name, date_joined
-FROM &quot;sequel-mart-schema&quot;.&quot;Customers&quot;;
+<h4>Filter aggregated results from a GROUP BY...</h4>
+<pre><code>SELECT    &lt;field1&gt;, SUM | COUNT | AVG(&lt;field2&gt;) AS SumField2
+FROM      &lt;schema_name&gt;.&lt;table_name&gt; | &lt;view_name&gt;
+GROUP BY  &lt;field1&gt;
+HAVING    SUM(&lt;field2&gt;) &gt; &lt;value&gt;;
 </code></pre>
-<p>Because we have only been using one table we've not had to reference the table name in the <code>SELECT</code>.  The above is implicitly:</p>
-<pre><code>SELECT &quot;Customers&quot;.customer_id, &quot;Customers&quot;.customer_name, &quot;Customers&quot;.date_joined
-FROM &quot;sequel-mart-schema&quot;.&quot;Customers&quot;;
-</code></pre>
-<h5>Aliasing with AS...</h5>
-<p>When we start to join multiple tables, we should alias the table names.</p>
-<p>Just like when we alias a column, the <code>AS</code> keyword can alias a table</p>
-<p>The <code>Customers</code> table could be aliased as <code>cu</code> and be re-written as</p>
-<pre><code>SELECT cu.customer_id, cu.customer_name, cu.date_joined
-FROM &quot;sequel-mart-schema&quot;.&quot;Customers&quot; AS cu;
-</code></pre>
-<p>This is for the following reasons:</p>
+<p>It's like saying: <span> &quot;Hey, PostgreSQL; please can you find this information for me?  It's in this table in this schema.  When you find it, please <strong>aggregate it together and read back only the results that match this criteria</strong>&quot; </span></p>
+<h6><em>&quot;HAVING is to a GROUP BY as WHERE is to a SELECT&quot;</em></h6>
+<hr />
+<p>For example, if we wanted to <code>COUNT</code>:</p>
 <ul>
-<li>It makes the SQL shorter and more concise</li>
-<li>It makes it easier to follow the path of table joins</li>
-<li>It helps the database engine to locate the data faster</li>
-<li>If the table name changes, we only have to change it in one place per query</li>
+<li>How many products we sell by <code>product_category</code></li>
+<li>But only if there are <strong>more than 10 products in a category</strong></li>
 </ul>
+<p>We can add a <code>HAVING</code> clause to the <code>COUNT(product_category)</code> as follows:</p>
+<pre><code>SELECT product_category, COUNT(product_category)
+FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
+GROUP BY product_category
+HAVING COUNT(product_category) &gt; 10;
+</code></pre>
+<p>We can see that because there are only 6 pot_plants they are not returned</p>
 </section>
 <section class="slide__images">
-<caption>1. Example of a column name being assigned</caption>
-<img src="../../images/002_SELECT_As_Alias.png" />
-<caption>2. Customer table - no aliasing</caption>
-<img src="../../images/002_Aliasing_Customers_1.png" />
-<caption>3. Customer table - with aliasing</caption>
-<img src="../../images/002_Aliasing_Customers_2.png" />
-<caption>4. Customer table - with aliasing</caption>
-<img src="../../images/002_Aliasing_Customers_3.png" />
+<caption>1. HAVING Example - Products - distinct list of categories and their count when more than 10 products in a category</caption>
+<img src="../../images/002_HAVING_Product_Category.png" />
 </section>
-
+<section class="slide__exercises">
+<hr>
+<h4>Exercises:</h4>
+<ol>
+<li>How many product pack_sizes have an average popularity of 71 or more?</li>
+<li>In the Sales_Header table, which individual feedback_scores (1, 2, 3, 4 and/or 5) were used in more than 100 transactions (e.g. if 101 transactions had a feedback of 3 then 3 would count)?</li>
+</ol>
+</section>
     </main>
         
     <footer>
       
 
-      <h4>
+      <h3>
         <a class="slide__title" href="../slide_001">
         Database Bootcamp 6
         </a>
-      </h4>
+      </h3>
 
-      <h5>
+      <h5 class="slide__copy">
         <span>© Thomas Steeples 2022</span>
-        </a>
       </h5>
 
 

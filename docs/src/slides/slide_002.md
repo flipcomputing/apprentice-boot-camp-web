@@ -24,7 +24,7 @@ How can we streamline our database?
 <br />
 <br />
 
-### ... while bearing 3 more in mind
+### ... and bear 3 more in mind
 
 How do we ensure the database is secure?
 

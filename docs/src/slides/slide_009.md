@@ -39,18 +39,13 @@ It's like saying: <span> "Hey, PostgreSQL; please can I have this returned to me
 
 <hr />
 
-We can use `SELECT` to perform calculations
+We can use `SELECT` to perform calculations with **arithmetic operators**
 
 - `SELECT 12 + 23;` returns the number 35 <span> "Hey, PostgreSQL; what is 12 + 23?"</span>
 - `SELECT 10 * 8;` returns the number 80<span> "Hey, PostgreSQL; what is 10 x 8?"</span>
 - `SELECT 3.14 + 2.73;` returns the decimal 5.87<span> "Hey, PostgreSQL; what is 3.14 + 2.73?"</span>
 - `SELECT 56 - 23 + 12.3;` returns the decimal 45.3
 - `SELECT 56 - (23 + 12.3);` returns the decimal 20.7 (following [BODMAS](https://en.wikipedia.org/wiki/Order_of_operations))
-
-We can also include in-built functions to manipulate an input
-- `SELECT CURRENT_TIMESTAMP;` returns the current date and time to the millisecond
-- The `CONCAT` function concatenates text input
-  - e.g. `SELECT CONCAT('Hello', ' a b ', 'World');` returns 'Hello a b World'
 
 ###### Booleans (A data type that returns `true` or `false`)
 - `SELECT true` returns a boolean true, `SELECT false` returns a boolean false
@@ -86,7 +81,5 @@ We can also include in-built functions to manipulate an input
   #### Exercises:
 - Practice some more sums
   - Include minus (-), divide (/) or modulus (%) and combine numbers and/or decimals
-- Print some text and practice concatination.
-- Try selecting a date (e.g. '2021-08-02 11:00:15') or CURRENT_TIMESTAMP
 
 </section>

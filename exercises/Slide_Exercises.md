@@ -1,3 +1,9 @@
+## SELECT FUNCTIONS
+1. A:
+```
+SELECT LENGTH('Manchester Digital Database Bootcamp');
+```
+
 ## WHERE... (Comparison Filters)
 
 1. Q: How many customers joined Sequel-Mart before 1st February 2021?

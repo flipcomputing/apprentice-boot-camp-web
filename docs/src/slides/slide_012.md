@@ -4,52 +4,123 @@ slide_number: 12
 slide_prev: 'slide_011/'
 slide_next: 'slide_013/'
 section_title: 'How do we query a relational database?'
-slide_title: 'Sequel-Mart database'
+slide_title: 'SQL SELECT Functions'
 theme: 'theme_002'
 slide_layout: 'grid-2'
 ---
 
 <section class="slide__text">
 
-Now that we have a better idea of data types and how to use `SELECT`, it's time to query some stored data!
+##### Change output with functions
+There are a lot of baked-in functions we can use to change the output
 
-##### Introducing our Sequel-Mart database
-This database stores information about our business in the following 6 tables:
-- Customers - <span>One row per registered customer who has made a purchase</span>
-- Dates - <span>One row per day. Various attributes about each date from 01/01/2020 to 31/12/2023 </span>
-- Products - <span>One row per product available for sale by Sequel-Mart</span>
-- Sales_Detail - <span>One row per basket of products bought per transaction</span>
-- Sales_Head - <span>One row per transaction completed by a customer in a store</span>
-- Stores - <span>One row per store in which a customer can make a transaction</span>
+We'll only go through a few in this Bootcamp
 
-The columns in each table can be found by:
-  - On the Browser panel on the left, find `Tables`
-  - Expand this and expand a table to see the list of columns
+The most common string and date functions are listed below
 
-##### Entity Relationship
-- It's common to map out how the tables in a database **relate** to each others
-- This will help later on when we want to return information stored in multiple tables in one query
+We will use some Math-based functions when we explore our database.
 
-<caption>1. Sequel-Mart's database schema</caption>
-<img src="{{ '../../images/002_Sequel_Mart_Schema.png' | url }}" />
+###### CURRENT_DATE
+Return the current date in 'YYYY-MM-DD' format
+```
+SELECT CURRENT_DATE;
+```
 
-##### Design considerations
-- Relational tables tend to be designed to store **attributes relating to one distinct category**
-- **Keys or IDs** are made available so we can **relate or join** these tables together
-  - Each product is given an ID of `product_id` (e.g. Alstromeria is given an ID of 1)
-  - This `product_id` is referenced by the `product_id` column in the `Sales_Detail` table
-  - The product only appears once in the `Products` table
-  - However it can appear many times in the `Sales_Detail` table
-  - Therefore it makes sense to only store the ID of the product in `Sales_Detail`
-    - It will take up less storage space
-    - Any changes to a product's attributes only need to take in the `Products` table
-    - It will eliminate potential inconsistencies from product data repeated in `Sales_Detail`
+###### CURRENT_TIMESTAMP
+Return the current date and time to the millisecond ('YYYY-MM-DD HH:mm:ss.ms)
+```
+SELECT CURRENT_TIMESTAMP;
+```
+
+###### Date INTERVAL
+Returns a date relative to the one you input
+```
+SELECT <date> + | - INTERVAL '<interval>';
+```
+
+The interval can be 'day', 'week', 'month', or 'year'
+
+For example
+- `SELECT CURRENT_TIMESTAMP + INTERVAL '1 day';` returns a tomorrow's date and time
+- `SELECT '2022-03-27 10:15:54'::TIMESTAMP - INTERVAL '2 months';` returns a date and time exactly 2 months before the input (27th January 2022 @ 10:15:54 in this case)
+  - Note that we have to convert the string date to a date or a timestamp for this function to work
+
+###### LENGTH()
+Counts the number of characters in an input
+```
+SELECT LENGTH(<input>);
+```
+
+For example, `SELECT LENGTH('abcdefgh');` is 8 characters long and so returns 8.
+
+###### LEFT()
+Return the start of a string
+```
+SELECT LEFT(<input>, <characters>);
+```
+
+For example `SELECT LEFT('abcdefgh', 3);` returns the first 3 characters 'abc'
+
+###### RIGHT()
+Return the end of a string
+```
+SELECT RIGHT(<input>, <characters>);
+```
+
+For example `SELECT RIGHT('abcdefgh', 3);` returns the last 3 characters 'fgh'
+
+###### SUBSTRING()
+Return part of a string
+```
+SELECT SUBSTRING(<input>, <start char>, <num of chars>);
+```
+
+For example `SELECT SUBSTRING('abcdefgh', 3, 4);`
+  - Starts at the 3rd character
+  - Returns 4 characters from there, so 3rd, 4th, 5th and 6th characters 'cdef'
+
+###### CONCAT()
+Merge different strings together
+```
+SELECT CONCAT(<input>, <start char>, <num of chars>);
+```
+
+For example, `SELECT CONCAT('abcdefgh', ' ijkl ', 'mnop');` returns 'abcdefgh ijkl mnop'
+
+
 
 </section>
 
 
 <section class="slide__images">
-<caption>2. PostgreSQL's table and column list (Products table)</caption>
-<img src="{{ '../../images/002_DESIGN_Table_List.png' | url }}" />
+    <caption>1. Date Interval (Difference) function</caption>
+    <img src="{{ '../../images/002_SELECT_Function_Date_Interval.png' | url }}" />
+    <caption>2. LENGTH function</caption>
+    <img src="{{ '../../images/002_SELECT_Function_Length.png' | url }}" />
+    <caption>3. LEFT function</caption>
+    <img src="{{ '../../images/002_SELECT_Function_Left.png' | url }}" />
+    <caption>4. RIGHT function</caption>
+    <img src="{{ '../../images/002_SELECT_Function_Right.png' | url }}" />
+    <caption>5. SUBSTRING function</caption>
+    <img src="{{ '../../images/002_SELECT_Function_Substring.png' | url }}" />
+    <caption>6. CONCAT function</caption>
+    <img src="{{ '../../images/002_SELECT_Function_Concat.png' | url }}" />
+
+
+</section>
+
+
+<section class="slide__exercises">
+
+---
+
+  #### Exercises:
+1. Consider the text 'Manchester Digital Database Bootcamp'
+  - How long is this text in characters?
+  - Extract the word 'Bootcamp' from the text
+  - Extract the word 'Database' from the text
+2. Using the CURRENT_TIMESTAMP
+  - Return a timestamp from 6 weeks ago
+  - Return a timestamp 2 years into the future
 
 </section>

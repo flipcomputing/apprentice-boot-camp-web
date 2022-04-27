@@ -28,7 +28,7 @@
 
       <h2 class="slide__title">
         <a class="slide__title" href="../slide_001">
-        INNER JOIN...
+        Aliasing Revisited
         </a>
       </h2>
 
@@ -40,102 +40,57 @@
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h5>Join 2 tables on matching columns</h5>
-<ul>
-<li>Until now we've been querying a single table at a time</li>
-<li>One of the main strengths of a relational database is the ability to join tables together</li>
-<li>This enables us to piece data together from different places to answer a question</li>
-</ul>
-<p>Think of a join as a left and right table:</p>
-<ul>
-<li><strong>Left</strong> - The first table in the join (on the <code>FROM</code> line)</li>
-<li><strong>Right</strong> - The second table in the join (on the <code>INNER JOIN</code> line)</li>
-</ul>
-<pre><code>SELECT      l.&lt;field1&gt;, l.&lt;field2&gt;, l.&lt;field3&gt;, r.&lt;field1&gt;, r.&lt;field2&gt;, r.&lt;field3&gt;
-FROM        &lt;schema_name&gt;.&lt;table_name&gt; | &lt;view_name&gt; AS l
-INNER JOIN  &lt;schema_name&gt;.&lt;table_name&gt; | &lt;view_name&gt; AS r
-            ON l.&lt;field1&gt; = r.&lt;field1&gt; AND l.&lt;field2&gt; = r.&lt;field2&gt;;
+<h4>Table aliasing</h4>
+<p>Earlier on we discussed the idea of assigning a column with an alias</p>
+<p>e.g. <code>SELECT 123 AS my_number</code> replaces <code>?column?</code> with <code>my_number</code></p>
+<p>The same logic can be applied to tables:</p>
+<p>Take the Customers table:</p>
+<pre><code>SELECT customer_id, customer_name, date_joined
+FROM &quot;sequel-mart-schema&quot;.&quot;Customers&quot;;
 </code></pre>
-<h6>Terms</h6>
-<ul>
-<li><code>INNER JOIN</code> = Combines rows that have <strong>matching values</strong> in two or more tables</li>
-<li><code>ON</code> = The columns on which you want to join the tables
-<ul>
-<li>They must have compatable data and data types to get a meaningful result</li>
-</ul>
-</li>
-</ul>
-<hr />
-<h5>Entity Relationship Diagram (ERD) Revisited</h5>
-<p>So how do we know what columns are joinable to which other table?</p>
-<p>Let's look at the ERD:</p>
-<caption>1. Sequel-Mart's database schema</caption>
-<img src="../../images/002_Sequel_Mart_Schema.png" />
-<ul>
-<li>As an example, we can join <code>Sales_Header</code> to <code>Customers</code>.
-<ul>
-<li>This can be done by joining a column on each table called <code>customer_id</code></li>
-<li>Good naming conventions on tables often makes this job a lot easier</li>
-</ul>
-</li>
-</ul>
-<pre><code>SELECT *
-FROM &quot;sequel-mart-schema&quot;.&quot;Sales_Header&quot; AS sh 
-INNER JOIN &quot;sequel-mart-schema&quot;.&quot;Customers&quot; AS cu
-    ON sh.customer_id = cu.customer_id;
+<p>Because we have only been using one table we've not had to reference the table name in the <code>SELECT</code>.  The above is implicitly:</p>
+<pre><code>SELECT &quot;Customers&quot;.customer_id, &quot;Customers&quot;.customer_name, &quot;Customers&quot;.date_joined
+FROM &quot;sequel-mart-schema&quot;.&quot;Customers&quot;;
 </code></pre>
+<h5>Aliasing with AS...</h5>
+<p>When we start to join multiple tables, we should alias the table names.</p>
+<p>Just like when we alias a column, the <code>AS</code> keyword can alias a table</p>
+<p>The <code>Customers</code> table could be aliased as <code>cu</code> and be re-written as</p>
+<pre><code>SELECT cu.customer_id, cu.customer_name, cu.date_joined
+FROM &quot;sequel-mart-schema&quot;.&quot;Customers&quot; AS cu;
+</code></pre>
+<p>This is for the following reasons:</p>
 <ul>
-<li>This returns transactions from the <code>Sales_Header</code> and more detailed information about each customer from <code>Customers</code></li>
-<li>Other possible joins include:
-<ul>
-<li><code>Sales_Header</code> to <code>Stores</code></li>
-<li><code>Sales_Header</code> to <code>Dates</code></li>
-<li><code>Sales_Header</code> to <code>Sales_Detail</code></li>
-<li><code>Sales_Detail</code> to <code>Products</code></li>
-</ul>
-</li>
-</ul>
-<h5>Notes:</h5>
-<ul>
-<li><code>INNER JOIN</code> is the longer form of this type of join.</li>
-<li>We can just use <code>JOIN</code> and the queries would run in the same way</li>
-<li>Beware that <code>INNER JOIN</code> only returns where records exist in <strong>both</strong> tables
-<ul>
-<li>If something is in one table and not the other it will not be returned</li>
-</ul>
-</li>
+<li>It makes the SQL shorter and more concise</li>
+<li>It makes it easier to follow the path of table joins</li>
+<li>It helps the database engine to locate the data faster</li>
+<li>If the table name changes, we only have to change it in one place per query</li>
 </ul>
 </section>
 <section class="slide__images">
-<caption>1. INNER JOIN returns matches found in BOTH tables only</caption>
-<img src="../../images/002_INNER_JOIN_Venn.png" />
-<caption>2. Joining Customers to Sales Header</caption>
-<img src="../../images/002_INNER_JOIN_cu_sh.png" />
+<caption>1. Example of a column name being assigned</caption>
+<img src="../../images/002_SELECT_As_Alias.png" />
+<caption>2. Customer table - no aliasing</caption>
+<img src="../../images/002_Aliasing_Customers_1.png" />
+<caption>3. Customer table - with aliasing</caption>
+<img src="../../images/002_Aliasing_Customers_2.png" />
+<caption>4. Customer table - with aliasing</caption>
+<img src="../../images/002_Aliasing_Customers_3.png" />
 </section>
-<section class="slide__exercises">
-<hr>
-<h4>Exercises:</h4>
-<ol>
-<li>Join Sales_Header (alias sh) to Stores (alias st).  Bring back the first 20 rows.</li>
-<li>Join Sales_Header (alias sh) to Dates (alias dt).  Bring back the first 20 rows.</li>
-<li>Join Sales_Header (alias sh) to Sales_Detail (alias sd).  Bring back the first 20 rows.</li>
-<li>Join Sales_Detail (alias sd) to Products (alias pr).  Bring back the first 20 rows.</li>
-</ol>
-</section>
+
     </main>
         
     <footer>
       
 
-      <h4>
+      <h3>
         <a class="slide__title" href="../slide_001">
         Database Bootcamp 6
         </a>
-      </h4>
+      </h3>
 
-      <h5>
+      <h5 class="slide__copy">
         <span>© Thomas Steeples 2022</span>
-        </a>
       </h5>
 
 

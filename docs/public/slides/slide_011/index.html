@@ -40,7 +40,7 @@
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h6>We may find a value is not in the format we need</h6>
+<h5>We may find a value is not in the format we need</h5>
 <p>For example, <code>SELECT '42';</code> will return as text</p>
 <p>Of course here we could just remove the quotes. However, when we move to more complicated queries this will often not be an option</p>
 <p>To convert this to an integer we can use either:</p>
@@ -58,7 +58,7 @@
 </ul>
 <p>Or change between dates</p>
 <ul>
-<li>e.g. <code>SELECT (CURRENT_TIMESTAMP)::DATE;</code> removes the time from the current timestamp</li>
+<li>e.g. <code>SELECT '2021-08-02 10:05:12'::DATE;</code> removes the time and just returns the date</li>
 </ul>
 <hr />
 <h5>Notes:</h5>
@@ -122,15 +122,14 @@
     <footer>
       
 
-      <h4>
+      <h3>
         <a class="slide__title" href="../slide_001">
         Database Bootcamp 6
         </a>
-      </h4>
+      </h3>
 
-      <h5>
+      <h5 class="slide__copy">
         <span>© Thomas Steeples 2022</span>
-        </a>
       </h5>
 
 

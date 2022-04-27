@@ -28,7 +28,7 @@
 
       <h2 class="slide__title">
         <a class="slide__title" href="../slide_001">
-        FROM...
+        Sequel-Mart database
         </a>
       </h2>
 
@@ -40,65 +40,66 @@
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h4>Tell the server where to look for the data</h4>
-<pre><code>SELECT * | &lt;value1&gt;, &lt;value2&gt;
-FROM &lt;table_name&gt;;
-</code></pre>
-<p>It's like saying: <span> &quot;Hey, PostgreSQL; please can you find this information for me?  It's in this table in this schema.  When you find this information, please read it back to me&quot; </span></p>
-<h5>For example:</h5>
-<p>Return a list of all products and all of their attributes to the results panel</p>
-<pre><code>SELECT *
-FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;;
-</code></pre>
-<p>Return a list of all products and some of their attributes to the results panel</p>
-<pre><code>SELECT product_id, product_category, product_item, popularity
-FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;;
-</code></pre>
-<h5>Notes:</h5>
+<p>Now that we have a better idea of data types and how to use <code>SELECT</code>, it's time to query some stored data!</p>
+<h5>Introducing our Sequel-Mart database</h5>
+<p>This database stores information about our business in the following 6 tables:</p>
 <ul>
-<li>You can drag the table from the browser into the Query Tool panel</li>
-<li><code>SELECT *</code> is short-hand for 'include every column in the table'
+<li>Customers - <span>One row per registered customer who has made a purchase</span></li>
+<li>Dates - <span>One row per day. Various attributes about each date from 01/01/2020 to 31/12/2023 </span></li>
+<li>Products - <span>One row per product available for sale by Sequel-Mart</span></li>
+<li>Sales_Detail - <span>One row per basket of products bought per transaction</span></li>
+<li>Sales_Head - <span>One row per transaction completed by a customer in a store</span></li>
+<li>Stores - <span>One row per store in which a customer can make a transaction</span></li>
+</ul>
+<p>The columns in each table can be found by:</p>
 <ul>
-<li>This is good for profiling data in a test environment</li>
-<li>For a production environment it is better to only use the columns you need</li>
+<li>On the Browser panel on the left, find <code>Tables</code></li>
+<li>Expand this and expand a table to see the list of columns</li>
+</ul>
+<h5>Entity Relationship</h5>
+<ul>
+<li>It's common to map out how the tables in a database <strong>relate</strong> to each others</li>
+<li>This will help later on when we want to return information stored in multiple tables in one query</li>
+</ul>
+<caption>1. Sequel-Mart's database schema</caption>
+<img src="../../images/002_Sequel_Mart_Schema.png" />
+<h5>Design considerations</h5>
+<ul>
+<li>Relational tables tend to be designed to store <strong>attributes relating to one distinct category</strong></li>
+<li><strong>Keys or IDs</strong> are made available so we can <strong>relate or join</strong> these tables together
+<ul>
+<li>Each product is given an ID of <code>product_id</code> (e.g. Alstromeria is given an ID of 1)</li>
+<li>This <code>product_id</code> is referenced by the <code>product_id</code> column in the <code>Sales_Detail</code> table</li>
+<li>The product only appears once in the <code>Products</code> table</li>
+<li>However it can appear many times in the <code>Sales_Detail</code> table</li>
+<li>Therefore it makes sense to only store the ID of the product in <code>Sales_Detail</code>
+<ul>
+<li>It will take up less storage space</li>
+<li>Any changes to a product's attributes only need to take in the <code>Products</code> table</li>
+<li>It will eliminate potential inconsistencies from product data repeated in <code>Sales_Detail</code></li>
 </ul>
 </li>
-<li>The column names which were previously <code>?column?</code> are replaced with the name in the table</li>
-<li>The data type of the column is included
-<ul>
-<li>e.g. <code>product_item</code> only accepts varying character strings of no more than 50 characters</li>
 </ul>
 </li>
 </ul>
 </section>
 <section class="slide__images">
-    <caption>1. Product table (all columns)</caption>
-    <img src="../../images/002_FROM_Products_All.png" />
-    <caption>2. Product table (some of the columns)</caption>
-    <img src="../../images/002_FROM_Products_Some.png" />
-</section>
-<section class="slide__exercises">
-<hr>
-<h4>Exercises:</h4>
-<ul>
-<li>Run SELECT * from each of the other 5 tables</li>
-<li>Familiarise yourself with the structure, and how it relates to the Entity Relationship diagram on the previous slide</li>
-</ul>
+<caption>2. PostgreSQL's table and column list (Products table)</caption>
+<img src="../../images/002_DESIGN_Table_List.png" />
 </section>
     </main>
         
     <footer>
       
 
-      <h4>
+      <h3>
         <a class="slide__title" href="../slide_001">
         Database Bootcamp 6
         </a>
-      </h4>
+      </h3>
 
-      <h5>
+      <h5 class="slide__copy">
         <span>© Thomas Steeples 2022</span>
-        </a>
       </h5>
 
 

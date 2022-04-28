@@ -58,18 +58,21 @@ Completed Sequel-Mart project web page:
 - Introduction & [Set-up via Github and Docker]((#installing-the-database-and-website-services)).
 	+ If you can complete the setup beforehand, that will help us make a prompt start to the boot-camp 
 - How databases fit into a front-end / back-end architecture
-- Fundamental concepts of databases (Data Types, ERDs, Normalisation)
-- Connect to PostgreSQL database (including basic security)
+- Fundamental concepts of databases (Data Types, ERDs)
+- Introduction to PostgreSQL's interface
 
 ### Section 2 (Querying a relational database - **CR**UD)
-- Read (`SELECT` `FROM`, `WHERE`, `ORDER BY`, `GROUP BY`, `HAVING`, `LIMIT`)
-- Create (`CREATE TABLE`)
+- Read (`SELECT` `FROM`, `WHERE`, `LIMIT`, `ORDER BY`, `GROUP BY`, `HAVING`)
 - Joining (`INNER JOIN`, `LEFT OUTER JOIN`)
 
 ### Section 3 (Changing content in a relational database - CR**UD**)
+- Create (`CREATE TABLE`)
 - Update (`INSERT`, `UPDATE`)
 - Delete (`DELETE`, `TRUNCATE`, `DROP`)
 - Changing column details (`ALTER ...`)
+
+---
+## Day 2
 
 ### Section 4 (Streamlining - making a relational database more efficient)
 - Speeding up queries
@@ -77,8 +80,6 @@ Completed Sequel-Mart project web page:
 - System Tables
 - SQL Injection
 
----
-## Day 2
 ### Section 5 (Sequel-Mart)
 - Project structure
 - Routing

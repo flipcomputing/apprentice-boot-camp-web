@@ -92,7 +92,17 @@
 <h4>Project Locations</h4>
 <ul>
 <li>Sequel-Mart frontend should be on <a href="http://localhost:5001/">http://localhost:5001/</a></li>
-<li>pgAdmin 4 (PostgreSQL's Managed Database Platform) should be on <a href="http://localhost:5050/">http://localhost:5050/</a></li>
+<li>pgAdmin 4 (PostgreSQL's Managed Database Platform) should be on <a href="http://localhost:5050/">http://localhost:5050/</a>
+<ul>
+<li>NOTE: The setup might not work if you already have something running on these ports</li>
+<li>In that case you will have to:
+<ul>
+<li>Adjust the port numbers of lines 32 and/or 46 of docker-compose.yml (screenshot 4)</li>
+<li>Save the .yml, <code>teardown</code> the project (as below) and run <code>setup</code> again (as above)</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>We will eventually populate the Sequel-Mart front-end with data from the PostgreSQL database</li>
 </ul>
 <h4>Accessing PostgreSQL</h4>
@@ -121,6 +131,8 @@
     <img src="../../images/001_SequelMart_Setup.png" />
     <caption>3. PostgreSQL on first load</caption>
     <img src="../../images/001_PostgreSQL_Setup.png" />
+    <caption>4. Default Port locations on docker-compose.yml</caption>
+    <img src="../../images/001_Setup_Ports.png" />
 </section>
     </main>
         
@@ -141,5 +153,6 @@
       <p class="slide-number">Slide 5</p>
     </footer>
   </article>
+  <script src="../../js/app.js"></script>
 </body>
 </html>

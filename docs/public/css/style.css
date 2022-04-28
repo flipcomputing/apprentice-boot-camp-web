@@ -357,14 +357,23 @@ footer {
 }
 
 
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1360px) {
   .grid-5 {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(40, fit-content(50%));
   }
+
+  .slide__contents-1, .slide__contents-2, .slide__contents-3, .slide__contents-4, .slide__contents-5, .slide__contents-6 {
+    padding: 0.05rem;
+    margin: 0 var(--margin-8);
+  }
+
+  .sect__1, .sect__2, .sect__3, .sect__4, .sect__5, .sect__6 {
+    font-size: var(--font-size-8);
+  }
 }
 
-@media only screen and (max-width: 960px) {
+@media only screen and (max-width: 780px) {
   :root {
     --font-size-default: 8px;
     --font-size-2: 3.4rem;
@@ -432,6 +441,7 @@ footer {
 
   .sect__1, .sect__2, .sect__3, .sect__4, .sect__5, .sect__6 {
     font-size: var(--font-size-9);
+    text-shadow: none;
   }
   
   .slide__title {

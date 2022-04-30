@@ -57,9 +57,9 @@ h1, h2 {
 }
 
 h3, h4, h5, h6, p {
-  line-height: 3.5rem;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  line-height: var(--margin-2);
+  margin-top: var(--margin-3);
+  margin-bottom: var(--margin-6);
 }
 
 
@@ -162,6 +162,7 @@ nav > a:hover {
 }
 
 .warning {
+  padding-top: var(--margin-6);
   color: var(--clr-text-warning);
   font-size: var(--font-size-6);
   font-weight: 700;
@@ -278,6 +279,24 @@ main > * {
   text-decoration: none;
 }
 
+.slide__contents-4 {
+  background-color: var(--clr-bg-sect-4);
+  color: var(--clr-text-sect-4);
+  text-decoration: none;
+}
+
+.slide__contents-5 {
+  background-color: var(--clr-bg-sect-5);
+  color: var(--clr-text-sect-5);
+  text-decoration: none;
+}
+
+.slide__contents-6 {
+  background-color: var(--clr-bg-sect-6);
+  color: var(--clr-text-sect-6);
+  text-decoration: none;
+}
+
 .sect__1, .sect__2, .sect__3, .sect__4, .sect__5, .sect__6 {
   background-color: transparent;
   text-decoration: none;
@@ -293,6 +312,18 @@ main > * {
 
 .sect__3 {
   color: var(--clr-text-sect-3);
+}
+
+.sect__4 {
+  color: var(--clr-text-sect-4);
+}
+
+.sect__5 {
+  color: var(--clr-text-sect-5);
+}
+
+.sect__6 {
+  color: var(--clr-text-sect-6);
 }
 
 img {
@@ -342,7 +373,12 @@ li {
   color: var(--clr-text-exercises);
 }
 
-
+.highlighted {
+  background-color: var(--clr-bg-highlight);
+  padding: var(--margin-8);
+  border-radius: var(--border-radius-1);
+  text-decoration: underline;
+}
 
 footer {
   display: flex;

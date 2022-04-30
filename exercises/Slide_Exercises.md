@@ -233,3 +233,24 @@ LEFT OUTER JOIN "sequel-mart-schema"."Sales_Header" AS sh
     ON cu.customer_id = sh.customer_id
 WHERE sh.sale_id IS NULL;
 ```
+
+
+
+# UPDATE...
+1. Q: Increase the offer_discount_percentage by 10% on any offer_ids between 12 and 16
+    - HINT: You can use the `BETWEEN` operator to get the IDs if they are consecutive
+1. A: The discounts should be 5.34, 2.62, 12.38, 8.42 and 2.19 respectively
+```
+UPDATE "sequel-mart-schema"."Product_Offers"
+SET offer_discount_percentage = offer_discount_percentage * 1.1
+WHERE offer_id BETWEEN 12 AND 16;
+```
+
+2. Q: Reduce the offer_discount_percentage by 5% on any offer_name that ends with the word 'deal' 
+    - HINT: Use the `LIKE` operator to get the deals
+2. A: This should change offer_ids 12 and 20 to 7.08 and 6.50 respectively
+```
+UPDATE "sequel-mart-schema"."Product_Offers"
+SET offer_discount_percentage = offer_discount_percentage * 0.95
+WHERE offer_name LIKE '%deal';
+```

@@ -12,12 +12,14 @@ slide_layout: 'grid-2'
 <section class="slide__text">
 
 #### Required Downloads
-- Make sure the following has been installed:
+- Make sure the following has been installed on your computer:
     - **Docker Desktop** for [Windows](https://docs.docker.com/desktop/windows/install/) or [Mac](https://docs.docker.com/desktop/mac/install/)
-    - A code editor (e.g. [VS Code](https://code.visualstudio.com/download))
+    - A code editor with an integrated terminal (e.g. [VS Code](https://code.visualstudio.com/download))
+    - [Node js (v14.15.1 or above)](https://nodejs.org/en/download/)
 
 #### Project Set Up
 - Add a folder somewhere on your computer.  This will store the project.
+- Open this folder as a new project in your code editor.
 - Open a terminal window (if using VS Code, the shortcut is `ctrl`+`'`).
 - `cd <file path>` to the folder you've just created
 - Run `git clone https://github.com/MCR-Digital/apprentice-boot-camp-databases.git`

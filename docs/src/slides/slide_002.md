@@ -19,7 +19,7 @@ How do we query a relational database?
 
 How do we change content?
 
-How can we streamline our database?
+How can we optimise our database?
 
 <br />
 <br />

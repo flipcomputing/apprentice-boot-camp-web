@@ -144,6 +144,8 @@ In the absence of physical collaboration on a whiteboard, a tool like [Miro](htt
 ---
 # Installing the Database and Website Services
 This section contains a step-by-step guide to installing everything you need to successfully complete the exercises in this boot-camp.
+
+These instructions are also available in the [Slide deck - Setting up the Project](https://mcr-digital.github.io/apprentice-boot-camp-databases/public/slides/slide_005/)
 &nbsp;
 
 ## Clone the Repository Locally

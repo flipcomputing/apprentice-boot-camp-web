@@ -14,7 +14,7 @@ slide_layout: 'grid-2'
 ##### We may find a value is not in the format we need
 For example, `SELECT '42';` will return as text
 
-Of course here we could just remove the quotes. However, when we move to more complicated queries this will often not be an option
+Of course, we could just remove the quotes here. However, when we move to more complicated queries this will often not be an option
 
 To convert this to an integer we can use either:
 ```

@@ -60,6 +60,7 @@ FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;;
 <li><code>SELECT *</code> is short-hand for 'include every column in the table'
 <ul>
 <li>This is good for profiling data in a test environment</li>
+<li>However it is considered 'lazy' and can be problematic if columns are changed</li>
 <li>For a production environment it is better to only use the columns you need</li>
 </ul>
 </li>

@@ -4,7 +4,7 @@ slide_number: 12
 slide_prev: 'slide_011/'
 slide_next: 'slide_013/'
 section_title: 'How do we query a relational database?'
-slide_title: 'SQL SELECT Functions'
+slide_title: 'SQL Text Functions'
 theme: 'theme_002'
 slide_layout: 'grid-2'
 ---
@@ -12,13 +12,14 @@ slide_layout: 'grid-2'
 <section class="slide__text">
 
 ##### Change output with functions
-There are a lot of baked-in functions we can use to change the output
+We've already used **arithmetic operators** to perform calculations on numeric values 
+
+There are also a lot of **baked-in functions** we can use to change the output of **string and date-based fields**
 
 We'll only go through a few in this Bootcamp
 
-The most common string and date functions are listed below
+The most common functions are listed below
 
-We will use some Math-based functions when we explore our database.
 
 ###### CURRENT_DATE
 Return the current date in 'YYYY-MM-DD' format

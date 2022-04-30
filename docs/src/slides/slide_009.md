@@ -53,7 +53,7 @@ We can use `SELECT` to perform calculations with **arithmetic operators**
 ###### Aliasing
 - At the moment the column header is `?column?`
 - If we include the `AS` keyword, we can give the column a name
-  - e.g. `SELECT 123 AS my_number` replaces `?column?` with `my_number`
+  - e.g. `SELECT 123 AS my_number` replaces `?column?` with `my_number` (screenshot 5)
 - When we query the database the column name of the table will be used by default
   - That behaviour can also be overwritten by the `AS` keyword
 

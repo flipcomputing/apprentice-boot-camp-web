@@ -38,7 +38,8 @@ CREATE TABLE <schema_name>.<table_name> (
 - Right-click on a table
 - Go to 'Scripts' > 'CREATE Script'
 - The script that created the table is printed in another Query Tool window
-- <div class="warning">Be careful. If you DROP or RECREATE a table, it's contents are gone too!</div>
+
+<div class="warning">Be careful. If you DROP or RECREATE a table, it's contents are gone too!</div>
 
 
 ###### Terms:

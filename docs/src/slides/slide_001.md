@@ -20,7 +20,7 @@ slide_layout: 'grid-5'
 <h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_009' | url }}">SELECT...</a><h3>
 <h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_010' | url }}">Data Types</a><h3>
 <h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_011' | url }}">Data Types - Manipulating</a><h3>
-<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_012' | url }}">SQL SELECT Functions</a><h3>
+<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_012' | url }}">SQL Text Functions</a><h3>
 <h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_013' | url }}">Sequel-Mart Database</a><h3>
 <h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_014' | url }}">FROM...</a><h3>
 <h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_015' | url }}">WHERE... (Comparison)</a><h3>
@@ -37,4 +37,12 @@ slide_layout: 'grid-5'
 <h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_026' | url }}">CREATE TABLE... Example</a><h3>
 <h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_027' | url }}">INSERT INTO... (Single row)</a><h3>
 <h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_028' | url }}">INSERT INTO... (Multiple row)</a><h3>
-<h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_029' | url }}">UPDATE...</a><h3>
+<h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_029' | url }}">UPDATE... (Single table)</a><h3>
+<h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_030' | url }}">UPDATE... (Multiple tables)</a><h3>
+<h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_031' | url }}">DELETE...</a><h3>
+<h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_032' | url }}">TRUNCATE TABLE...</a><h3>
+<h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_033' | url }}">DROP...</a><h3>
+<h3 class="slide__contents-3"><a class="sect__3" href="{{ '../slide_034' | url }}">ALTER COLUMN...</a><h3>
+<h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_035' | url }}">How Do We Optimise?</a><h3>
+<h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_036' | url }}">System Tables</a><h3>
+<h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_037' | url }}">Pages</a><h3>

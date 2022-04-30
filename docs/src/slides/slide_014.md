@@ -36,6 +36,7 @@ FROM "sequel-mart-schema"."Products";
 - You can drag the table from the browser into the Query Tool panel
 - `SELECT *` is short-hand for 'include every column in the table'
   - This is good for profiling data in a test environment
+  - However it is considered 'lazy' and can be problematic if columns are changed
   - For a production environment it is better to only use the columns you need
 - The column names which were previously `?column?` are replaced with the name in the table
 - The data type of the column is included

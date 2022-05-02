@@ -4,83 +4,78 @@ slide_number: 23
 slide_prev: 'slide_022/'
 slide_next: 'slide_024/'
 section_title: 'How do we query a relational database?'
-slide_title: LEFT OUTER JOIN...
+slide_title: INNER JOIN...
 theme: 'theme_002'
 slide_layout: 'grid-2'
 ---
 
 <section class="slide__text">
 
-##### Join 2 tables, all values from 1 table, matches only from the other
+##### Join 2 tables on matching columns
+
+- Until now we've been querying a single table at a time
+- One of the main strengths of a relational database is the ability to join tables together
+- This enables us to piece data together from different places to answer a question
+
+Think of a join as a left and right table:
+- **Left** - The first table in the join (on the `FROM` line)
+- **Right** - The second table in the join (on the `INNER JOIN` line)
 
 ```
-SELECT           l.<field1>, l.<field2>, r.<field1>, r.<field2>
-FROM             <schema_name>.<table_name> | <view_name> AS l
-LEFT OUTER JOIN  <schema_name>.<table_name> | <view_name> AS r
+SELECT      l.<field1>, l.<field2>, l.<field3>, r.<field1>, r.<field2>, r.<field3>
+FROM        <schema_name>.<table_name> | <view_name> AS l
+INNER JOIN  <schema_name>.<table_name> | <view_name> AS r
             ON l.<field1> = r.<field1> AND l.<field2> = r.<field2>;
 ```
 
 ###### Terms
-- `LEFT OUTER JOIN` = Returns all rows from the left table, and the matching rows from the right table
+- `INNER JOIN` = Combines rows that have **matching values** in two or more tables
+- `ON` = The columns on which you want to join the tables
+    - They must have compatable data and data types to get a meaningful result
 
 <hr />
 
-##### INNER JOIN vs LEFT OUTER JOIN
+##### Entity Relationship Diagram (ERD) Revisited
 
-Let's join `Sales_Header` to `Customers` again but this time:
-- We'll put the `Customer` table first
-- We'll filter for customers with the first name Amelie
+So how do we know what columns are joinable to which other table?
+
+Let's look at the ERD:
+
+<caption>1. Sequel-Mart's database schema</caption>
+<img src="{{ '../../images/002_Sequel_Mart_Schema.png' | url }}" />
+
+- As an example, we can join `Sales_Header` to `Customers`.
+    - This can be done by joining a column on each table called `customer_id`
+    - Good naming conventions on tables often makes this job a lot easier
 
 ```
 SELECT *
-FROM "sequel-mart-schema"."Customers" AS cu
-INNER JOIN "sequel-mart-schema"."Sales_Header" AS sh 
-    ON cu.customer_id = sh.customer_id
-WHERE cu.customer_name LIKE 'Amelie%';
+FROM "sequel-mart-schema"."Sales_Header" AS sh 
+INNER JOIN "sequel-mart-schema"."Customers" AS cu
+    ON sh.customer_id = cu.customer_id;
 ```
 
-This returns 5 transactions
-- All for 'Amelie R.D.S'.
+- This returns transactions from the `Sales_Header` and more detailed information about each customer from `Customers`
+- Other possible joins include:
+    - `Sales_Header` to `Stores`
+    - `Sales_Header` to `Dates`
+    - `Sales_Header` to `Sales_Detail`
+    - `Sales_Detail` to `Products`
 
-Now let's apply a `LEFT OUTER JOIN` to this query:
-```
-SELECT *
-FROM "sequel-mart-schema"."Customers" AS cu
-LEFT OUTER JOIN "sequel-mart-schema"."Sales_Header" AS sh 
-    ON cu.customer_id = sh.customer_id
-WHERE cu.customer_name LIKE 'Amelie%';
-```
 
-This time we get 6 transactions
-- 5 for 'Amelie R.D.S'
-- 1 for 'Amelie M.W.H' with `NULL` for the columns in `Sales_Header`
-
-###### What's going on?
-- Amelie M.W.H is a registered customer but has not had a transaction yet
-- An `INNER JOIN` only returns records if they are in both tables
-- A `LEFT OUTER JOIN` forces the query to return all records from the left-hand table
-- The left table is the first in the join (`Customers` in this case)
-- So we get one dummy record to acknowledge the record in `Customers` with `NULL`s in the right-hand table
-
-Make sure we're using the right join type to get the result we're expecting
-
-###### Notes:
-- `NULL` is a special placeholder to say the data doesn't exist or is unknown
-    - You can query for the existence of `NULL`s with the `IS NULL` syntax
-    - For example `WHERE sh.sale_id IS NULL`
-- `LEFT OUTER JOIN` is the longer form of this type of join
-- We can just use `LEFT JOIN` and the queries would run in the same way
-- `RIGHT OUTER JOIN` or `RIGHT JOIN` returns everything from table `b` and matches from table `a`
+##### Notes:
+- `INNER JOIN` is the longer form of this type of join.
+- We can just use `JOIN` and the queries would run in the same way
+- Beware that `INNER JOIN` only returns where records exist in **both** tables
+    - If something is in one table and not the other it will not be returned
 
 </section>
 
 <section class="slide__images">
-<caption>1. LEFT OUTER JOIN returns matches found in BOTH tables only</caption>
-<img src="{{ '../../images/002_LEFT_JOIN_Venn.png' | url }}" />
-<caption>2. Inner Joining Customers to Sales Header for customers called Amelie</caption>
-<img src="{{ '../../images/002_INNER_JOIN_cu_sh_amelie.png' | url }}" />
-<caption>3. Outer Joining Customers to Sales Header for customers called Amelie</caption>
-<img src="{{ '../../images/002_LEFT_JOIN_cu_sh_amelie.png' | url }}" />
+<caption>1. INNER JOIN returns matches found in BOTH tables only</caption>
+<img src="{{ '../../images/002_INNER_JOIN_Venn.png' | url }}" />
+<caption>2. Joining Customers to Sales Header</caption>
+<img src="{{ '../../images/002_INNER_JOIN_cu_sh.png' | url }}" />
 
 </section>
 
@@ -89,8 +84,9 @@ Make sure we're using the right join type to get the result we're expecting
 ---
 
 #### Exercises:
-1. Apart from Amelie M.W.H how many other customers are yet to make a transaction?
-    - HINT: Add `WHERE sh.sale_id IS NULL` after your join
-
+1. Join Sales_Header (alias sh) to Stores (alias st).  Bring back the first 20 rows.
+2. Join Sales_Header (alias sh) to Dates (alias dt).  Bring back the first 20 rows.
+3. Join Sales_Header (alias sh) to Sales_Detail (alias sd).  Bring back the first 20 rows.
+4. Join Sales_Detail (alias sd) to Products (alias pr).  Bring back the first 20 rows.
 
 </section>

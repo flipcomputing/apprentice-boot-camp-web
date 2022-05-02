@@ -34,6 +34,7 @@ slide_layout: 'grid-2'
 
 - If this Docker folder **does not exist**:
     - In your terminal, run `./setup.sh` (if using a Mac) or `./setup.bat` (if using Windows)
+    - Leave it to run. It may take a few minutes for the setup process to complete
 
 <hr />
 
@@ -68,6 +69,7 @@ slide_layout: 'grid-2'
 #### Tearing Down the Project
 - <span>When you no longer need the project on your machine:</span>
 - <span>In your terminal, run `./teardown.sh` (if using a Mac) or `./teardown.bat` (if using Windows)</span>
+- <span>When `./teardown` has completed, you can remove the greyed-out folder completely from Docker Desktop</span>
 - <span>They can be recreated with `./setup.sh` or `./setup.bat` as above if needed.</span>
 </section>
 
@@ -80,4 +82,6 @@ slide_layout: 'grid-2'
     <img src="{{ '../../images/001_PostgreSQL_Setup.png' | url }}" />
     <caption>4. Default Port locations on docker-compose.yml</caption>
     <img src="{{ '../../images/001_Setup_Ports.png' | url }}" />
+    <caption>5. Permanently delete the project folder from docker desktop</caption>
+    <img src="{{ '../../images/001_Docker_Teardown_Delete.png' | url }}" />
 </section>

@@ -4,36 +4,29 @@ slide_number: 34
 slide_prev: 'slide_033/'
 slide_next: 'slide_035/'
 section_title: 'How do we change content?'
-slide_title: ALTER COLUMN...
+slide_title: DROP...
 theme: 'theme_003'
 slide_layout: 'grid-2'
 ---
 
 <section class="slide__text">
 
-##### Tell the server that you want to change a column attribute
+##### Delete an object from a database
+Tell the server that you want to: 
 
-We can change a lot of things about a table. The most common are:
-
-###### Data Type
+- Delete a table
 ```
-ALTER TABLE <schema_name>.<table_name>
-ALTER COLUMN <column_name> SET DATA TYPE  <data_type1>;
-```
-<div class="warning">- You will get an error if data in the table is outside of the proposed new data type</div>
-
-###### Default value 
-```
-ALTER TABLE <schema_name>.<table_name>
-ALTER COLUMN <column_name> SET DEFAULT <default_value> | DROP DEFAULT;
+DROP TABLE <schema_name>.<table_name>;
 ```
 
-###### Nullability of a column
+- Delete a schema
 ```
-ALTER TABLE <schema_name>.<table_name>
-ALTER COLUMN <column_name> SET NOT NULL | DROP NOT NULL;
+DROP SCHEMA <schema_name>;
 ```
-<div class="warning">- You will get an error if you `SET NOT NULL` when the column already contains `NULL` rows</div>
+
+<div class="warning">IMPORTANT:</div>
+<div class="warning">- Dropping something will remove it from the database server!</div>
+<div class="warning">- Sometimes this command can fail if something else in the database depends on it existing</div>
 
 
 
@@ -41,7 +34,27 @@ ALTER COLUMN <column_name> SET NOT NULL | DROP NOT NULL;
 
 To practice, let's create a new table called `aaa_Dummy_Table` on our `sequel-mart-schema` and drop it: 
 
+```
+CREATE TABLE "sequel-mart-schema"."aaa_Dummy_Table" (
+	column_001 INT,
+	column_002 VARCHAR(10),
+	column_003 TIMESTAMP,
+	column_004 NUMERIC(9,2)
+);
+```
 
+This creates our table.  We can query it:
+```
+SELECT *
+FROM "sequel-mart-schema"."aaa_Dummy_Table";
+```
+
+Now let's remove (or `DROP`) it:
+```
+DROP TABLE "sequel-mart-schema"."aaa_Dummy_Table";
+```
+NOTE:
+- Because this statement can be applied to many other object types we cannot use the a shorthand
 
 
 </section>

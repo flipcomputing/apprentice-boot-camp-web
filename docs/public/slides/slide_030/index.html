@@ -28,7 +28,7 @@
 
       <h2 class="slide__title">
         <a class="slide__title" href="../slide_001">
-        UPDATE... (Multiple tables)
+        UPDATE... (Single table)
         </a>
       </h2>
 
@@ -40,38 +40,102 @@
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h5>We're ready to apply the discounts to our Sales_Detail table</h5>
-<h6>What do we need to do?</h6>
-<ul>
-<li>Identify the products the offers apply to</li>
-<li>Identify when the offers applied (the date range)</li>
-<li>Find the transactions where an offer was active for that product</li>
-<li>Apply the discount for those transactions as specified in <code>Product_Offers</code></li>
-</ul>
-<div class="warning">Obviously in the real world, this would be applied at the time of sale</div>
-<h6>Where do we find this information?</h6>
-<p>Five tables each hold pieces to this puzzle so let's go through the requirements slowly.</p>
-<p>If we start with the updated Entity Relationship Diagram:</p>
-<caption>Updated ERD, including the Product_Offers table</caption>
-<img src="../../images/002_Sequel_Mart_Schema_Inc_Product_Offers.png" />
-<p>We'll definitely need:</p>
-<ul>
-<li>All product sales from <code>Sales_Detail</code></li>
-<li>The date the sales happened from <code>Sales_Header</code></li>
-<li></li>
-</ul>
-<h6>Sales_Detail</h6>
-<p>Let's see what we have in this table:</p>
-<pre><code>SELECT sd.*
-FROM &quot;sequel-mart-schema&quot;.&quot;Sales_Detail&quot; AS sd
-LIMIT 50;
+<h5>Tell the server that you want to change existing record(s) in a table</h5>
+<pre><code>UPDATE &lt;schema_name&gt;.&lt;table_name&gt;
+SET &lt;field_name1&gt; = &lt;new_value&gt;, &lt;field_name2&gt; = &lt;new_value&gt;
+WHERE &lt;field_name3&gt; = &lt;filter&gt;;
 </code></pre>
+<ul>
+<li><code>UPDATE</code> - Specify the table we want to update</li>
+<li><code>SET</code> - What we want the value of each column to be</li>
+<li>If more than one column should be changed, separate them with commas</li>
+</ul>
+<div class="warning">If you don't include a WHERE clause, every row in the table will be updated!</div>
+<h6>Product Offers (Single Row and Column)</h6>
+<p>We have been informed that the 4.85% discount for 'Gooseberry Seasonal Saver' should actually be 5.25%.</p>
+<p>Running:</p>
+<pre><code>UPDATE &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
+SET offer_discount_percentage = 5.25
+WHERE offer_name = 'Gooseberry Seasonal Saver';
+</code></pre>
+<p>will make that change.  We could also have said:</p>
+<pre><code>UPDATE &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
+SET offer_discount_percentage = 5.25
+WHERE offer_id = 2;
+</code></pre>
+<p>Now if we check our table, we'll see <code>offer_discount_percentage</code> for this offer has changed to 5.25.  All other records are unaffected.</p>
+<pre><code>SELECT *
+FROM &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
+ORDER BY offer_id;
+</code></pre>
+<h6>Product Offers (Single Row, Multiple Column)</h6>
+<p>Next we have been informed of some inaccuracies with our Introductory Offer:</p>
+<ul>
+<li>Rename it 'Broad Bean Counter'</li>
+<li>Change the discount percentage to 6.50%</li>
+<li>Change the offer start and end dates to '2021-03-01' and '2021-03-30'</li>
+</ul>
+<p>The SQL for this can include multiple values for <code>SET</code>, separated by commas</p>
+<pre><code>UPDATE &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
+SET offer_name = 'Broad Bean Counter'
+	, offer_discount_percentage = 6.50
+	, offer_start_date = '2021-03-01'
+	, offer_end_date = '2021-03-30'
+WHERE offer_id = 1;
+</code></pre>
+<h6>Product Offers (Multiple Row, Single Column)</h6>
+<p>A further change request has been issued to us:</p>
+<ul>
+<li>We can increase the discount on offers 3, 4, 6 and 8 by a further 5%</li>
+</ul>
+<p>To do this we can:</p>
+<ul>
+<li>Use the <code>offer_discount_percentage</code> in the <code>SET</code> statement
+<ul>
+<li>This will effectively treat every <code>offer_discount_percentage</code> as a local variable</li>
+<li>e.g. Offer 3 will substitute <code>offer_discount_percentage</code> for 11.95</li>
+<li>We can multiply that by 1.05 to get 12.55</li>
+</ul>
+</li>
+<li>Use the <code>IN</code> operator to list the offers we want to include in the <code>WHERE</code> clause</li>
+</ul>
+<pre><code>UPDATE &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
+SET offer_discount_percentage = offer_discount_percentage * 1.05
+WHERE offer_id IN (3, 4, 6, 8);
+</code></pre>
+<p>After we have done this, offers 3, 4, 6 and 8 are 5% more than they were before.</p>
+<p>The datatype <code>numeric(4,2)</code> ensures they are rounded to 2 decimal places</p>
 </section>
 <section class="slide__images">
-<caption>1. All columns of the Sales_Detail table</caption>
-<img src="../../images/003_UPDATE_Sales_Detail_Product_Offers_Sales_Details_All.png" />
+<caption>1. UPDATE the Gooseberry discount from 4.85% to 5.25%</caption>
+<img src="../../images/003_UPDATE_Product_Offers_Gooseberry_525.png" />
+<caption>2. Gooseberry discount updated to 5.25%</caption>
+<img src="../../images/003_UPDATE_Product_Offers_Gooseberry_525_After.png" />
+<caption>3. Offer ID 1 Multiple Changes</caption>
+<img src="../../images/003_UPDATE_Product_Offers_Introductory_to_Bean.png" />
+<caption>4. Offer ID 1 After Multiple Changes</caption>
+<img src="../../images/003_UPDATE_Product_Offers_Introductory_to_Bean_After.png" />
+<caption>5. Offer IDs 3,4,6,8 discount increased by a further 5%</caption>
+<img src="../../images/003_UPDATE_Product_Offers_Multple_Row_Discounts.png" />
+<caption>6. Offer IDs 3,4,6,8 discount increased by a further 5%</caption>
+<img src="../../images/003_UPDATE_Product_Offers_Multple_Row_Discounts_After.png" />
 </section>
-
+<section class="slide__exercises">
+<h4>Exercises:</h4>
+<p>We have received more instructions:</p>
+<ol>
+<li>Increase the offer_discount_percentage by 10% on any offer_ids between 12 and 16
+<ul>
+<li>HINT: You can use the <code>BETWEEN</code> operator to get the IDs if they are consecutive</li>
+</ul>
+</li>
+<li>Reduce the offer_discount_percentage by 5% on any offer_name that ends with the word 'deal'
+<ul>
+<li>HINT: Use the <code>LIKE</code> operator to get the deals</li>
+</ul>
+</li>
+</ol>
+</section>
     </main>
         
     <footer>

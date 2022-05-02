@@ -4,72 +4,52 @@ slide_number: 33
 slide_prev: 'slide_032/'
 slide_next: 'slide_034/'
 section_title: 'How do we change content?'
-slide_title: DROP...
+slide_title: TRUNCATE TABLE...
 theme: 'theme_003'
 slide_layout: 'grid-2'
 ---
 
 <section class="slide__text">
 
-##### Delete an object from a database
+##### Clear a table
 Tell the server that you want to: 
+- Remove all existing record(s) in a table
+- Reset it’s cache (reset any incrementing keys, indexes, data space)
 
-- Delete a table
 ```
-DROP TABLE <schema_name>.<table_name>;
-```
-
-- Delete a schema
-```
-DROP SCHEMA <schema_name>;
+TRUNCATE TABLE <schema_name>.<table_name>;
 ```
 
 <div class="warning">IMPORTANT:</div>
-<div class="warning">- Dropping something will remove it from the database server!</div>
-<div class="warning">- Sometimes this command can fail if something else in the database depends on it existing</div>
+<div class="warning">- Truncating will remove ALL existing data from a table. Check before committing!</div>
+<div class="warning">- Not a pleasant feeling if done unintentionally!</div>
 
+###### stage_Product_Offers
 
-
-###### Example table
-
-To practice, let's create a new table called `aaa_Dummy_Table` on our `sequel-mart-schema` and drop it: 
+Let's clear the `stage_Product_Offers` in readiness for more CSV files in the future: 
 
 ```
-CREATE TABLE "sequel-mart-schema"."aaa_Dummy_Table" (
-	column_001 INT,
-	column_002 VARCHAR(10),
-	column_003 TIMESTAMP,
-	column_004 NUMERIC(9,2)
-);
+TRUNCATE TABLE "sequel-mart-schema"."stage_Product_Offers";
 ```
 
-This creates our table.  We can query it:
-```
-SELECT *
-FROM "sequel-mart-schema"."aaa_Dummy_Table";
-```
+This removes every record from this table.  All other tables are unaffected.
 
-Now let's remove (or `DROP`) it:
-```
-DROP TABLE "sequel-mart-schema"."aaa_Dummy_Table";
-```
 NOTE:
-- Because this statement can be applied to many other object types we cannot use the a shorthand
+- We could use the shorthand `TRUNCATE` instead of `TRUNCATE TABLE`
 
+    ```
+    TRUNCATE "sequel-mart-schema"."stage_Product_Offers";
+    ```
 
 </section>
 
 <section class="slide__images">
-<caption>1. CREATE aaa_Dummy_Table</caption>
-<img src="{{ '../../images/003_DROP_Dummy_Table_CREATE.png' | url }}" />
-<caption>2. aaa_Dummy_Table included in database schema</caption>
-<img src="{{ '../../images/003_DROP_Dummy_Table_List.png' | url }}" />
-<caption>3. SELECT FROM aaa_Dummy_Table</caption>
-<img src="{{ '../../images/003_DROP_Dummy_Table_SELECT.png' | url }}" />
-<caption>4. DROP aaa_Dummy_Table</caption>
-<img src="{{ '../../images/003_DROP_Dummy_Table_DROP.png' | url }}" />
-<caption>5. aaa_Dummy_Table no longer in database schema</caption>
-<img src="{{ '../../images/003_DROP_Dummy_Table_List_After.png' | url }}" />
+<caption>1. All columns of the stage_Product_Offers table</caption>
+<img src="{{ '../../images/003_DELETE_stage_Product_Offers_Before_May_2021_After.png' | url }}" />
+<caption>2. Truncate stage_Product_Offers</caption>
+<img src="{{ '../../images/003_TRUNCATE_stage_Product_Offers.png' | url }}" />
+<caption>3. stage_Product_Offers is empty once truncated</caption>
+<img src="{{ '../../images/003_TRUNCATE_stage_Product_Offers_After.png' | url }}" />
 
 
 

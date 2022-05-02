@@ -28,7 +28,7 @@
 
       <h2 class="slide__title">
         <a class="slide__title" href="../slide_001">
-        Pages
+        System Tables
         </a>
       </h2>
 
@@ -40,47 +40,76 @@
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h4>How data is stored in a database</h4>
+<h4>Shows 'metadata' (data about data)</h4>
+<p>Postgresql has a hidden <code>pg_catalog</code> schema. This keeps track of:</p>
 <ul>
-<li>Split into chunks or ‘pages’ of 8KB in size</li>
-<li>When a page is filled, another is created for new data</li>
-</ul>
-<h5>Like scanning a reference book</h5>
+<li>System-designed components needed to keep the database server functioning</li>
+<li>User-designed components (tables, views, indexes etc)
 <ul>
-<li>A query instructs the database engine to read <code>FROM</code> a
-set of pages (or a table to you and me)</li>
-<li>It scans the <code>SELECT</code>ed columns in these pages</li>
-<li>It marks the rows that fulfil any <code>WHERE</code> or <code>HAVING</code> clause
-for returning as a result</li>
-<li>The engine can <code>LIMIT</code> and/or <code>ORDER</code> the results read back</li>
+<li>Concepts like Views and Indexes will be introduced later in this section</li>
 </ul>
-<h5>Problems of scale</h5>
+</li>
+</ul>
+<p>We can access this schema with normal SQL:</p>
+<pre><code>SELECT *
+FROM pg_tables;
+</code></pre>
+<p>We do not need to include the <code>pg_catalog</code> schema name. Postgres knows where this is</p>
+<p>Notice we can see:</p>
 <ul>
-<li>Our database is small</li>
-<li>However, some companies process TBs or PBs of data a day.</li>
-<li>SLOW unless streamlined</li>
+<li>All the tables in our <code>sequel-mart-schema</code> schema</li>
+<li>Tables in the <code>table-load-base</code> schema (more to follow in this section)</li>
+<li>Tables in the <code>pg_catalog</code> schema</li>
 </ul>
+<p>All these tables can be viewed with a <code>SELECT ... FROM</code></p>
+<p>Examples of other tables in the <code>pg_catalog</code> schema are:</p>
+<table>
+  <tr>
+    <th>System Table</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <th>...</th>
+    <th>...</th>
+  </tr>
+  <tr>
+    <td>pg_database</td>
+    <td>details of every database on the server</td>
+  </tr>
+  <tr>
+    <td>pg_tables</td>
+    <td>details of tables on the server</td>
+  </tr>
+  <tr>
+    <td>pg_stats</td>
+    <td>contents of every column in a table larger than 8KB</td>
+  </tr>
+  <tr>
+    <th>...</th>
+    <th>...</th>
+  </tr>
+  <tr>
+    <td>pg_views</td>
+    <td>views in the database, including system views</td>
+  </tr>
+  <tr>
+    <td>pg_indexes</td>
+    <td>indexes on tables in the server</td>
+  </tr>
+  <tr>
+    <td>pg_user</td>
+    <td>user accounts on the server</td>
+  </tr>
+  <tr>
+    <td>pg_locks</td>
+    <td>locks taken in a transaction</td>
+  </tr>
+</table>
 <hr />
-<h5>Trivia</h5>
-<ul>
-<li>Our <code>Sales_Detail</code> table has 59 bytes per row
-<ul>
-<li>Therefore 139 rows (8,192 / 59) can fit on a page</li>
-</ul>
-</li>
-<li>The table has ~11,000 rows
-<ul>
-<li>Therefore we need 79 pages (11,000 / 139) to fit this data</li>
-</ul>
-</li>
-<li>If we generated 420M Sales_Details that would generate over 3M pages</li>
-<li>Stacked on top of each other, that would be taller than The Shard in London!!</li>
-<li>A lot for a database engine to sift through.  The smaller we make that stack, the faster it makes querying for us</li>
-</ul>
 </section>
 <section class="slide__images">
-<caption>1. Products table arranged in pages</caption>
-<img src="../../images/004_Pages_Example.png" />
+<caption>1. pg_tables example</caption>
+<img src="../../images/004_System_Tables_pg_tables.png" />
 </section>
 
     </main>

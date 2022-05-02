@@ -28,7 +28,7 @@
 
       <h2 class="slide__title">
         <a class="slide__title" href="../slide_001">
-        ORDER BY...
+        Nested Statements
         </a>
       </h2>
 
@@ -40,52 +40,59 @@
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h4>Return the data in a specific order</h4>
-<pre><code>SELECT * | &lt;value1&gt;, &lt;value2&gt;
-FROM &lt;table_name&gt;
-ORDER BY &lt;field1&gt; ASC | DESC;
+<h5>Nesting</h5>
+<pre><code>SELECT &lt;field1&gt;, &lt;field2&gt;
+FROM
+    (SELECT &lt;field1&gt;, &lt;field2&gt;
+     FROM &lt;schema_name&gt;.&lt;table_name&gt;
+    ) AS &lt;alias1&gt;
 </code></pre>
-<p>It's like saying: <span> &quot;Hey, PostgreSQL; please can you find this information for me?  It's in this table in this schema.  When you find it, please <strong>sort it by something and read it back in that order</strong>&quot; </span></p>
-<p>For example, if we wanted to return all products and order by least popular:</p>
-<pre><code>SELECT product_id, product_category, product_item, product_variety, popularity
-FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
-ORDER BY popularity;
+<p>SQL statements can be nested inside one another</p>
+<p>The result of the inner statement forms the data set which is fed to the outer table</p>
+<p>Sub-queries can appear inside a SELECT, FROM or WHERE clause</p>
+<p>They are similar to a function calling another function</p>
+<p>For example:</p>
+<pre><code>SELECT 'Summary' AS Title
+	, sub_query.*
+	, popularity + 5 AS popularity_plus
+FROM
+(
+	SELECT product_id, product_item, popularity
+	FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
+	WHERE popularity &gt; 80
+) AS sub_query
+WHERE popularity + 5 &gt; 90;
 </code></pre>
-<p>Or most popular:</p>
-<pre><code>SELECT product_id, product_category, product_item, product_variety, popularity
-FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
-ORDER BY popularity DESC;
+<h6>Sub query (executed first)</h6>
+<pre><code>...
+(
+	SELECT product_id, product_item, popularity
+	FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
+	WHERE popularity &gt; 80
+)
+...
 </code></pre>
-<p>Note the <code>DESC</code> on the end of the second statement.</p>
 <ul>
-<li><code>DESC</code> shows we are sorting by popularity in descending order.</li>
-<li>We could add <code>ASC</code> at the end of the first statement but <code>ORDER BY</code> orders ascending by default so this is not required</li>
+<li>We are extracting 3 columns from the <code>Products</code> table</li>
+<li>We are applying a filter on <code>popularity</code></li>
+<li>This sub query <strong>must be aliased</strong> (<code>AS sub_query</code> in this case)</li>
+<li>We get a 3 column/12 row result</li>
+<li>This forms the <code>FROM</code> clause for the main query</li>
 </ul>
-<h5>Combining with WHERE...</h5>
-<p>If we want to know the highest and lowest values for a specific subset of the data we can combine them with the <code>WHERE</code> clause</p>
-<h5>Advice for usage</h5>
+<h6>Main query (executed last)</h6>
+<p>The outer <code>SELECT</code> demonstrates:</p>
 <ul>
-<li>While <code>ORDER BY</code> is useful, it is discouraged for large-scale production environments:</li>
-<li>Sorting tends to be resource intensive on very large tables</li>
-<li>It is a bottleneck in the execution plan</li>
-<li>Front-end systems are often better at sorting data once it's been pulled in</li>
+<li>Passing in a static value ('Summary')</li>
+<li>Returning all columns in the sub-query (<code>, sub_query.*</code>)</li>
+<li>Applying an arithmetic operation <code>popularity + 5</code></li>
+<li>Applying a further <code>WHERE</code> comparison operator to the main query (<code>popularity + 5 &gt; 90</code>)</li>
 </ul>
 </section>
 <section class="slide__images">
-    <caption>1. List of products, least popular first</caption>
-    <img src="../../images/002_ORDER_Products_Pop_Asc.png" />
-    <caption>2. List of products, most popular first</caption>
-    <img src="../../images/002_ORDER_Products_Pop_Desc.png" />
-</section>
-<section class="slide__exercises">
-<hr>
-<h4>Exercises:</h4>
-<ol>
-<li>When did the first customer and last customer join us?</li>
-<li>What is the most expensive wholesale_price for products that are not sold by the kg?</li>
-<li>What is the most expensive unit_sales_price for products that have a popularity below 65?</li>
-<li>What is the lowest revenue for a sale (Sales_Detail) where there were more than 6 items_sold AND the cost_of_sales was more than 10?</li>
-</ol>
+<caption>1. Nested SELECT (Sub Query)</caption>
+<img src="../../images/002_Nested_SELECT_Sub_Query_Example.png" />
+<caption>1. Nested SELECT (Main Query)</caption>
+<img src="../../images/002_Nested_SELECT_Example.png" />
 </section>
     </main>
         

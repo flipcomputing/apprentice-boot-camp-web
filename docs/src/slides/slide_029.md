@@ -4,117 +4,141 @@ slide_number: 29
 slide_prev: 'slide_028/'
 slide_next: 'slide_030/'
 section_title: 'How do we change content?'
-slide_title: UPDATE... (Single table)
+slide_title: INSERT INTO... (Multiple row)
 theme: 'theme_003'
 slide_layout: 'grid-2'
 ---
 
 <section class="slide__text">
 
-##### Tell the server that you want to change existing record(s) in a table
+##### Tell the server that we want to add new rows (records) to a table
+
+If we want to bulk insert data, we can reference it from another table
 
 ```
-UPDATE <schema_name>.<table_name>
-SET <field_name1> = <new_value>, <field_name2> = <new_value>
-WHERE <field_name3> = <filter>;
+INSERT INTO "<schema_name>"."<table_name>" (<field_name1>, <field_name2>)
+SELECT <value1>, <value2>
+FROM <table> | <view>;
 ```
 
-- `UPDATE` - Specify the table we want to update 
-- `SET` - What we want the value of each column to be
-- If more than one column should be changed, separate them with commas
+###### Product Offers
+We have received a bulk of new planned offers in a CSV file
+- CSV = Comma Separated Values
+- It's a bit like a table where:
+    - Columns are separated by commas 
+    - Rows are separated by new lines
 
-<div class="warning">If you don't include a WHERE clause, every row in the table will be updated!</div>
-
-###### Product Offers (Single Row and Column)
-We have been informed that the 4.85% discount for 'Gooseberry Seasonal Saver' should actually be 5.25%.
-
-Running:
-
-```
-UPDATE "sequel-mart-schema"."Product_Offers"
-SET offer_discount_percentage = 5.25
-WHERE offer_name = 'Gooseberry Seasonal Saver';
-```
-will make that change.  We could also have said:
+###### Loading this into a staging table
+- When we receive data from an external source like this it is a **good idea not to put it into our production database immediately**
+- It is best to create a 'staging' table so we can triage it before we bulk insert
+- Let's call our staging table `stage_Product_Offers`
+- It will be the same as `Product_Offers` except:
+    - We're including the word `stage_` in the table name
+    - We're not including the `offer_id` because this will be generated automatically
 
 ```
-UPDATE "sequel-mart-schema"."Product_Offers"
-SET offer_discount_percentage = 5.25
-WHERE offer_id = 2;
+CREATE TABLE "sequel-mart-schema"."stage_Product_Offers" (
+	offer_name VARCHAR(50) NOT NULL,
+	product_id INT NOT NULL DEFAULT 0,
+	offer_discount_percentage NUMERIC(4,2),
+	offer_start_date DATE,
+	offer_end_date DATE
+);
 ```
 
-Now if we check our table, we'll see `offer_discount_percentage` for this offer has changed to 5.25.  All other records are unaffected.
+Make sure the schema is included in the name
+
+<hr />
+
+###### Import the CSV data to this table
+Because we are using a Docker image we can't just pull the data straight from our hard-drive.
+
+- Right-click on the `stage_Product_Offers` table (screenshot 3)
+- Click 'Import/Export Data...' and fill the form out:
+    ###### Options Tab
+    - **Import/Export** = Import
+    - **Filename**
+        - Click on the file icon on the right
+        - Click the up-arrow icon on the left of the new pop-up until you get to the root folder ('/') (screenshot 5)
+        - You should see a long list of folders
+        - Select the 'tmp' file (this is the only one not locked)
+        - Click the 'Upload file' icon (screenshot 6)
+        - Locate the CSV file from *(your project folder)\apprentice-boot-camp-databases\backend\imports\Product_Offers_Data.csv*
+        - Drag and drop the CSV file into the grey area below
+        - Click the x on the top-right of the pop-up.  The file should now be in the /tmp/ folder (screenshot 7)
+        - Click 'Select' in the bottom-right and the file should appear as /tmp/Product_Offers_Data.xls
+    - **Format** = csv
+    - **Encoding** = SQL_ASCII
+    - **Header** = Set the toggle on
+    - **Delimiter** = , (comma)
+
+    ###### Columns tab
+    - **Columns to Import** = Select all 5 columns in the order they are in the table from the dropdown (screenshot 9). They may already be pre-populated
+- Click **OK** on the bottom-right of the import/export wizard to start the import
+
+All being well the data should now be in the staging table
 
 ```
 SELECT *
-FROM "sequel-mart-schema"."Product_Offers"
-ORDER BY offer_id;
+FROM "sequel-mart-schema"."stage_Product_Offers";
 ```
 
-###### Product Offers (Single Row, Multiple Column)
-Next we have been informed of some inaccuracies with our Introductory Offer:
-- Rename it 'Broad Bean Counter'
-- Change the discount percentage to 6.50%
-- Change the offer start and end dates to '2021-03-01' and '2021-03-30'
+<img src="{{ '../../images/003_INSERT_Stage_Product_Offer_Data.png' | url }}" />
 
-The SQL for this can include multiple values for `SET`, separated by commas
+<hr />
 
-```
-UPDATE "sequel-mart-schema"."Product_Offers"
-SET offer_name = 'Broad Bean Counter'
-	, offer_discount_percentage = 6.50
-	, offer_start_date = '2021-03-01'
-	, offer_end_date = '2021-03-30'
-WHERE offer_id = 1;
-```
+###### INSERT INTO Product_Offers
 
-###### Product Offers (Multiple Row, Single Column)
-A further change request has been issued to us:
-- We can increase the discount on offers 3, 4, 6 and 8 by a further 5%
-
-To do this we can:
-- Use the `offer_discount_percentage` in the `SET` statement
-    - This will effectively treat every `offer_discount_percentage` as a local variable
-    - e.g. Offer 3 will substitute `offer_discount_percentage` for 11.95
-    - We can multiply that by 1.05 to get 12.55
-- Use the `IN` operator to list the offers we want to include in the `WHERE` clause
+Now if we run the following:
 
 ```
-UPDATE "sequel-mart-schema"."Product_Offers"
-SET offer_discount_percentage = offer_discount_percentage * 1.05
-WHERE offer_id IN (3, 4, 6, 8);
+INSERT INTO "sequel-mart-schema"."Product_Offers"
+	(offer_name, product_id, offer_discount_percentage, offer_start_date, offer_end_date)
+SELECT offer_name
+	, product_id
+	, offer_discount_percentage
+	, offer_start_date
+	, offer_end_date
+FROM "sequel-mart-schema"."stage_Product_Offers";
 ```
+we should find the 19 new offers have been inserted into the `Product_Offers` table
 
-After we have done this, offers 3, 4, 6 and 8 are 5% more than they were before.
+<img src="{{ '../../images/003_INSERT_Multi_Product_Offers.png' | url }}" />
 
-The datatype `numeric(4,2)` ensures they are rounded to 2 decimal places
+and if we query the table we can see the new offers:
+
+```
+SELECT *
+FROM "sequel-mart-schema"."Product_Offers";
+```
+<img src="{{ '../../images/003_INSERT_Product_Offers_20_Offers.png' | url }}" />
+
+
+
 
 </section>
 
 <section class="slide__images">
-<caption>1. UPDATE the Gooseberry discount from 4.85% to 5.25%</caption>
-<img src="{{ '../../images/003_UPDATE_Product_Offers_Gooseberry_525.png' | url }}" />
-<caption>2. Gooseberry discount updated to 5.25%</caption>
-<img src="{{ '../../images/003_UPDATE_Product_Offers_Gooseberry_525_After.png' | url }}" />
-<caption>3. Offer ID 1 Multiple Changes</caption>
-<img src="{{ '../../images/003_UPDATE_Product_Offers_Introductory_to_Bean.png' | url }}" />
-<caption>4. Offer ID 1 After Multiple Changes</caption>
-<img src="{{ '../../images/003_UPDATE_Product_Offers_Introductory_to_Bean_After.png' | url }}" />
-<caption>5. Offer IDs 3,4,6,8 discount increased by a further 5%</caption>
-<img src="{{ '../../images/003_UPDATE_Product_Offers_Multple_Row_Discounts.png' | url }}" />
-<caption>6. Offer IDs 3,4,6,8 discount increased by a further 5%</caption>
-<img src="{{ '../../images/003_UPDATE_Product_Offers_Multple_Row_Discounts_After.png' | url }}" />
+<caption>1. External Product_Offers CSV Location</caption>
+<img src="{{ '../../images/003_INSERT_Product_Offer_CSV_Location.png' | url }}" />
+<caption>2. Create stage_Product_Offer</caption>
+<img src="{{ '../../images/003_INSERT_Stage_Product_Offer_CREATE.png' | url }}" />
+<caption>3. Find the menu to import into stage_Product_Offer</caption>
+<img src="{{ '../../images/003_INSERT_Stage_Product_Offer_Import_Route.png' | url }}" />
+<caption>4. Menu to import into stage_Product_Offer (Start)</caption>
+<img src="{{ '../../images/003_INSERT_Stage_Product_Offer_Import_Menu_Before.png' | url }}" />
+<caption>5. Menu to import into stage_Product_Offer (Files)</caption>
+<img src="{{ '../../images/003_INSERT_Stage_Product_Offer_Import_Menu_File_01.png' | url }}" />
+<caption>6. Menu to import into stage_Product_Offer (Upload File)</caption>
+<img src="{{ '../../images/003_INSERT_Stage_Product_Offer_Import_Menu_Upload_File.png' | url }}" />
+<caption>7. Menu to import into stage_Product_Offer (Uploaded File)</caption>
+<img src="{{ '../../images/003_INSERT_Stage_Product_Offer_Import_Menu_File_02.png' | url }}" />
+<caption>8. Menu to import into stage_Product_Offer (End)</caption>
+<img src="{{ '../../images/003_INSERT_Stage_Product_Offer_Import_Menu_After.png' | url }}" />
+<caption>9. Menu to import into stage_Product_Offer (Columns)</caption>
+<img src="{{ '../../images/003_INSERT_Stage_Product_Offer_Import_Menu_Columns.png' | url }}" />
+<caption>10. CSV Imported to stage_Product_Offer</caption>
+<img src="{{ '../../images/003_INSERT_Stage_Product_Offer_Import_Ok_Message.png' | url }}" />
 
-
-</section>
-
-<section class="slide__exercises">
-
-#### Exercises:
-We have received more instructions:
-1. Increase the offer_discount_percentage by 10% on any offer_ids between 12 and 16
-    - HINT: You can use the `BETWEEN` operator to get the IDs if they are consecutive
-2. Reduce the offer_discount_percentage by 5% on any offer_name that ends with the word 'deal' 
-    - HINT: Use the `LIKE` operator to get the deals
 
 </section>

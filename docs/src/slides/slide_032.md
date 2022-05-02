@@ -4,52 +4,53 @@ slide_number: 32
 slide_prev: 'slide_031/'
 slide_next: 'slide_033/'
 section_title: 'How do we change content?'
-slide_title: TRUNCATE TABLE...
+slide_title: DELETE...
 theme: 'theme_003'
 slide_layout: 'grid-2'
 ---
 
 <section class="slide__text">
 
-##### Clear a table
+##### Hide records / Prepare for Removal
 Tell the server that you want to: 
-- Remove all existing record(s) in a table
-- Reset it’s cache (reset any incrementing keys, indexes, data space)
+- Mark records in a table for deletion (soft-delete)
+- Keep it’s cache (any incrementing keys, indexes, data space)
+- Some Database Management Systems will remove them completely
 
 ```
-TRUNCATE TABLE <schema_name>.<table_name>;
+DELETE
+FROM <schema_name>.<table_name>
+WHERE <field1> = <value1>;
 ```
 
 <div class="warning">IMPORTANT:</div>
-<div class="warning">- Truncating will remove ALL existing data from a table. Check before committing!</div>
+<div class="warning">- Deleting will remove existing data. Check before committing!</div>
+<div class="warning">- If there is no WHERE clause, every row will be deleted.</div>
 <div class="warning">- Not a pleasant feeling if done unintentionally!</div>
 
 ###### stage_Product_Offers
 
-Let's clear the `stage_Product_Offers` in readiness for more CSV files in the future: 
+Let's remove any offers from the `stage_Product_Offers` table where:
+- The offer started before 1st May 2021
 
 ```
-TRUNCATE TABLE "sequel-mart-schema"."stage_Product_Offers";
+DELETE
+FROM "sequel-mart-schema"."stage_Product_Offers"
+WHERE offer_start_date < '2021-05-01';
 ```
 
-This removes every record from this table.  All other tables are unaffected.
+This removes the 3 offers from our table that started before 1st May 2021
 
-NOTE:
-- We could use the shorthand `TRUNCATE` instead of `TRUNCATE TABLE`
-
-    ```
-    TRUNCATE "sequel-mart-schema"."stage_Product_Offers";
-    ```
 
 </section>
 
 <section class="slide__images">
 <caption>1. All columns of the stage_Product_Offers table</caption>
+<img src="{{ '../../images/003_DELETE_stage_Product_Offers_All.png' | url }}" />
+<caption>2. Delete stage_Product_Offers that started before May 2021</caption>
+<img src="{{ '../../images/003_DELETE_stage_Product_Offers_Before_May_2021.png' | url }}" />
+<caption>3. Offers that started before May 2021 removed from stage_Product_Offers</caption>
 <img src="{{ '../../images/003_DELETE_stage_Product_Offers_Before_May_2021_After.png' | url }}" />
-<caption>2. Truncate stage_Product_Offers</caption>
-<img src="{{ '../../images/003_TRUNCATE_stage_Product_Offers.png' | url }}" />
-<caption>3. stage_Product_Offers is empty once truncated</caption>
-<img src="{{ '../../images/003_TRUNCATE_stage_Product_Offers_After.png' | url }}" />
 
 
 

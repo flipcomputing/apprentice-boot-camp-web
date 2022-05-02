@@ -4,70 +4,78 @@ slide_number: 17
 slide_prev: 'slide_016/'
 slide_next: 'slide_018/'
 section_title: 'How do we query a relational database?'
-slide_title: 'ORDER BY...'
+slide_title: Nested Statements
 theme: 'theme_002'
 slide_layout: 'grid-2'
 ---
 
 <section class="slide__text">
 
-#### Return the data in a specific order
+##### Nesting
 
 ```
-SELECT * | <value1>, <value2>
-FROM <table_name>
-ORDER BY <field1> ASC | DESC;
+SELECT <field1>, <field2>
+FROM
+    (SELECT <field1>, <field2>
+     FROM <schema_name>.<table_name>
+    ) AS <alias1>
 ```
 
-It's like saying: <span> "Hey, PostgreSQL; please can you find this information for me?  It's in this table in this schema.  When you find it, please **sort it by something and read it back in that order**" </span>
+SQL statements can be nested inside one another
 
-For example, if we wanted to return all products and order by least popular:
+The result of the inner statement forms the data set which is fed to the outer table
+
+Sub-queries can appear inside a SELECT, FROM or WHERE clause
+
+They are similar to a function calling another function
+
+For example:
 ```
-SELECT product_id, product_category, product_item, product_variety, popularity
-FROM "sequel-mart-schema"."Products"
-ORDER BY popularity;
+SELECT 'Summary' AS Title
+	, sub_query.*
+	, popularity + 5 AS popularity_plus
+FROM
+(
+	SELECT product_id, product_item, popularity
+	FROM "sequel-mart-schema"."Products"
+	WHERE popularity > 80
+) AS sub_query
+WHERE popularity + 5 > 90;
 ```
 
-Or most popular:
+###### Sub query (executed first)
+
 ```
-SELECT product_id, product_category, product_item, product_variety, popularity
-FROM "sequel-mart-schema"."Products"
-ORDER BY popularity DESC;
+...
+(
+	SELECT product_id, product_item, popularity
+	FROM "sequel-mart-schema"."Products"
+	WHERE popularity > 80
+)
+...
 ```
 
-Note the `DESC` on the end of the second statement.
-  - `DESC` shows we are sorting by popularity in descending order.
-  - We could add `ASC` at the end of the first statement but `ORDER BY` orders ascending by default so this is not required
+- We are extracting 3 columns from the `Products` table
+- We are applying a filter on `popularity`
+- This sub query **must be aliased** (`AS sub_query` in this case)
+- We get a 3 column/12 row result
+- This forms the `FROM` clause for the main query
 
-##### Combining with WHERE...
-If we want to know the highest and lowest values for a specific subset of the data we can combine them with the `WHERE` clause
+###### Main query (executed last)
 
-##### Advice for usage
-- While `ORDER BY` is useful, it is discouraged for large-scale production environments:
-- Sorting tends to be resource intensive on very large tables
-- It is a bottleneck in the execution plan
-- Front-end systems are often better at sorting data once it's been pulled in
+The outer `SELECT` demonstrates:
+- Passing in a static value ('Summary')
+- Returning all columns in the sub-query (`, sub_query.*`)
+- Applying an arithmetic operation `popularity + 5`
+- Applying a further `WHERE` comparison operator to the main query (`popularity + 5 > 90`)
 
 </section>
-
 
 <section class="slide__images">
-    <caption>1. List of products, least popular first</caption>
-    <img src="{{ '../../images/002_ORDER_Products_Pop_Asc.png' | url }}" />
-    <caption>2. List of products, most popular first</caption>
-    <img src="{{ '../../images/002_ORDER_Products_Pop_Desc.png' | url }}" />
+<caption>1. Nested SELECT (Sub Query)</caption>
+<img src="{{ '../../images/002_Nested_SELECT_Sub_Query_Example.png' | url }}" />
+<caption>1. Nested SELECT (Main Query)</caption>
+<img src="{{ '../../images/002_Nested_SELECT_Example.png' | url }}" />
 
-</section>
-
-
-<section class="slide__exercises">
-
----
-
-  #### Exercises:
-1. When did the first customer and last customer join us?
-2. What is the most expensive wholesale_price for products that are not sold by the kg?
-3. What is the most expensive unit_sales_price for products that have a popularity below 65?
-4. What is the lowest revenue for a sale (Sales_Detail) where there were more than 6 items_sold AND the cost_of_sales was more than 10?
 
 </section>

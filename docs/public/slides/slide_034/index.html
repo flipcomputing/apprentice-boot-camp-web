@@ -28,7 +28,7 @@
 
       <h2 class="slide__title">
         <a class="slide__title" href="../slide_001">
-        ALTER COLUMN...
+        DROP...
         </a>
       </h2>
 
@@ -40,24 +40,41 @@
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h5>Tell the server that you want to change a column attribute</h5>
-<p>We can change a lot of things about a table. The most common are:</p>
-<h6>Data Type</h6>
-<pre><code>ALTER TABLE &lt;schema_name&gt;.&lt;table_name&gt;
-ALTER COLUMN &lt;column_name&gt; SET DATA TYPE  &lt;data_type1&gt;;
+<h5>Delete an object from a database</h5>
+<p>Tell the server that you want to:</p>
+<ul>
+<li>Delete a table</li>
+</ul>
+<pre><code>DROP TABLE &lt;schema_name&gt;.&lt;table_name&gt;;
 </code></pre>
-<div class="warning">- You will get an error if data in the table is outside of the proposed new data type</div>
-<h6>Default value</h6>
-<pre><code>ALTER TABLE &lt;schema_name&gt;.&lt;table_name&gt;
-ALTER COLUMN &lt;column_name&gt; SET DEFAULT &lt;default_value&gt; | DROP DEFAULT;
+<ul>
+<li>Delete a schema</li>
+</ul>
+<pre><code>DROP SCHEMA &lt;schema_name&gt;;
 </code></pre>
-<h6>Nullability of a column</h6>
-<pre><code>ALTER TABLE &lt;schema_name&gt;.&lt;table_name&gt;
-ALTER COLUMN &lt;column_name&gt; SET NOT NULL | DROP NOT NULL;
-</code></pre>
-<div class="warning">- You will get an error if you `SET NOT NULL` when the column already contains `NULL` rows</div>
+<div class="warning">IMPORTANT:</div>
+<div class="warning">- Dropping something will remove it from the database server!</div>
+<div class="warning">- Sometimes this command can fail if something else in the database depends on it existing</div>
 <h6>Example table</h6>
 <p>To practice, let's create a new table called <code>aaa_Dummy_Table</code> on our <code>sequel-mart-schema</code> and drop it:</p>
+<pre><code>CREATE TABLE &quot;sequel-mart-schema&quot;.&quot;aaa_Dummy_Table&quot; (
+	column_001 INT,
+	column_002 VARCHAR(10),
+	column_003 TIMESTAMP,
+	column_004 NUMERIC(9,2)
+);
+</code></pre>
+<p>This creates our table.  We can query it:</p>
+<pre><code>SELECT *
+FROM &quot;sequel-mart-schema&quot;.&quot;aaa_Dummy_Table&quot;;
+</code></pre>
+<p>Now let's remove (or <code>DROP</code>) it:</p>
+<pre><code>DROP TABLE &quot;sequel-mart-schema&quot;.&quot;aaa_Dummy_Table&quot;;
+</code></pre>
+<p>NOTE:</p>
+<ul>
+<li>Because this statement can be applied to many other object types we cannot use the a shorthand</li>
+</ul>
 </section>
 <section class="slide__images">
 <caption>1. CREATE aaa_Dummy_Table</caption>

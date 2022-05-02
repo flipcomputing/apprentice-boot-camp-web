@@ -4,46 +4,90 @@ slide_number: 37
 slide_prev: 'slide_036/'
 slide_next: 'slide_038/'
 section_title: 'How do we change content?'
-slide_title: Pages
+slide_title: System Tables
 theme: 'theme_004'
 slide_layout: 'grid-2'
 ---
 
 <section class="slide__text">
 
-#### How data is stored in a database
-- Split into chunks or ‘pages’ of 8KB in size
-- When a page is filled, another is created for new data
+#### Shows 'metadata' (data about data)
+Postgresql has a hidden `pg_catalog` schema. This keeps track of:
+- System-designed components needed to keep the database server functioning
+- User-designed components (tables, views, indexes etc)
+    - Concepts like Views and Indexes will be introduced later in this section
 
-##### Like scanning a reference book
-- A query instructs the database engine to read `FROM` a 
-set of pages (or a table to you and me)
-- It scans the `SELECT`ed columns in these pages 
-- It marks the rows that fulfil any `WHERE` or `HAVING` clause
-for returning as a result
-- The engine can `LIMIT` and/or `ORDER` the results read back
+We can access this schema with normal SQL:
+```
+SELECT *
+FROM pg_tables;
+```
 
-##### Problems of scale
-- Our database is small
-- However, some companies process TBs or PBs of data a day.
-- SLOW unless streamlined
+We do not need to include the `pg_catalog` schema name. Postgres knows where this is
+
+Notice we can see:
+- All the tables in our `sequel-mart-schema` schema
+- Tables in the `table-load-base` schema (more to follow in this section)
+- Tables in the `pg_catalog` schema
+
+All these tables can be viewed with a `SELECT ... FROM`
+
+Examples of other tables in the `pg_catalog` schema are:
+
+<table>
+  <tr>
+    <th>System Table</th>
+    <th>Description</th>
+  </tr>
+
+  <tr>
+    <th>...</th>
+    <th>...</th>
+  </tr>
+  <tr>
+    <td>pg_database</td>
+    <td>details of every database on the server</td>
+  </tr>
+  <tr>
+    <td>pg_tables</td>
+    <td>details of tables on the server</td>
+  </tr>
+  <tr>
+    <td>pg_stats</td>
+    <td>contents of every column in a table larger than 8KB</td>
+  </tr>
+
+  <tr>
+    <th>...</th>
+    <th>...</th>
+  </tr>
+
+  <tr>
+    <td>pg_views</td>
+    <td>views in the database, including system views</td>
+  </tr>
+  <tr>
+    <td>pg_indexes</td>
+    <td>indexes on tables in the server</td>
+  </tr>
+  <tr>
+    <td>pg_user</td>
+    <td>user accounts on the server</td>
+  </tr>
+  <tr>
+    <td>pg_locks</td>
+    <td>locks taken in a transaction</td>
+  </tr>
+</table>
 
 <hr />
 
-##### Trivia
-- Our `Sales_Detail` table has 59 bytes per row
-    - Therefore 139 rows (8,192 / 59) can fit on a page
-- The table has ~11,000 rows
-    - Therefore we need 79 pages (11,000 / 139) to fit this data
-- If we generated 420M Sales_Details that would generate over 3M pages
-- Stacked on top of each other, that would be taller than The Shard in London!!
-- A lot for a database engine to sift through.  The smaller we make that stack, the faster it makes querying for us
 
 </section>
 
 <section class="slide__images">
-<caption>1. Products table arranged in pages</caption>
-<img src="{{ '../../images/004_Pages_Example.png' | url }}" />
+<caption>1. pg_tables example</caption>
+<img src="{{ '../../images/004_System_Tables_pg_tables.png' | url }}" />
 
 
 </section>

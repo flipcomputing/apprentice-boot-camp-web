@@ -10,8 +10,7 @@ const db = require('../db');        //Connects to DB & sends a GET request for i
 router.get('/', (req, res) => {
   db.any(
     `
-    /* Paste your code here */
-    
+    /* Paste your SQL View here */
     `
   )
   .then(rows => {

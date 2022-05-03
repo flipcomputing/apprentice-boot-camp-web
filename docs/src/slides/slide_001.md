@@ -49,3 +49,17 @@ slide_layout: 'grid-5'
 <h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_038' | url }}">Pages</a><h3>
 <h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_039' | url }}">Execution Plans</a><h3>
 <h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_040' | url }}">CREATE INDEX...</a><h3>
+<h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_041' | url }}">CREATE VIEW...</a><h3>
+<h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_042' | url }}">CREATE PROCEDURE...</a><h3>
+<h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_043' | url }}">TRANSACTIONS</a><h3>
+<h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_044' | url }}">SQL Injection</a><h3>
+<h3 class="slide__contents-5"><a class="sect__5" href="{{ '../slide_045' | url }}">Sequel-Mart</a><h3>
+<h3 class="slide__contents-5"><a class="sect__5" href="{{ '../slide_046' | url }}">Frontend & Backend II</a><h3>
+<h3 class="slide__contents-5"><a class="sect__5" href="{{ '../slide_047' | url }}">Building Sequel-Mart</a><h3>
+<h3 class="slide__contents-5"><a class="sect__5" href="{{ '../slide_048' | url }}">API Routes</a><h3>
+<h3 class="slide__contents-6"><a class="sect__6" href="{{ '../slide_049' | url }}">Exercises</a><h3>
+<h3 class="slide__contents-6"><a class="sect__6" href="{{ '../slide_050' | url }}">Transactions View</a><h3>
+<h3 class="slide__contents-6"><a class="sect__6" href="{{ '../slide_051' | url }}">Customer View</a><h3>
+<h3 class="slide__contents-6"><a class="sect__6" href="{{ '../slide_052' | url }}">Product View</a><h3>
+<h3 class="slide__contents-6"><a class="sect__6" href="{{ '../slide_053' | url }}">Summary View</a><h3>
+<h3 class="slide__contents-6"><a class="sect__6" href="{{ '../slide_054' | url }}">Over To You!!!</a><h3>

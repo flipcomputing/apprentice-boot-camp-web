@@ -254,3 +254,41 @@ UPDATE "sequel-mart-schema"."Product_Offers"
 SET offer_discount_percentage = offer_discount_percentage * 0.95
 WHERE offer_name LIKE '%deal';
 ```
+
+
+
+
+
+# Exercises
+## 6.1 Transactions
+SELECT sh.sale_id AS Transaction
+	, cu.customer_name AS Customer
+	, sh.date_sale AS Date
+	, sh.feedback_score AS Feedback
+	, SUM(sd.revenue) AS Amount
+	, SUM(sd.items_sold) AS Items
+FROM "sequel-mart-schema"."Sales_Header" AS sh
+INNER JOIN "sequel-mart-schema"."Customers" AS cu ON cu.customer_id = sh.customer_id
+INNER JOIN "sequel-mart-schema"."Sales_Detail" AS sd ON sh.sale_id = sd.sale_id
+GROUP BY sh.sale_id
+	, cu.customer_name
+	, sh.date_sale
+	, sh.feedback_score
+ORDER BY date_sale DESC
+LIMIT 10;
+
+## 6.2 Customers
+```
+SELECT cu.customer_name AS customer
+	, MIN(sh.date_sale) AS most_recent
+	, COUNT(sh.sale_id) AS transactions
+	, ROUND(AVG(sd.revenue),2) AS avg_spend
+	, ROUND(AVG(items_sold),2) AS avg_items
+	, ROUND(AVG(sh.feedback_score),1) AS avg_feedback
+FROM "sequel-mart-schema"."Customers" AS cu
+JOIN "sequel-mart-schema"."Sales_Header" AS sh ON cu.customer_id = sh.customer_id
+JOIN "sequel-mart-schema"."Sales_Detail" AS sd ON sh.sale_id = sd.sale_id
+GROUP BY cu.customer_name
+ORDER BY AVG(sd.revenue) DESC
+LIMIT 10;
+```

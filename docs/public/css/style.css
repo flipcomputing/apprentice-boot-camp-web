@@ -1,5 +1,5 @@
 :root {
-  --width-max: 1440px;
+  --width-max: 1620px;
 
   --clr-text-main-span: hsl(184, 40%, 50%);
   --clr-text-main-link: hsl(240, 90%, 55%);
@@ -236,6 +236,13 @@ main > * {
   max-width: 100%;
 }
 
+.grid-1 {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(2, fit-content(50%));
+  max-width: 100%;
+}
+
 .grid-2 {
   display: grid;
   grid-template-columns: 60% 1fr;
@@ -335,6 +342,11 @@ img {
   box-shadow: 2px 2px 4px var(--clr-text-shadow-2);
 }
 
+.bg-hidden {
+  border: none;
+  box-shadow: none;
+}
+
 pre, code {
   background-color: var(--clr-bg-code);
   margin: var(--margin-8);
@@ -393,7 +405,7 @@ footer {
 }
 
 
-@media only screen and (max-width: 1360px) {
+@media only screen and (max-width: 1420px) {
   .grid-5 {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(40, fit-content(50%));
@@ -467,7 +479,7 @@ footer {
 
   .grid-5 {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(50, fit-content(50%));
+    grid-template-rows: repeat(54, fit-content(50%));
   }
 
   .slide__contents-1, .slide__contents-2, .slide__contents-3, .slide__contents-4, .slide__contents-5, .slide__contents-6 {

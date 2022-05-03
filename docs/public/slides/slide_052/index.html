@@ -40,7 +40,65 @@
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h4>Under Construction</h4>
+<h4>Exercise 6.3 - Products:</h4>
+<p>In pg-admin, create a SQL script that does the following:</p>
+<p>Tables:</p>
+<ul>
+<li><code>Products</code>.  Alias as <code>pr</code></li>
+<li><code>Sales_Detail</code>.  Alias as <code>sd</code></li>
+</ul>
+<p>Attributes:</p>
+<ul>
+<li><code>product_item</code>. Alias as <code>product_item</code></li>
+<li><code>product_variety</code>. Alias as <code>product_variety</code></li>
+<li><code>pack_size</code>. Alias as <code>pack_size</code></li>
+<li><code>unit_sales_price</code>. Alias as <code>unit_price</code></li>
+<li>Total number of <code>items_sold</code>. Alias as <code>items_sold</code></li>
+<li><code>inventory</code>. Alias as <code>in inventory</code></li>
+</ul>
+<p>Other considerations:</p>
+<ul>
+<li>Order by total number of <code>items_sold</code> with the highest value first</li>
+<li>Limit the output to the first 10 rows only</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p>Test this script in PostgreSQL</p>
+<ul>
+<li>The names and data should match the screenshot</li>
+</ul>
+</li>
+<li>
+<p>Convert this SQL script into a <code>VIEW</code> called <code>v_Top_Products</code></p>
+</li>
+<li>
+<p>Append SQL to <code>SELECT * FROM</code> this <code>VIEW</code> into the space provided in line 13 of <strong>backend/routes/products.js</strong></p>
+</li>
+<li>
+<p>Save and close <strong>backend/routes/products.js</strong></p>
+</li>
+</ul>
+<div class="warning">You may need to close and re-run your Docker session for this to take effect</div>
+<hr />
+<ul>
+<li>In a new browser tab, <a href="http://localhost:5001/products">preview the transactions route (http://localhost:5001/products)</a>
+<ul>
+<li>This should be populated with an array of 10 objects for each product</li>
+</ul>
+</li>
+</ul>
+<caption>1. Expected call to transactions route http://localhost:5001/products</caption>
+<img src="../../images/006_003_Products_Route.png" />
+<ul>
+<li>This is the data that our front-end will use to populate the Products table on the web page</li>
+</ul>
+<hr />
+<ul>
+<li>In the main <a href="http://localhost:5001">Sequel-Mark website (http://localhost:5001)</a>, check the Products table has been populated</li>
+</ul>
+<caption>2. Expected products Table View</caption>
+<img src="../../images/006_003_Products.png" />
 </section>
 <section class="slide__images">
 </section>

@@ -20,7 +20,7 @@ slide_layout: 'grid-5'
 <h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_009' | url }}">SELECT...</a><h3>
 <h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_010' | url }}">Data Types</a><h3>
 <h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_011' | url }}">Data Types - Manipulating</a><h3>
-<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_012' | url }}">SQL Text Functions</a><h3>
+<h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_012' | url }}">SQL Functions</a><h3>
 <h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_013' | url }}">Sequel-Mart Database</a><h3>
 <h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_014' | url }}">FROM...</a><h3>
 <h3 class="slide__contents-2"><a class="sect__2" href="{{ '../slide_015' | url }}">WHERE... (Comparison)</a><h3>

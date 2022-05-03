@@ -46,7 +46,7 @@ FROM &lt;table_name&gt;;
 </code></pre>
 <p>It's like saying: <span> &quot;Hey, PostgreSQL; please can you find this information for me?  It's in this table in this schema.  When you find this information, please read it back to me&quot; </span></p>
 <h5>For example:</h5>
-<p>Return a list of all products and all of their attributes to the results panel</p>
+<p>Return a list of all 129 products and all of their attributes to the results panel</p>
 <pre><code>SELECT *
 FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;;
 </code></pre>
@@ -71,20 +71,37 @@ FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;;
 </ul>
 </li>
 </ul>
+<hr />
+<h4>Distinct</h4>
+<p>When we have a list of values in a column with a lot of duplicates it can be useful to get a unique list</p>
+<p>If we say</p>
+<pre><code>SELECT product_category
+FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;;
+</code></pre>
+<p>we will just get the categories of all 129 rows.</p>
+<p>There are a lot of repeated values which makes it hard to tell how many categories there are</p>
+<p>However if we were to say:</p>
+<pre><code>SELECT DISTINCT product_category
+FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;;
+</code></pre>
+<p>We would get the 4 unique (<code>DISTINCT</code>) product categories we sell</p>
 </section>
 <section class="slide__images">
     <caption>1. Product table (all columns)</caption>
     <img src="../../images/002_FROM_Products_All.png" />
     <caption>2. Product table (some of the columns)</caption>
     <img src="../../images/002_FROM_Products_Some.png" />
+    <caption>3. Product table (distinct list of product categories)</caption>
+    <img src="../../images/002_FROM_Products_Distinct.png" />
 </section>
 <section class="slide__exercises">
 <hr>
 <h4>Exercises:</h4>
-<ul>
+<ol>
 <li>Run SELECT * from each of the other 5 tables</li>
 <li>Familiarise yourself with the structure, and how it relates to the Entity Relationship diagram on the previous slide</li>
-</ul>
+<li>How many unique <code>pack_size</code> values are there in which a product can be sold?</li>
+</ol>
 </section>
     </main>
         

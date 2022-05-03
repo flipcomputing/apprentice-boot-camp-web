@@ -4,7 +4,7 @@ slide_number: 12
 slide_prev: 'slide_011/'
 slide_next: 'slide_013/'
 section_title: 'How do we query a relational database?'
-slide_title: 'SQL Text Functions'
+slide_title: 'SQL Functions'
 theme: 'theme_002'
 slide_layout: 'grid-2'
 ---
@@ -20,6 +20,17 @@ We'll only go through a few in this Bootcamp
 
 The most common functions are listed below
 
+###### ROUND()
+Rounds a numeric value to a specific number of decimal places
+```
+SELECT ROUND(<number>, <decimal places>)
+```
+
+It will round up or down to the nearest decimal
+
+For example:
+- `SELECT ROUND(3.1415926535, 2);` returns 3.14;
+- `SELECT ROUND(3.1415926535, 3);` returns 3.142;
 
 ###### CURRENT_DATE
 Return the current date in 'YYYY-MM-DD' format
@@ -94,17 +105,19 @@ For example, `SELECT CONCAT('abcdefgh', ' ijkl ', 'mnop');` returns 'abcdefgh ij
 
 
 <section class="slide__images">
-    <caption>1. Date Interval (Difference) function</caption>
+    <caption>1. ROUND function</caption>
+    <img src="{{ '../../images/002_SELECT_Function_Round.png' | url }}" />
+    <caption>2. Date Interval (Difference) function</caption>
     <img src="{{ '../../images/002_SELECT_Function_Date_Interval.png' | url }}" />
-    <caption>2. LENGTH function</caption>
+    <caption>3. LENGTH function</caption>
     <img src="{{ '../../images/002_SELECT_Function_Length.png' | url }}" />
-    <caption>3. LEFT function</caption>
+    <caption>4. LEFT function</caption>
     <img src="{{ '../../images/002_SELECT_Function_Left.png' | url }}" />
-    <caption>4. RIGHT function</caption>
+    <caption>5. RIGHT function</caption>
     <img src="{{ '../../images/002_SELECT_Function_Right.png' | url }}" />
-    <caption>5. SUBSTRING function</caption>
+    <caption>6. SUBSTRING function</caption>
     <img src="{{ '../../images/002_SELECT_Function_Substring.png' | url }}" />
-    <caption>6. CONCAT function</caption>
+    <caption>7. CONCAT function</caption>
     <img src="{{ '../../images/002_SELECT_Function_Concat.png' | url }}" />
 
 

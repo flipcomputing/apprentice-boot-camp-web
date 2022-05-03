@@ -38,57 +38,29 @@
         </a>
       </p>
     </nav>
-    <main class=grid-2>
+    <main class=grid-1>
       <section class="slide__text">
 <h4>Exercise 6.1 - Transactions:</h4>
-<p>In pg-admin, create a SQL that does the following:</p>
-<p>SELECTs</p>
+<p>In pg-admin, create a SQL script that does the following:</p>
+<p>Tables:</p>
 <ul>
-<li>
-<p>Groups data by</p>
-</li>
-<li>
-<p><code>sale_id</code> (Sales_Header)</p>
-<ul>
-<li>Alias as <code>Transaction</code></li>
+<li><code>Customers</code>.  Alias as <code>cu</code></li>
+<li><code>Sales_Header</code>.  Alias as <code>sh</code></li>
+<li><code>Sales_Detail</code>.  Alias as <code>sd</code></li>
 </ul>
-</li>
-<li>
-<p><code>customer_name</code> (Customers)</p>
+<p>Attributes:</p>
 <ul>
-<li>Alias as <code>Customer</code></li>
+<li><code>sale_id</code>. Alias as <code>Transaction</code></li>
+<li><code>customer_name</code>. Alias as <code>Customer</code></li>
+<li><code>date_sale</code>. Alias as <code>Date</code></li>
+<li><code>feedback_score</code>. Alias as <code>Feedback</code></li>
+<li>The total <code>revenue</code> for this transaction. Alias as <code>Amount</code></li>
+<li>The total number of <code>items_sold</code>. Alias as <code>Items</code></li>
 </ul>
-</li>
-<li>
-<p><code>date_sale</code> (Sales_Header)</p>
+<p>Other considerations:</p>
 <ul>
-<li>Alias as <code>Date</code></li>
-</ul>
-</li>
-<li>
-<p><code>feedback_score</code> (Sales_Headers)</p>
-<ul>
-<li>Alias as <code>Feedback</code></li>
-</ul>
-</li>
-<li>
-<p>The total <code>revenue</code> for this transaction (Sales Detail)</p>
-<ul>
-<li>Alias as <code>Amount</code></li>
-</ul>
-</li>
-<li>
-<p>The total number of <code>items_sold</code> (Sales Detail)</p>
-<ul>
-<li>Alias as <code>Items</code></li>
-</ul>
-</li>
-<li>
-<p>Order by <code>date_sale</code> with the most recent date first</p>
-</li>
-<li>
-<p>Limit the output to the first 10 rows only</p>
-</li>
+<li>Order by <code>date_sale</code> with the most recent date first</li>
+<li>Limit the output to the first 10 rows only</li>
 </ul>
 <hr />
 <ul>
@@ -102,7 +74,7 @@
 <p>Convert this SQL script into a <code>VIEW</code> called <code>v_Top_Transactions</code></p>
 </li>
 <li>
-<p>Append SQL to <code>SELECT ... FROM</code> this <code>VIEW</code> into the space provided in line 13 of <strong>backend/routes/transactions.js</strong></p>
+<p>Append SQL to <code>SELECT * FROM</code> this <code>VIEW</code> into the space provided in line 13 of <strong>backend/routes/transactions.js</strong></p>
 </li>
 <li>
 <p>Save and close <strong>backend/routes/transactions.js</strong></p>
@@ -111,22 +83,21 @@
 <div class="warning">You may need to close and re-run your Docker session for this to take effect</div>
 <hr />
 <ul>
-<li>
-<p>In a new browser tab, <a href="http://localhost:5001/transactions">preview the transactions route (http://localhost:5001/transactions)</a></p>
+<li>In a new browser tab, <a href="http://localhost:5001/transactions">preview the transactions route (http://localhost:5001/transactions)</a>
 <ul>
 <li>This should be populated with an array of 10 objects for each transaction</li>
-<li>This is the data that our front-end will use to populate the Transactions table</li>
 </ul>
-<p><code>[{&quot;transaction&quot;:39,&quot;customer&quot;:&quot;Lyra U.O.V&quot;,&quot;date&quot;:&quot;2021-08-26T16:07:14.807Z&quot;,&quot;feedback&quot;:5,&quot;amount&quot;:&quot;2.49&quot;,&quot;items&quot;:&quot;1&quot;},{&quot;transaction&quot;:555,&quot;customer&quot;:&quot;Olivia G.T.A&quot;,&quot;date&quot;:&quot;2021-08-26T14:49:32.474Z&quot;,&quot;feedback&quot;:5,&quot;amount&quot;:&quot;131.82&quot;,&quot;items&quot;:&quot;88&quot;},{&quot;transaction&quot;:488,&quot;customer&quot;:&quot;Lola P.S.W&quot;,&quot;date&quot;:&quot;2021-08-26T11:53:48.687Z&quot;,&quot;feedback&quot;:1,&quot;amount&quot;:&quot;373.31&quot;,&quot;items&quot;:&quot;89&quot;},{&quot;transaction&quot;:801,&quot;customer&quot;:&quot;Anna Y.O.J&quot;,&quot;date&quot;:&quot;2021-08-26T11:18:48.930Z&quot;,&quot;feedback&quot;:5,&quot;amount&quot;:&quot;417.08&quot;,&quot;items&quot;:&quot;91&quot;},{&quot;transaction&quot;:84,&quot;customer&quot;:&quot;Teddy P.N.I&quot;,&quot;date&quot;:&quot;2021-08-26T08:07:35.143Z&quot;,&quot;feedback&quot;:5,&quot;amount&quot;:&quot;94.95&quot;,&quot;items&quot;:&quot;16&quot;},{&quot;transaction&quot;:626,&quot;customer&quot;:&quot;Anna A.R.P&quot;,&quot;date&quot;:&quot;2021-08-26T00:44:00.518Z&quot;,&quot;feedback&quot;:5,&quot;amount&quot;:&quot;193.65&quot;,&quot;items&quot;:&quot;80&quot;},{&quot;transaction&quot;:330,&quot;customer&quot;:&quot;Eva M.M.T&quot;,&quot;date&quot;:&quot;2021-08-25T14:23:32.497Z&quot;,&quot;feedback&quot;:5,&quot;amount&quot;:&quot;279.82&quot;,&quot;items&quot;:&quot;107&quot;},{&quot;transaction&quot;:939,&quot;customer&quot;:&quot;Anna U.L.P&quot;,&quot;date&quot;:&quot;2021-08-25T11:07:54.471Z&quot;,&quot;feedback&quot;:5,&quot;amount&quot;:&quot;98.28&quot;,&quot;items&quot;:&quot;52&quot;},{&quot;transaction&quot;:282,&quot;customer&quot;:&quot;Jackson X.Y.A&quot;,&quot;date&quot;:&quot;2021-08-25T10:26:32.825Z&quot;,&quot;feedback&quot;:1,&quot;amount&quot;:&quot;92.84&quot;,&quot;items&quot;:&quot;17&quot;},{&quot;transaction&quot;:645,&quot;customer&quot;:&quot;Samuel U.U.J&quot;,&quot;date&quot;:&quot;2021-08-24T06:18:32.166Z&quot;,&quot;feedback&quot;:4,&quot;amount&quot;:&quot;63.40&quot;,&quot;items&quot;:&quot;42&quot;}]</code></p>
-</li>
-<li>
-<p>In the main <a href="http://localhost:5001">Sequel-Mark website (http://localhost:5001)</a>, check the Transactions table has been populated</p>
 </li>
 </ul>
-</section>
-<section class="slide__images">
 <caption>1. Expected call to transactions route http://localhost:5001/transactions</caption>
 <img src="../../images/006_001_Transactions_Route.png" />
+<ul>
+<li>This is the data that our front-end will use to populate the Transactions table on the web page</li>
+</ul>
+<hr />
+<ul>
+<li>In the main <a href="http://localhost:5001">Sequel-Mark website (http://localhost:5001)</a>, check the Transactions table has been populated</li>
+</ul>
 <caption>2. Expected Transactions Table View</caption>
 <img src="../../images/006_001_Transactions.png" />
 </section>

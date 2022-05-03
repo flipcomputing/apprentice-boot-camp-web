@@ -40,7 +40,60 @@
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h4>Under Construction</h4>
+<h4>Exercise 6.4 - Summary:</h4>
+<p>In pg-admin, create a SQL script that does the following:</p>
+<p>Tables:</p>
+<ul>
+<li><code>Sales_Header</code>.  Alias as <code>sh</code></li>
+<li><code>Sales_Detail</code>.  Alias as <code>sd</code></li>
+</ul>
+<p>Attributes:</p>
+<ul>
+<li>Distinct Count of <code>sale_id</code>. Alias as <code>total_transactions</code></li>
+<li>Sum of total <code>items_sold</code>. Alias as <code>total_products_sold</code></li>
+<li>Average <code>feedback_score</code> rounded to 1 decimal place. Alias as <code>avg_feedback</code></li>
+<li>Sum of total <code>revenue_net</code>. Alias as <code>revenue</code></li>
+<li>Sum of total <code>cost_of_sales</code>. Alias as <code>cost_of_sales</code></li>
+<li>Sum of total <code>revenue_net</code> minus sum of total <code>cost_of_sales</code>. Alias as <code>gross_profit</code></li>
+</ul>
+<hr />
+<ul>
+<li>
+<p>Test this script in PostgreSQL</p>
+<ul>
+<li>The names and data should match the screenshot</li>
+</ul>
+</li>
+<li>
+<p>Convert this SQL script into a <code>VIEW</code> called <code>v_Summary</code></p>
+</li>
+<li>
+<p>Append SQL to <code>SELECT * FROM</code> this <code>VIEW</code> into the space provided in line 13 of <strong>backend/routes/summary.js</strong></p>
+</li>
+<li>
+<p>Save and close <strong>backend/routes/summary.js</strong></p>
+</li>
+</ul>
+<div class="warning">You may need to close and re-run your Docker session for this to take effect</div>
+<hr />
+<ul>
+<li>In a new browser tab, <a href="http://localhost:5001/summary">preview the transactions route (http://localhost:5001/summary)</a>
+<ul>
+<li>This should be populated with an array of a single object containing the 6 attributes</li>
+</ul>
+</li>
+</ul>
+<caption>1. Expected call to summary route http://localhost:5001/summary</caption>
+<img src="../../images/006_004_Summary_Route.png" />
+<ul>
+<li>This is the data that our front-end will use to populate the Summary cards on the web page</li>
+</ul>
+<hr />
+<ul>
+<li>In the main <a href="http://localhost:5001">Sequel-Mark website (http://localhost:5001)</a>, check the Summary cards have been populated</li>
+</ul>
+<caption>2. Expected Summary Cards View</caption>
+<img src="../../images/006_004_Summary.png" />
 </section>
 <section class="slide__images">
 </section>

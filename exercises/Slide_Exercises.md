@@ -1,7 +1,43 @@
-## SELECT FUNCTIONS
-1. A:
+## SQL FUNCTIONS
+1. Consider the text 'Manchester Digital Database Bootcamp'
+  Q: How long is this text in characters?
+  A: 36 characters
+	```
+	SELECT LENGTH('Manchester Digital Database Bootcamp');
+	```
+
+  Q: Extract the word 'Bootcamp' from the text
+  A: (`RIGHT` or `SUBSTRING` would work here)
+	```
+	SELECT RIGHT('Manchester Digital Database Bootcamp', 8);
+	```
+
+  Q: Extract the word 'Database' from the text
+    ```
+	SELECT SUBSTRING('Manchester Digital Database Bootcamp', 20, 8);
+	```
+
+2. Using the CURRENT_TIMESTAMP
+  Q: Return a timestamp from 6 weeks ago
+  A: 
+	```
+	SELECT CURRENT_TIMESTAMP - INTERVAL '6 weeks';
+	```
+
+  Q: Return a timestamp 2 years into the future
+  A:
+	```
+	SELECT CURRENT_TIMESTAMP + INTERVAL '2 years';
+	```
+
+
+## FROM
+
+3. Q: How many unique `pack_size` values are there in which a product can be sold?
+3. A: There are 9 unique sizes
 ```
-SELECT LENGTH('Manchester Digital Database Bootcamp');
+SELECT DISTINCT pack_size
+FROM "sequel-mart-schema"."Products";
 ```
 
 ## WHERE... (Comparison Filters)
@@ -261,6 +297,8 @@ WHERE offer_name LIKE '%deal';
 
 # Exercises
 ## 6.1 Transactions
+CREATE VIEW v_Top_Transactions
+AS
 SELECT sh.sale_id AS Transaction
 	, cu.customer_name AS Customer
 	, sh.date_sale AS Date
@@ -279,6 +317,8 @@ LIMIT 10;
 
 ## 6.2 Customers
 ```
+CREATE VIEW v_Top_Customers
+AS
 SELECT cu.customer_name AS customer
 	, MIN(sh.date_sale) AS most_recent
 	, COUNT(sh.sale_id) AS transactions
@@ -286,9 +326,45 @@ SELECT cu.customer_name AS customer
 	, ROUND(AVG(items_sold),2) AS avg_items
 	, ROUND(AVG(sh.feedback_score),1) AS avg_feedback
 FROM "sequel-mart-schema"."Customers" AS cu
-JOIN "sequel-mart-schema"."Sales_Header" AS sh ON cu.customer_id = sh.customer_id
-JOIN "sequel-mart-schema"."Sales_Detail" AS sd ON sh.sale_id = sd.sale_id
+INNER JOIN "sequel-mart-schema"."Sales_Header" AS sh ON cu.customer_id = sh.customer_id
+INNER JOIN "sequel-mart-schema"."Sales_Detail" AS sd ON sh.sale_id = sd.sale_id
 GROUP BY cu.customer_name
 ORDER BY AVG(sd.revenue) DESC
 LIMIT 10;
+```
+
+## 6.3 Products
+```
+CREATE VIEW v_Top_Products
+AS
+SELECT pr.product_item
+	, pr.product_variety
+	, pr.pack_size
+	, pr.unit_sales_price AS unit_price
+	, pr.inventory
+	, SUM(sd.items_sold) AS items_sold
+FROM "sequel-mart-schema"."Products" AS pr
+INNER JOIN "sequel-mart-schema"."Sales_Detail" AS sd ON pr.product_id = sd.product_id
+GROUP BY pr.product_item
+	, pr.product_variety
+	, pr.pack_size
+	, pr.unit_sales_price
+	, pr.inventory
+ORDER BY SUM(sd.items_sold) DESC
+LIMIT 10;
+```
+
+## 6.4 Summary
+```
+CREATE VIEW v_Summary
+AS
+SELECT COUNT(DISTINCT sh.sale_id) AS total_transactions
+	, SUM(sd.items_sold) AS total_products_sold
+	, ROUND(AVG(sh.feedback_score),1) AS avg_feedback
+	, SUM(sd.revenue_net) AS revenue
+	, SUM(sd.cost_of_sales) AS cost_of_sales
+	, SUM(sd.revenue_net) - SUM(sd.cost_of_sales) AS gross_profit
+FROM "sequel-mart-schema"."Sales_Header" AS sh
+INNER JOIN "sequel-mart-schema"."Sales_Detail" AS sd ON sh.sale_id = sd.sale_id;
+;
 ```

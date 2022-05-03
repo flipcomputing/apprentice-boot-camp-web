@@ -28,7 +28,7 @@
 
       <h2 class="slide__title">
         <a class="slide__title" href="../slide_001">
-        SQL Text Functions
+        SQL Functions
         </a>
       </h2>
 
@@ -45,6 +45,16 @@
 <p>There are also a lot of <strong>baked-in functions</strong> we can use to change the output of <strong>string and date-based fields</strong></p>
 <p>We'll only go through a few in this Bootcamp</p>
 <p>The most common functions are listed below</p>
+<h6>ROUND()</h6>
+<p>Rounds a numeric value to a specific number of decimal places</p>
+<pre><code>SELECT ROUND(&lt;number&gt;, &lt;decimal places&gt;)
+</code></pre>
+<p>It will round up or down to the nearest decimal</p>
+<p>For example:</p>
+<ul>
+<li><code>SELECT ROUND(3.1415926535, 2);</code> returns 3.14;</li>
+<li><code>SELECT ROUND(3.1415926535, 3);</code> returns 3.142;</li>
+</ul>
 <h6>CURRENT_DATE</h6>
 <p>Return the current date in 'YYYY-MM-DD' format</p>
 <pre><code>SELECT CURRENT_DATE;
@@ -98,17 +108,19 @@
 <p>For example, <code>SELECT CONCAT('abcdefgh', ' ijkl ', 'mnop');</code> returns 'abcdefgh ijkl mnop'</p>
 </section>
 <section class="slide__images">
-    <caption>1. Date Interval (Difference) function</caption>
+    <caption>1. ROUND function</caption>
+    <img src="../../images/002_SELECT_Function_Round.png" />
+    <caption>2. Date Interval (Difference) function</caption>
     <img src="../../images/002_SELECT_Function_Date_Interval.png" />
-    <caption>2. LENGTH function</caption>
+    <caption>3. LENGTH function</caption>
     <img src="../../images/002_SELECT_Function_Length.png" />
-    <caption>3. LEFT function</caption>
+    <caption>4. LEFT function</caption>
     <img src="../../images/002_SELECT_Function_Left.png" />
-    <caption>4. RIGHT function</caption>
+    <caption>5. RIGHT function</caption>
     <img src="../../images/002_SELECT_Function_Right.png" />
-    <caption>5. SUBSTRING function</caption>
+    <caption>6. SUBSTRING function</caption>
     <img src="../../images/002_SELECT_Function_Substring.png" />
-    <caption>6. CONCAT function</caption>
+    <caption>7. CONCAT function</caption>
     <img src="../../images/002_SELECT_Function_Concat.png" />
 </section>
 <section class="slide__exercises">

@@ -21,7 +21,7 @@ FROM <table_name>;
 It's like saying: <span> "Hey, PostgreSQL; please can you find this information for me?  It's in this table in this schema.  When you find this information, please read it back to me" </span>
 
 ##### For example:
-Return a list of all products and all of their attributes to the results panel
+Return a list of all 129 products and all of their attributes to the results panel
 ```
 SELECT *
 FROM "sequel-mart-schema"."Products";
@@ -42,6 +42,28 @@ FROM "sequel-mart-schema"."Products";
 - The data type of the column is included
   - e.g. `product_item` only accepts varying character strings of no more than 50 characters
 
+<hr />
+
+#### Distinct
+When we have a list of values in a column with a lot of duplicates it can be useful to get a unique list
+
+If we say
+```
+SELECT product_category
+FROM "sequel-mart-schema"."Products";
+```
+we will just get the categories of all 129 rows.
+
+There are a lot of repeated values which makes it hard to tell how many categories there are
+
+However if we were to say:
+```
+SELECT DISTINCT product_category
+FROM "sequel-mart-schema"."Products";
+```
+
+We would get the 4 unique (`DISTINCT`) product categories we sell
+
 </section>
 
 
@@ -50,6 +72,8 @@ FROM "sequel-mart-schema"."Products";
     <img src="{{ '../../images/002_FROM_Products_All.png' | url }}" />
     <caption>2. Product table (some of the columns)</caption>
     <img src="{{ '../../images/002_FROM_Products_Some.png' | url }}" />
+    <caption>3. Product table (distinct list of product categories)</caption>
+    <img src="{{ '../../images/002_FROM_Products_Distinct.png' | url }}" />
 
 </section>
 
@@ -59,7 +83,8 @@ FROM "sequel-mart-schema"."Products";
 ---
 
   #### Exercises:
-- Run SELECT * from each of the other 5 tables
-- Familiarise yourself with the structure, and how it relates to the Entity Relationship diagram on the previous slide
+1. Run SELECT * from each of the other 5 tables
+2. Familiarise yourself with the structure, and how it relates to the Entity Relationship diagram on the previous slide
+3. How many unique `pack_size` values are there in which a product can be sold?
 
 </section>

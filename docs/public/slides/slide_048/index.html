@@ -38,16 +38,29 @@
         </a>
       </p>
     </nav>
-    <main class=grid-2>
+    <main class=grid-1>
       <section class="slide__text">
 <h4>Routers and routes</h4>
 <p>As mentioned, the frontend app makes a request to a backend data store which issues a response to display</p>
 <p><strong>Routers</strong> = A pattern where the backend provides perscribed routes to the data that the frontend can call</p>
 <p><strong>Routes</strong> = A URL that the backend returns a result to and the frontend can use to populate the application</p>
+<h6>Router path</h6>
+<ol>
+<li>The HTML element has a data-url tag with the name of the route's URL page</li>
+<li>An asynchronous request is made for this HTML element to be populated</li>
+<li>The router's coordinator on the backend (app.js)
+<ul>
+<li>Connects to the database</li>
+<li>Decides on the format of the output</li>
+<li>Calls the route requested by the frontend</li>
+</ul>
+</li>
+<li>The route file gets the data with a SQL script and passes it back to app.js</li>
+<li>app.js passes the result back to the frontend</li>
+<li>The data is iteratively populated into the HTML element and will appear on the web page</li>
+</ol>
+<img class="bg-hidden" src="../../images/005_Router_Path.png" />
 </section>
-<section class="slide__images">
-</section>
-
     </main>
         
     <footer>

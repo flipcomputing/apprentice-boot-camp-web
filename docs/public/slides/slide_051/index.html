@@ -41,52 +41,30 @@
     <main class=grid-2>
       <section class="slide__text">
 <h4>Exercise 6.2 - Customers:</h4>
-<p>In pg-admin, create a SQL that does the following:</p>
-<p>SELECTs</p>
+<p>In pg-admin, create a SQL script that does the following:</p>
+<p>Tables:</p>
 <ul>
-<li>
-<p><code>customer_name</code> (Customers)</p>
-<ul>
-<li>Alias as <code>customer</code></li>
+<li><code>Customers</code>.  Alias as <code>cu</code></li>
+<li><code>Sales_Header</code>.  Alias as <code>sh</code></li>
+<li><code>Sales_Detail</code>.  Alias as <code>sd</code></li>
 </ul>
-</li>
-<li>
-<p>Most recent <code>date_sale</code> (Sales Detail)</p>
+<p>Attributes:</p>
 <ul>
-<li>Alias as <code>most_recent</code></li>
+<li><code>customer_name</code>. Alias as <code>customer</code></li>
+<li>Most recent <code>date_sale</code>. Alias as <code>most_recent</code>
+<ul>
 <li>HINT: Use the <code>MAX</code> aggregator for this</li>
 </ul>
 </li>
-<li>
-<p>Count the number of <code>sale_id</code>s for that customer (Sales Header)</p>
-<ul>
-<li>Alias as <code>transactions</code></li>
+<li>Count the number of <code>sale_id</code>s for that customer. Alias as <code>transactions</code></li>
+<li>Average <code>revenue</code> for that customer rounded to 1 decimal place. Alias as <code>avg_spend</code></li>
+<li>Average number of <code>items_sold</code> rounded to 1 decimal place. Alias as <code>avg_items</code></li>
+<li>Average <code>feedback_score</code> rounded to 1 decimal place. Alias as <code>avg_feedback</code></li>
 </ul>
-</li>
-<li>
-<p>Average <code>revenue</code> for that customer (Sales Detail)</p>
+<p>Other considerations:</p>
 <ul>
-<li>Alias as <code>avg_spend</code></li>
-</ul>
-</li>
-<li>
-<p>Average number of <code>items_sold</code> (Sales Detail)</p>
-<ul>
-<li>Alias as <code>avg_items</code></li>
-</ul>
-</li>
-<li>
-<p>Average <code>feedback_score</code> (Sales Header)</p>
-<ul>
-<li>Alias as <code>avg_feedback</code></li>
-</ul>
-</li>
-<li>
-<p>Order by <code>average revenue</code> with the highest value first</p>
-</li>
-<li>
-<p>Limit the output to the first 10 rows only</p>
-</li>
+<li>Order by <code>average revenue</code> with the highest value first</li>
+<li>Limit the output to the first 10 rows only</li>
 </ul>
 <hr />
 <ul>
@@ -100,7 +78,7 @@
 <p>Convert this SQL script into a <code>VIEW</code> called <code>v_Top_Customers</code></p>
 </li>
 <li>
-<p>Append SQL to <code>SELECT ... FROM</code> this <code>VIEW</code> into the space provided in line 13 of <strong>backend/routes/customers.js</strong></p>
+<p>Append SQL to <code>SELECT * FROM</code> this <code>VIEW</code> into the space provided in line 13 of <strong>backend/routes/customers.js</strong></p>
 </li>
 <li>
 <p>Save and close <strong>backend/routes/customers.js</strong></p>
@@ -109,26 +87,24 @@
 <div class="warning">You may need to close and re-run your Docker session for this to take effect</div>
 <hr />
 <ul>
-<li>
-<p>In a new browser tab, <a href="http://localhost:5001/customers">preview the transactions route (http://localhost:5001/customers)</a></p>
+<li>In a new browser tab, <a href="http://localhost:5001/customers">preview the transactions route (http://localhost:5001/customers)</a>
 <ul>
 <li>This should be populated with an array of 10 objects for each customer</li>
-<li>This is the data that our front-end will use to populate the Customers table</li>
 </ul>
-<p><code>[{&quot;customer&quot;:&quot;Isabelle X.S.I&quot;,&quot;most_recent&quot;:&quot;2021-05-07T18:46:46.573Z&quot;,&quot;transactions&quot;:&quot;12&quot;,&quot;avg_spend&quot;:&quot;24.31&quot;,&quot;avg_items&quot;:&quot;5.67&quot;,&quot;avg_feedback&quot;:&quot;4.3&quot;},{&quot;customer&quot;:&quot;Austin B.P.E&quot;,&quot;most_recent&quot;:&quot;2021-03-08T18:58:30.869Z&quot;,&quot;transactions&quot;:&quot;6&quot;,&quot;avg_spend&quot;:&quot;22.92&quot;,&quot;avg_items&quot;:&quot;5.33&quot;,&quot;avg_feedback&quot;:&quot;5.0&quot;},{&quot;customer&quot;:&quot;Oakley H.D.N&quot;,&quot;most_recent&quot;:&quot;2021-07-16T13:30:23.467Z&quot;,&quot;transactions&quot;:&quot;20&quot;,&quot;avg_spend&quot;:&quot;20.55&quot;,&quot;avg_items&quot;:&quot;5.05&quot;,&quot;avg_feedback&quot;:&quot;2.4&quot;},{&quot;customer&quot;:&quot;Ezra Y.X.A&quot;,&quot;most_recent&quot;:&quot;2021-04-09T02:53:32.620Z&quot;,&quot;transactions&quot;:&quot;16&quot;,&quot;avg_spend&quot;:&quot;20.48&quot;,&quot;avg_items&quot;:&quot;5.31&quot;,&quot;avg_feedback&quot;:&quot;4.0&quot;},{&quot;customer&quot;:&quot;Summer R.C.V&quot;,&quot;most_recent&quot;:&quot;2021-03-07T15:11:10.513Z&quot;,&quot;transactions&quot;:&quot;48&quot;,&quot;avg_spend&quot;:&quot;19.89&quot;,&quot;avg_items&quot;:&quot;4.73&quot;,&quot;avg_feedback&quot;:&quot;4.0&quot;},{&quot;customer&quot;:&quot;Ava I.C.N&quot;,&quot;most_recent&quot;:&quot;2021-01-10T17:56:12.911Z&quot;,&quot;transactions&quot;:&quot;25&quot;,&quot;avg_spend&quot;:&quot;18.17&quot;,&quot;avg_items&quot;:&quot;4.60&quot;,&quot;avg_feedback&quot;:&quot;1.3&quot;},{&quot;customer&quot;:&quot;Harrison G.K.Z&quot;,&quot;most_recent&quot;:&quot;2021-04-12T22:58:27.801Z&quot;,&quot;transactions&quot;:&quot;17&quot;,&quot;avg_spend&quot;:&quot;18.00&quot;,&quot;avg_items&quot;:&quot;5.24&quot;,&quot;avg_feedback&quot;:&quot;1.7&quot;},{&quot;customer&quot;:&quot;Reggie P.D.T&quot;,&quot;most_recent&quot;:&quot;2021-02-14T01:13:53.713Z&quot;,&quot;transactions&quot;:&quot;55&quot;,&quot;avg_spend&quot;:&quot;17.92&quot;,&quot;avg_items&quot;:&quot;5.15&quot;,&quot;avg_feedback&quot;:&quot;4.7&quot;},{&quot;customer&quot;:&quot;Alfie I.U.B&quot;,&quot;most_recent&quot;:&quot;2021-02-17T09:17:20.479Z&quot;,&quot;transactions&quot;:&quot;69&quot;,&quot;avg_spend&quot;:&quot;17.73&quot;,&quot;avg_items&quot;:&quot;4.96&quot;,&quot;avg_feedback&quot;:&quot;4.1&quot;},{&quot;customer&quot;:&quot;Mia B.I.U&quot;,&quot;most_recent&quot;:&quot;2021-03-09T02:48:42.068Z&quot;,&quot;transactions&quot;:&quot;31&quot;,&quot;avg_spend&quot;:&quot;17.62&quot;,&quot;avg_items&quot;:&quot;4.74&quot;,&quot;avg_feedback&quot;:&quot;4.4&quot;}]</code></p>
-</li>
-<li>
-<p>In the main <a href="http://localhost:5001">Sequel-Mark website (http://localhost:5001)</a>, check the Customers table has been populated</p>
 </li>
 </ul>
-</section>
-<section class="slide__images">
 <caption>1. Expected call to transactions route http://localhost:5001/customers</caption>
 <img src="../../images/006_002_Customers_Route.png" />
+<ul>
+<li>This is the data that our front-end will use to populate the Customers table on the web page</li>
+</ul>
+<hr />
+<ul>
+<li>In the main <a href="http://localhost:5001">Sequel-Mark website (http://localhost:5001)</a>, check the Customers table has been populated</li>
+</ul>
 <caption>2. Expected Customer Table View</caption>
 <img src="../../images/006_002_Customers.png" />
 </section>
-
     </main>
         
     <footer>

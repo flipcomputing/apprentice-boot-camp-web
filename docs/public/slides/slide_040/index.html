@@ -40,6 +40,29 @@
     </nav>
     <main class=grid-2>
       <section class="slide__text">
+<h4>Create a (usually smaller) 'copy' of the table</h4>
+<pre><code>CREATE INDEX &lt;index_name&gt;
+ON &lt;table&gt; USING btree | hash
+(field_name1 ASC | DESC, field_name2) NULLS FIRST | LAST
+INCLUDE (&lt;field_name3&gt;, &lt;field_name4&gt;);
+</code></pre>
+<h5>Advantages of Indexes</h5>
+<ul>
+<li><strong>Regular queries</strong> can use this smaller copy. It can make <strong>reads faster</strong></li>
+<li><strong>Cutting out unneeded columns</strong>
+<ul>
+<li>Fewer pages for the engine to read</li>
+<li>Uses less memory &amp; CPU</li>
+</ul>
+</li>
+<li><strong>Sorts</strong> can be <strong>pre-empted</strong> speeding up the query</li>
+<li><strong>Indexes can be filtered</strong> making them even faster when used</li>
+</ul>
+<h5>Disadvantages of Indexes</h5>
+<ul>
+<li>Extra <strong>overhead</strong>. Data changes happen in multiple places (<strong>slower writes</strong>)</li>
+<li>More <strong>storage</strong> space is needed</li>
+</ul>
 <h4>-------------------------------</h4>
 <h4>---Under Construction---</h4>
 <h4>-------------------------------</h4>

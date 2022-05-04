@@ -342,6 +342,10 @@ img {
   box-shadow: 2px 2px 4px var(--clr-text-shadow-2);
 }
 
+.img-large {
+  max-height: 120em;
+}
+
 .bg-hidden {
   border: none;
   box-shadow: none;

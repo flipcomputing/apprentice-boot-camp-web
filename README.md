@@ -75,9 +75,9 @@ Completed Sequel-Mart project web page:
 ## Day 2
 
 ### Section 4 (Streamlining - making a relational database more efficient)
+- System Tables
 - Speeding up queries
 - `CREATE INDEX`, `CREATE VIEW`, `CREATE PROCEDURE`, Transactions
-- System Tables
 - SQL Injection
 
 ### Section 5 (Sequel-Mart)

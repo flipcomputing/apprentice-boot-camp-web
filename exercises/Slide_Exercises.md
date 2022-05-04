@@ -297,7 +297,8 @@ WHERE offer_name LIKE '%deal';
 
 # Exercises
 ## 6.1 Transactions
-CREATE VIEW v_Top_Transactions
+```
+CREATE VIEW "sequel-mart-schema".v_Top_Transactions
 AS
 SELECT sh.sale_id AS Transaction
 	, cu.customer_name AS Customer
@@ -314,10 +315,15 @@ GROUP BY sh.sale_id
 	, sh.feedback_score
 ORDER BY date_sale DESC
 LIMIT 10;
+```
+
+```
+SELECT * FROM "sequel-mart-schema".v_Top_Customers;
+```
 
 ## 6.2 Customers
 ```
-CREATE VIEW v_Top_Customers
+CREATE VIEW "sequel-mart-schema".v_Top_Customers
 AS
 SELECT cu.customer_name AS customer
 	, MIN(sh.date_sale) AS most_recent
@@ -333,9 +339,13 @@ ORDER BY AVG(sd.revenue) DESC
 LIMIT 10;
 ```
 
+```
+SELECT * FROM "sequel-mart-schema".v_Top_Customers;
+```
+
 ## 6.3 Products
 ```
-CREATE VIEW v_Top_Products
+CREATE VIEW "sequel-mart-schema".v_Top_Products
 AS
 SELECT pr.product_item
 	, pr.product_variety
@@ -354,9 +364,13 @@ ORDER BY SUM(sd.items_sold) DESC
 LIMIT 10;
 ```
 
+```
+SELECT * FROM "sequel-mart-schema".v_Top_Products;
+```
+
 ## 6.4 Summary
 ```
-CREATE VIEW v_Summary
+CREATE VIEW "sequel-mart-schema".v_Summary
 AS
 SELECT COUNT(DISTINCT sh.sale_id) AS total_transactions
 	, SUM(sd.items_sold) AS total_products_sold
@@ -367,4 +381,8 @@ SELECT COUNT(DISTINCT sh.sale_id) AS total_transactions
 FROM "sequel-mart-schema"."Sales_Header" AS sh
 INNER JOIN "sequel-mart-schema"."Sales_Detail" AS sd ON sh.sale_id = sd.sale_id;
 ;
+```
+
+```
+SELECT * FROM "sequel-mart-schema".v_Summary;
 ```

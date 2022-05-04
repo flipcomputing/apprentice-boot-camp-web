@@ -3,8 +3,8 @@ layout: 'base.njk'
 slide_number: 0
 slide_prev: 'slide_000/'
 slide_next: 'slide_001/'
-section_title: 'Introduction'
-slide_title: 'Navigate using the arrows above'
+section_title: 'Click these titles or the logo to navigate to the contents screen'
+slide_title: 'Navigate to the previous or next slide using the arrows above'
 theme: 'theme_001'
 slide_layout: 'center'
 ---

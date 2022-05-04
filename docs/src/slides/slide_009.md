@@ -32,10 +32,12 @@ It's like saying: <span> "Hey, PostgreSQL; please can I have this returned to me
   - If these are removed and both queries are run, we would get a syntax error
   - If multiple queries are in the same session only the last query will return a result
   - To run a specific query, highlight it before executing it
-- Text and Dates need to be surrounded by **single-quotes** (not double-quotes)
+- **Text and Dates** need to be surrounded by **single-quotes** (not double-quotes)
   - e.g. `SELECT 'Hello World';`
-- Integers and Numerics can be put in as they are
+- **Integers and Numerics** can be put in as they are
   - e.g. `SELECT 123;`
+- **Multiple columns** can be added by separating with commas
+  - e.g. `SELECT 'foo', 'bar', 42, 2.73;` returns 4 columns
 
 <hr />
 

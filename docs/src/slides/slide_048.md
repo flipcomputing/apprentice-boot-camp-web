@@ -20,15 +20,18 @@ As mentioned, the frontend app makes a request to a backend data store which iss
 
 ###### Router path
 1. The HTML element has a data-url tag with the name of the route's URL page
-2. An asynchronous request is made for this HTML element to be populated
-3. The router's coordinator on the backend (app.js)
+2. The frontend coordinator (data.js) instructs each helper function to get the data from the backend
+3. An asynchronous request is made for the data from the backend
+4. The router's coordinator on the backend (app.js)
     - Connects to the database
     - Decides on the format of the output
     - Calls the route requested by the frontend
-4. The route file gets the data with a SQL script and passes it back to app.js
-5. app.js passes the result back to the frontend
-6. The data is iteratively populated into the HTML element and will appear on the web page
+5. The route file gets the data with a SQL script and passes it back to app.js
+6. app.js passes the result back to the frontend helper function
+7. The data is iteratively populated into the HTML element. Once done, it will appear on the web page
 
-<img class="bg-hidden" src="{{ '../../images/005_Router_Path.png' | url }}" />
+<hr />
+
+<img class="bg-hidden img-large" src="{{ '../../images/005_Router_Path.png' | url }}" />
 
 </section>

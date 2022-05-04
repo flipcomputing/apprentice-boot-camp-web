@@ -41,7 +41,7 @@ If it responds successfully:
 
 ###### The files in the Frontend and Backend of our project
 
-<img class="bg-hidden" src="{{ '../../images/005_Sequel_Mart_File_Structure.png' | url }}" />
+<img class="bg-hidden img-large" src="{{ '../../images/005_Sequel_Mart_File_Structure.png' | url }}" />
 
 
 </section>

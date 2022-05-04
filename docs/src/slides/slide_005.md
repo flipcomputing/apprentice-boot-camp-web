@@ -16,6 +16,7 @@ slide_layout: 'grid-2'
     - **Docker Desktop** for [Windows](https://docs.docker.com/desktop/windows/install/) or [Mac](https://docs.docker.com/desktop/mac/install/)
     - A code editor with an integrated terminal (e.g. [VS Code](https://code.visualstudio.com/download))
     - [Node js (v14.15.1 or above)](https://nodejs.org/en/download/)
+        - You can check if it has installed by running `node --version` in a terminal session
 
 #### Project Set Up
 - Add a folder somewhere on your computer.  This will store the project.

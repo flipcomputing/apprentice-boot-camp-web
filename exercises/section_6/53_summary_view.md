@@ -1,5 +1,5 @@
 # Exercises
-## 6.4 Summary
+## 6.4 Summary - (Slide 53)
 ```
 CREATE VIEW "sequel-mart-schema".v_Summary
 AS

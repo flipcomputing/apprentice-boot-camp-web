@@ -1,5 +1,5 @@
 # Exercises
-## 6.1 Transactions
+## 6.1 Transactions - (Slide 50)
 ```
 CREATE VIEW "sequel-mart-schema".v_Top_Transactions
 AS

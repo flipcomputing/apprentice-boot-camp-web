@@ -1,5 +1,5 @@
 # Exercises
-## 6.2 Customers
+## 6.2 Customers - (Slide 51)
 ```
 CREATE VIEW "sequel-mart-schema".v_Top_Customers
 AS

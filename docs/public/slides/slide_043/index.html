@@ -28,7 +28,7 @@
 
       <h2 class="slide__title">
         <a class="slide__title" href="../slide_001">
-        TRANSACTIONS
+        CREATE PROCEDURE...
         </a>
       </h2>
 
@@ -40,164 +40,95 @@
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h4>Run many SQL queries together</h4>
+<h5>A set of often parametised SQL queries</h5>
+<p>A <code>VIEW</code> can execute a single SQL statement</p>
+<p>A <code>PROCEDURE</code> can:</p>
 <ul>
-<li>Only write the results from a series of SQL statements to the database (<code>COMMIT</code>) if they <strong>all</strong> succeed</li>
-<li>Do not write to the database (<code>ROLLBACK</code>) if one does not succeed</li>
+<li>Chain and execute multiple SQL statements</li>
+<li>Accept input parameters to influence the result</li>
+<li>Accept output parameters</li>
 </ul>
-<pre><code>BEGIN;
-    INSERT &lt;SQL_Statement1&gt;;
-    UPDATE &lt;SQL_Statement2&gt;;
-SAVEPOINT &lt;savepoint1&gt;;
-    INSERT &lt;SQL_Statement3&gt;;
-ROLLBACK TO &lt;savepoint1&gt;;
-    UPDATE &lt;SQL_Statement4&gt;;
-COMMIT; | ROLLBACK;
+<div class="warning">These are complicated to write at first but it has similarities with functions in coding languages</div>
+<pre><code>CREATE OR REPLACE PROCEDURE &lt;schema_name&gt;.&lt;proc_name&gt;(
+&lt;input_param_1&gt;, &lt;input_param_2&gt;)
+LANGUAGE 'plpgsql' | 'sql'
+AS $BODY$
+DECLARE &lt;variable_name&gt; &lt;data_type&gt;
+BEGIN
+        &lt;SQL_Statement_1&gt;
+        &lt;SQL_Statement_2&gt;
+        COMMIT;
+END;
+$BODY$;
 </code></pre>
-<p>A transaction must have the following components:</p>
 <ul>
-<li><code>BEGIN;</code> = Where a transaction starts</li>
-</ul>
-<p>It must have at least one of the following components:</p>
+<li><code>CREATE OR REPLACE PROCEDURE</code> = The name of the procedure and the schema it which it should be stored</li>
+<li><code>&lt;input_param_1&gt;, &lt;input_param_2&gt;</code> = Any external input parameters (optional)</li>
+<li><code>LANGUAGE</code> = PL/pgSQL is a procedural programming language supported by PostgreSQL</li>
+<li><code>$BODY$</code> = A token in between two dollar signs to avoid having to stringify the whole procedure
 <ul>
-<li><code>COMMIT;</code> = Where the transaction ends and:
-<ul>
-<li>Writes everything to the database tables affected</li>
-<li>Frees any locks taken out</li>
+<li>Using 'BODY' is a convention but it could be any value (e.g. <code>$BOOTCAMP$</code>)</li>
 </ul>
 </li>
-<li><code>ROLLBACK;</code> = Ends the transaction and:
+<li><code>DECLARE</code> = Any internally declared variables we can use in our procedure</li>
+<li><code>BEGIN ... END</code> = Area in which the SQL statements are batched as a <code>TRANSACTION</code></li>
+</ul>
+<h5>Example - Generating Sales</h5>
+<p>Our <code>sequel-mart-schema</code> includes a procedure for generating randomised sales (<code>p_sales_generate</code>)</p>
+<p>If we:</p>
 <ul>
-<li>Does not write anything to the database tables affected</li>
-<li>Frees any locks taken out</li>
+<li>Right-click on the procedure</li>
+<li>Click Properties...</li>
+<li>Click the Code tab</li>
 </ul>
-</li>
-</ul>
-<p>And it may have the following components:</p>
+<p>We access the PLPGSQL code between the <code>$BODY$</code> tags</p>
+<p>This procedure:</p>
 <ul>
-<li><code>ROLLBACK TO;</code> = Ends the transaction and:
+<li>Accepts an <code>INTEGER</code> input field called 'sales'
 <ul>
-<li>Does not write anything to the database tables affected</li>
-<li>Frees any locks taken out</li>
+<li>This specifies how many sales you want to generate</li>
 </ul>
 </li>
-<li><code>SAVEPOINT</code> = Allows us to:
+<li>Counts the number of <code>customers</code> who could make a sale and stores it as 'customer_total'</li>
+<li>Iterates through the number of 'sales' we want to generate and assigns:</li>
+</ul>
+<p><code>Sales_Header</code></p>
 <ul>
-<li>Commit SQL statements before that point on an error (used with <code>ROLLBACK TO</code>)</li>
-<li>Roll back SQL statements after that point on an error</li>
+<li>A random <code>customer_id</code> using the 'customer_total' variable as a range</li>
+<li>A random <code>sale_date</code></li>
+<li>A random <code>feedback_score</code></li>
 </ul>
-</li>
-</ul>
-<hr />
-<h5>Other things to note:</h5>
+<p><code>Sales_Detail</code></p>
 <ul>
-<li>Make sure transactions are efficient and well tested before putting them into production</li>
-<li>
-<div class="warning">Transactions lock tables or rows that are being changed</div>
-</li>
-<li>
-<div class="warning">Other transactions wait until they have finished</div>
-</li>
-<li>
-<div class="warning">This can lead to **blocking** and **deadlocking** issues if slow</div>
+<li>A random number of products to include in this sale (between 1 and 20).  For each product we assign:
+<ul>
+<li>The number of items sold (between 1 and 10)</li>
+<li>The product itself (weighted with a more popular product more likely to be chosen)</li>
+<li>The product's <code>unit_sales_price</code> and <code>wholesale_price</code></li>
+</ul>
 </li>
 </ul>
-<div class="warning">Make sure you don't start a transaction and leave it running without committing or rolling it back</div>
-<hr />
-<h6>Example</h6>
-<p>Let's query our <code>Product_Offers</code> table again for <code>offer_id</code>s 17, 19 and 20:</p>
-<pre><code>SELECT *
-FROM &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
-WHERE offer_id IN (17,19,20);
+<h5>Calling a Procedure</h5>
+<p>A procedure can be executed using <code>CALL</code></p>
+<pre><code>CALL &lt;schema_name&gt;.p_&lt;proc_name&gt;(&lt;input_param_1&gt;, &lt;input_param_2&gt;)
 </code></pre>
-<p>The <code>offer_start_date</code>s are 28th August, 2nd September &amp; 4th September respectively.</p>
-<p>If we wanted to add a day to <code>offer_id</code> 20 (make it 5th September), we would:</p>
+<div class="warning">If you run the 'p_sales_generate' procedure now, your results for the exercises in section 6 will be different from the screenshots</div>
+<p>For example if we were to run:</p>
+<pre><code>CALL 'sequel-mart-schema'.'p_sales_generate'(100);
+</code></pre>
+<p>We would:</p>
 <ul>
-<li>Use an <code>UPDATE</code></li>
-<li>Make use of the <code>INTERVAL</code> function to add the day</li>
+<li>Add 100 new randomly generated sales transactions to our <code>Sales_Header</code> table</li>
+<li>Add about 1,000 new product purchases to our <code>Sales_Detail</code> table</li>
 </ul>
-<pre><code>UPDATE &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
-SET offer_start_date = offer_start_date + INTERVAL '1 day'
-WHERE offer_id = 20;
-</code></pre>
-<p>This is a single statement transaction.  It's the equivalent of writing:</p>
-<pre><code>BEGIN;
-	UPDATE &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
-	SET offer_start_date = offer_start_date + INTERVAL '1 day'
-	WHERE offer_id = 20;
-COMMIT;
-</code></pre>
-<p>However, if we were instead to write:</p>
-<pre><code>BEGIN;
-	UPDATE &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
-	SET offer_start_date = offer_start_date + INTERVAL '1 day'
-	WHERE offer_id = 20;
-ROLLBACK;
-</code></pre>
-<p>The <code>offer_start_date</code> for this offer would not be written to the database. It would still be 4th September 2021.</p>
-<h5>Extending the example</h5>
-<p>Now let's add a <code>SAVEPOINT</code> and <code>ROLLBACK TO</code> that <code>SAVEPOINT</code></p>
-<pre><code>BEGIN;
-	UPDATE &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
-	SET offer_start_date = offer_start_date + INTERVAL '1 day'
-	WHERE offer_id = 17;
-SAVEPOINT product_offer_savepoint;
-	UPDATE &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
-	SET offer_start_date = offer_start_date + INTERVAL '1 day'
-	WHERE offer_id = 19;
-ROLLBACK TO product_offer_savepoint;
-	UPDATE &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
-	SET offer_start_date = offer_start_date + INTERVAL '1 day'
-	WHERE offer_id = 20;
-COMMIT;
-</code></pre>
-<p>This time the SQL transaction will:</p>
-<ul>
-<li>
-<p>Note the <code>BEGIN</code></p>
-</li>
-<li>
-<p>Add a day to <code>offer_id</code> 17 and accept as part of the transaction</p>
-</li>
-<li>
-<p>Note the <code>SAVEPOINT</code> called <code>product_offer_savepoint</code></p>
-</li>
-<li>
-<p>Add a day to <code>offer_id</code> 19 and accept as part of the transaction</p>
-</li>
-<li>
-<p>Note the <code>ROLLBACK TO product_offer_savepoint</code></p>
-</li>
-<li>
-<p>Reverse adding a day to <code>offer_id</code> 19 and remove it from the transaction</p>
-</li>
-<li>
-<p>Go back to the line below the <code>ROLLBACK TO</code></p>
-</li>
-<li>
-<p>Add a day to <code>offer_id</code> 20 and accept as part of the transaction</p>
-</li>
-<li>
-<p>The transaction contains <code>UPDATE</code>s to <code>offer_id</code>s 17 and 20</p>
-</li>
-<li>
-<p>Note the <code>COMMIT</code> and makes these changes to the database</p>
-</li>
-</ul>
-<p>If we run:</p>
-<pre><code>SELECT *
-FROM &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
-WHERE offer_id IN (17,19,20);
-</code></pre>
-<p>we see that IDs 17 and 20 have a modified <code>offer_start_date</code> but ID 19 has not changed</p>
 </section>
 <section class="slide__images">
-<caption>1. Product Offers table IDs 17, 19 & 20 (Before)</caption>
-<img src="../../images/004_Transactions_SELECT_Product_Offer_20.png" />
-<caption>2. Location of VIEWs on the browser tab</caption>
-<img src="../../images/004_Transactions_ROLLBACK_Only.png" />
-<caption>3. Product Offers table IDs 17, 19 & 20 (After)</caption>
-<img src="../../images/004_Transactions_SELECT_Product_Offer_20_After_Changes.png" />
+<caption>1. Procedures (Location in Browser Tab)</caption>
+<img src="../../images/004_Procedure_Location.png" />
+<caption>2. Procedures (Navigate to the code)</caption>
+<img src="../../images/004_Procedure_Properties.png" />
+<caption>3. Procedures (Navigate to the code)</caption>
+<img src="../../images/004_Procedure_Code.png" />
 </section>
 
     </main>

@@ -41,12 +41,17 @@
     <main class=grid-2>
       <section class="slide__text">
 <h4>How Postgresql plans and executes a query</h4>
+<div class="warning">This is usually optimised by a Database Administrator (DBA)</div>
+<div class="warning">It is still beneficial to have at least a basic understanding of how this tool works though</div>
 <ul>
 <li>
 <p>PostgreSQL offers a tool to help work out:</p>
 <ul>
-<li>How many resources a query is using</li>
+<li>How PostgreSQL is planning to execute a query</li>
+<li>How it's joining the tables</li>
 <li>If it's blocking any other queries</li>
+<li>How many resources a query is using</li>
+<li>Were the planned resources similar to what those it actually used?</li>
 </ul>
 </li>
 <li>
@@ -57,6 +62,7 @@
 </ul>
 </li>
 </ul>
+<hr />
 <h6>How do we access it?</h6>
 <ul>
 <li>On the second panel down, next to the play button is an icon that when pressed 'Explains' a query (<code>F7</code> is the shortcut key)</li>
@@ -69,7 +75,78 @@ FROM &quot;sequel-mart-schema&quot;.&quot;Sales_Header&quot; AS sh
 INNER JOIN &quot;sequel-mart-schema&quot;.&quot;Sales_Detail&quot; AS sd 
 	ON sh.sale_id = sd.sale_id;
 </code></pre>
-<h5>What can help?</h5>
+<p>This reads left-to-right, bottom-to-top</p>
+<ul>
+<li>Scan <code>Sales_Header</code></li>
+<li>Write the joining column(s) to a 'hash table' in memory</li>
+<li>Scan <code>Sales_Detail</code></li>
+<li>Match it with data in the hashed table</li>
+</ul>
+<p>If the checkboxes in screenshot 1 are ticked, we can click on any node to view more details about:</p>
+<ul>
+<li><strong>Node Type</strong> - What the node is expected to do</li>
+<li><strong>Relation Name/Schema</strong> - The table and schema name</li>
+<li><strong>Node Cost</strong> - A number that gives a rough indication of the resource intensity</li>
+<li><strong>Plan Rows</strong> - How many rows Postgres expects at this point in the query</li>
+<li><strong>Plan Width</strong> - The expected number of bytes of data in all columns added together</li>
+<li><strong>Output</strong> - Columns expected after this point of the query</li>
+<li><strong>Filter</strong> - Application of any <code>WHERE</code> clauses</li>
+<li><strong>Loops</strong> - Number of iterations through a table expected to find all of the data</li>
+</ul>
+<h5>Adding to our example (1)</h5>
+<p>If we were to add a <code>WHERE</code>, <code>ORDER BY</code> AND <code>LIMIT</code> to our query</p>
+<pre><code>SELECT *
+FROM &quot;sequel-mart-schema&quot;.&quot;Sales_Header&quot; AS sh
+INNER JOIN &quot;sequel-mart-schema&quot;.&quot;Sales_Detail&quot; AS sd 
+	ON sh.sale_id = sd.sale_id
+WHERE sh.date_sale &gt;= '2021-08-01'
+ORDER BY sd.revenue desc
+LIMIT 50;
+</code></pre>
+<p>Our plan (screenshot 4) includes extra nodes showing how Postgres plans to deal with:</p>
+<ul>
+<li>The <code>SORT</code> (once the tables have been joined)</li>
+<li>The <code>LIMIT</code> (once the sort has been applied)</li>
+</ul>
+<p>It also adds a 'Filter' section to the <code>Sales_Header</code> node to handle the <code>WHERE</code></p>
+<h5>Adding to our example (2)</h5>
+<p>If we wrote a query to get the average number of items sold by day after 1st August:</p>
+<pre><code>SELECT sh.date_id, AVG(sd.items_sold)
+FROM &quot;sequel-mart-schema&quot;.&quot;Sales_Header&quot; AS sh
+INNER JOIN &quot;sequel-mart-schema&quot;.&quot;Sales_Detail&quot; AS sd 
+	ON sh.sale_id = sd.sale_id
+WHERE sh.date_sale &gt;= '2021-08-01'
+GROUP BY sh.date_id
+ORDER BY sh.date_id;
+</code></pre>
+<p>Our plan would include:</p>
+<ul>
+<li>An 'Aggregate' component to deal with the <code>AVG</code> and <code>GROUP BY</code></li>
+</ul>
+<hr />
+<h5>Shorthands</h5>
+<p>We can also add <code>EXPLAIN</code> before our query.</p>
+<pre><code>EXPLAIN SELECT sh.date_id, AVG(sd.items_sold)
+FROM &quot;sequel-mart-schema&quot;.&quot;Sales_Header&quot; AS sh
+INNER JOIN &quot;sequel-mart-schema&quot;.&quot;Sales_Detail&quot; AS sd 
+	ON sh.sale_id = sd.sale_id
+WHERE sh.date_sale &gt;= '2021-08-01'
+GROUP BY sh.date_id
+ORDER BY sh.date_id;
+</code></pre>
+<p>This give us a list of the commands and costs associated with building a query</p>
+<p>We can get further detail by adding <code>EXPLAIN ANALYZE</code></p>
+<pre><code>EXPLAIN ANALYZE SELECT sh.date_id, AVG(sd.items_sold)
+FROM &quot;sequel-mart-schema&quot;.&quot;Sales_Header&quot; AS sh
+INNER JOIN &quot;sequel-mart-schema&quot;.&quot;Sales_Detail&quot; AS sd 
+	ON sh.sale_id = sd.sale_id
+WHERE sh.date_sale &gt;= '2021-08-01'
+GROUP BY sh.date_id
+ORDER BY sh.date_id;
+</code></pre>
+<p>This gives us even more information about memory allocations and timings</p>
+<hr />
+<h5>What can help performance?</h5>
 <ul>
 <li>Adding/Tuning indexes (next slide)</li>
 <li>Tuning the query
@@ -82,21 +159,22 @@ INNER JOIN &quot;sequel-mart-schema&quot;.&quot;Sales_Detail&quot; AS sd
 <li>Adding memory and/or CPU to the server</li>
 <li>Tuning the storage to make it faster (e.g. faster SSDs)</li>
 </ul>
-<p>For example:</p>
-<pre><code>SELECT product_id, product_category, product_item, product_variety, popularity
-FROM &quot;sequel-mart-schema&quot;.&quot;Products&quot;
-WHERE product_category = 'vegetable'
-	AND popularity &gt;= 80;
-</code></pre>
-<h4>-------------------------------</h4>
-<h4>---Under Construction---</h4>
-<h4>-------------------------------</h4>
 </section>
 <section class="slide__images">
 <caption>1. Execution Plan on Taskbar</caption>
 <img src="../../images/004_Execution_Plan_Location.png" />
 <caption>2. Execution Plan Results</caption>
 <img src="../../images/004_Execution_Plan_Basic_Output.png" />
+<caption>3. Execution Plan Statistics</caption>
+<img src="../../images/004_Execution_Plan_Stats.png" />
+<caption>4. Execution Plan Statistics Filters</caption>
+<img src="../../images/004_Execution_Plan_Stats_WHERE_ORDER_LIMIT.png" />
+<caption>5. Execution Plan Statistics Aggregating</caption>
+<img src="../../images/004_Execution_Plan_Stats_GROUP.png" />
+<caption>6. Execution Plan EXPLAIN</caption>
+<img src="../../images/004_Execution_Plan_EXPLAIN.png" />
+<caption>7. Execution Plan EXPLAIN ANALYZE</caption>
+<img src="../../images/004_Execution_Plan_EXPLAIN_ANALYZE.png" />
 </section>
 
     </main>

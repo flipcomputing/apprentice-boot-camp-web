@@ -96,6 +96,10 @@ p, a, strong, em {
   text-decoration: none;
 }
 
+td > strong {
+  font-size: var(--font-size-8);
+}
+
 tr > * {
   font-size: var(--font-size-8);
   text-align: center;

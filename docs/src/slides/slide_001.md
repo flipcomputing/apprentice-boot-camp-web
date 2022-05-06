@@ -49,9 +49,9 @@ slide_layout: 'grid-5'
 <h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_038' | url }}">Pages</a><h3>
 <h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_039' | url }}">Execution Plans</a><h3>
 <h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_040' | url }}">CREATE INDEX...</a><h3>
-<h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_041' | url }}">CREATE VIEW...</a><h3>
-<h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_042' | url }}">CREATE PROCEDURE...</a><h3>
-<h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_043' | url }}">TRANSACTIONS</a><h3>
+<h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_041' | url }}">TRANSACTIONS</a><h3>
+<h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_042' | url }}">CREATE VIEW...</a><h3>
+<h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_043' | url }}">CREATE PROCEDURE...</a><h3>
 <h3 class="slide__contents-4"><a class="sect__4" href="{{ '../slide_044' | url }}">SQL Injection</a><h3>
 <h3 class="slide__contents-5"><a class="sect__5" href="{{ '../slide_045' | url }}">Sequel-Mart</a><h3>
 <h3 class="slide__contents-5"><a class="sect__5" href="{{ '../slide_046' | url }}">Frontend & Backend II</a><h3>

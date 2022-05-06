@@ -56,6 +56,10 @@ Examples of other tables in the `pg_catalog` schema are:
     <td>pg_stats</td>
     <td>contents of every column in a table larger than 8KB</td>
   </tr>
+  <tr>
+    <td>pg_stat_user_tables</td>
+    <td>details of every user table inc. row counts and usage stats</td>
+  </tr>
 
   <tr>
     <th>...</th>
@@ -88,6 +92,8 @@ Examples of other tables in the `pg_catalog` schema are:
 <section class="slide__images">
 <caption>1. pg_tables example</caption>
 <img src="{{ '../../images/004_System_Tables_pg_tables.png' | url }}" />
+<caption>2. pg_stat_user_tables example</caption>
+<img src="{{ '../../images/004_System_Tables_pg_tables_stat_user.png' | url }}" />
 
 
 </section>

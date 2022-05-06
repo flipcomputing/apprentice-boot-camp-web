@@ -44,7 +44,8 @@
 <p>As mentioned, the frontend app makes a request to a backend data store which issues a response to display</p>
 <p><strong>Routers</strong> = A pattern where the backend provides perscribed routes to the data that the frontend can call</p>
 <p><strong>Routes</strong> = A URL that the backend returns a result to and the frontend can use to populate the application</p>
-<h6>Router path</h6>
+<hr />
+<h5>Request / Response Path</h5>
 <ol>
 <li>The HTML element has a data-url tag with the name of the route's URL page</li>
 <li>The frontend coordinator (data.js) instructs each helper function to get the data from the backend</li>
@@ -53,10 +54,12 @@
 <ul>
 <li>Connects to the database</li>
 <li>Decides on the format of the output</li>
-<li>Calls the route requested by the frontend</li>
+<li>Waits for the frontend to make a request for data</li>
+<li>Calls the route requested by the frontend when a request is made</li>
 </ul>
 </li>
-<li>The route file gets the data with a SQL script and passes it back to app.js</li>
+<li>The route file gets the data with a SQL script</li>
+<li>And sends it back to app.js</li>
 <li>app.js passes the result back to the frontend helper function</li>
 <li>The data is iteratively populated into the HTML element. Once done, it will appear on the web page</li>
 </ol>

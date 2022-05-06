@@ -28,7 +28,7 @@
 
       <h2 class="slide__title">
         <a class="slide__title" href="../slide_001">
-        CREATE VIEW...
+        TRANSACTIONS
         </a>
       </h2>
 
@@ -40,120 +40,164 @@
     </nav>
     <main class=grid-2>
       <section class="slide__text">
-<h4>Create a 'copy' of another SQL query</h4>
-<pre><code>CREATE VIEW &lt;schema_name&gt;.v_&lt;view_name&gt;
-AS
-SELECT &lt;field1&gt;, &lt;field2&gt;
-FROM &lt;table1&gt;;
+<h4>Run many SQL queries together</h4>
+<ul>
+<li>Only write the results from a series of SQL statements to the database (<code>COMMIT</code>) if they <strong>all</strong> succeed</li>
+<li>Do not write to the database (<code>ROLLBACK</code>) if one does not succeed</li>
+</ul>
+<pre><code>BEGIN;
+    INSERT &lt;SQL_Statement1&gt;;
+    UPDATE &lt;SQL_Statement2&gt;;
+SAVEPOINT &lt;savepoint1&gt;;
+    INSERT &lt;SQL_Statement3&gt;;
+ROLLBACK TO &lt;savepoint1&gt;;
+    UPDATE &lt;SQL_Statement4&gt;;
+COMMIT; | ROLLBACK;
 </code></pre>
-<p>The view can then be used in the <code>FROM</code> statement of an SQL query</p>
-<p>Prefixing a view with <code>v_</code> makes it clear that it is a view rather than a permanent table</p>
+<p>A transaction must have the following components:</p>
+<ul>
+<li><code>BEGIN;</code> = Where a transaction starts</li>
+</ul>
+<p>It must have at least one of the following components:</p>
+<ul>
+<li><code>COMMIT;</code> = Where the transaction ends and:
+<ul>
+<li>Writes everything to the database tables affected</li>
+<li>Frees any locks taken out</li>
+</ul>
+</li>
+<li><code>ROLLBACK;</code> = Ends the transaction and:
+<ul>
+<li>Does not write anything to the database tables affected</li>
+<li>Frees any locks taken out</li>
+</ul>
+</li>
+</ul>
+<p>And it may have the following components:</p>
+<ul>
+<li><code>ROLLBACK TO;</code> = Ends the transaction and:
+<ul>
+<li>Does not write anything to the database tables affected</li>
+<li>Frees any locks taken out</li>
+</ul>
+</li>
+<li><code>SAVEPOINT</code> = Allows us to:
+<ul>
+<li>Commit SQL statements before that point on an error (used with <code>ROLLBACK TO</code>)</li>
+<li>Roll back SQL statements after that point on an error</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h5>Other things to note:</h5>
+<ul>
+<li>Make sure transactions are efficient and well tested before putting them into production</li>
+<li>
+<div class="warning">Transactions lock tables or rows that are being changed</div>
+</li>
+<li>
+<div class="warning">Other transactions wait until they have finished</div>
+</li>
+<li>
+<div class="warning">This can lead to **blocking** and **deadlocking** issues if slow</div>
+</li>
+</ul>
+<div class="warning">Make sure you don't start a transaction and leave it running without committing or rolling it back</div>
+<hr />
 <h6>Example</h6>
-<p>If we want to know more about the products on offer and their popularity, we could run the following query:</p>
-<pre><code>SELECT po.offer_id, po.offer_name, po.offer_discount_percentage
-    , po.offer_start_date, po.offer_end_date
-	, pr.product_id, pr.product_category, pr.product_item
-    , pr.product_variety, pr.popularity
-FROM &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot; AS po
-INNER JOIN &quot;sequel-mart-schema&quot;.&quot;Products&quot; AS pr
-	ON pr.product_id = po.product_id;
-</code></pre>
-<p>If we found we wanted this information in many different places in a project, we could save the script as a View called <code>v_Product_Offers_And_Products</code> in our schema as follows:</p>
-<pre><code>CREATE VIEW &quot;sequel-mart-schema&quot;.v_Product_Offers_And_Products
-AS
-SELECT po.offer_id, po.offer_name, po.offer_discount_percentage, po.offer_start_date, po.offer_end_date
-	, pr.product_id, pr.product_category, pr.product_item, pr.product_variety, pr.popularity
-FROM &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot; AS po
-INNER JOIN &quot;sequel-mart-schema&quot;.&quot;Products&quot; AS pr
-	ON pr.product_id = po.product_id;
-</code></pre>
-<p>We can now query this <code>VIEW</code> as though it was just another table:</p>
+<p>Let's query our <code>Product_Offers</code> table again for <code>offer_id</code>s 17, 19 and 20:</p>
 <pre><code>SELECT *
-FROM &quot;sequel-mart-schema&quot;.v_Product_Offers_And_Products;
+FROM &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
+WHERE offer_id IN (17,19,20);
 </code></pre>
-<hr />
-<h5>Reasons to use Views</h5>
+<p>The <code>offer_start_date</code>s are 28th August, 2nd September &amp; 4th September respectively.</p>
+<p>If we wanted to add a day to <code>offer_id</code> 20 (make it 5th September), we would:</p>
 <ul>
-<li>Shortens code for frequently used queries</li>
-<li>Promotes consistently used code between developers</li>
-<li>Views can be given different security policies, so it can be a safer approach</li>
-<li>Hides more of the inner workings of the database from the frontend</li>
+<li>Use an <code>UPDATE</code></li>
+<li>Make use of the <code>INTERVAL</code> function to add the day</li>
 </ul>
-<hr />
-<h5>Source SQL code for a VIEW</h5>
-<p>If we want to go back to a <code>VIEW</code> later and remind ourselves how it was created we can:</p>
-<ul>
-<li>Right-click on the <code>VIEW</code> name in the Browser tab</li>
-<li>Click 'Properties...'</li>
-<li>Click the 'Code' tab on the pop-up that appears</li>
-</ul>
-<p>We can make a change to the <code>VIEW</code> in this Code pop-up and save it.</p>
-<p>For example, let's
-- Add the <code>unit_sales_price</code> column to the <code>VIEW</code>
-- Remove any offers that ended before 1st August 2021</p>
-<p>Our SQL script now looks like this in the window:</p>
-<pre><code> SELECT po.offer_id,
-    po.offer_name,
-    po.offer_discount_percentage,
-    po.offer_start_date,
-    po.offer_end_date,
-    pr.product_id,
-    pr.product_category,
-    pr.product_item,
-    pr.product_variety,
-    pr.popularity,
-    pr.unit_sales_price
-   FROM &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot; po
-     JOIN &quot;sequel-mart-schema&quot;.&quot;Products&quot; pr ON pr.product_id = po.product_id
-   WHERE po.offer_end_date &gt; '2021-08-01';
+<pre><code>UPDATE &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
+SET offer_start_date = offer_start_date + INTERVAL '1 day'
+WHERE offer_id = 20;
 </code></pre>
+<p>This is a single statement transaction.  It's the equivalent of writing:</p>
+<pre><code>BEGIN;
+	UPDATE &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
+	SET offer_start_date = offer_start_date + INTERVAL '1 day'
+	WHERE offer_id = 20;
+COMMIT;
+</code></pre>
+<p>However, if we were instead to write:</p>
+<pre><code>BEGIN;
+	UPDATE &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
+	SET offer_start_date = offer_start_date + INTERVAL '1 day'
+	WHERE offer_id = 20;
+ROLLBACK;
+</code></pre>
+<p>The <code>offer_start_date</code> for this offer would not be written to the database. It would still be 4th September 2021.</p>
+<h5>Extending the example</h5>
+<p>Now let's add a <code>SAVEPOINT</code> and <code>ROLLBACK TO</code> that <code>SAVEPOINT</code></p>
+<pre><code>BEGIN;
+	UPDATE &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
+	SET offer_start_date = offer_start_date + INTERVAL '1 day'
+	WHERE offer_id = 17;
+SAVEPOINT product_offer_savepoint;
+	UPDATE &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
+	SET offer_start_date = offer_start_date + INTERVAL '1 day'
+	WHERE offer_id = 19;
+ROLLBACK TO product_offer_savepoint;
+	UPDATE &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
+	SET offer_start_date = offer_start_date + INTERVAL '1 day'
+	WHERE offer_id = 20;
+COMMIT;
+</code></pre>
+<p>This time the SQL transaction will:</p>
 <ul>
-<li>Click 'Save'</li>
-<li>We may get a message warning us that the <code>VIEW</code> will be dropped and recreated
-<ul>
-<li>If we have other objects in our database dependent on this <code>VIEW</code>, they may need to be dropped first and re-added</li>
-<li>Click 'Yes' if this message appears</li>
-</ul>
+<li>
+<p>Note the <code>BEGIN</code></p>
 </li>
-<li>If we query our <code>VIEW</code> again, the changes have been applied:
-<ul>
-<li>The <code>unit_sales_price</code> column has been added</li>
-<li>We are only seeing the 8 offers since 1st August 2021</li>
-</ul>
+<li>
+<p>Add a day to <code>offer_id</code> 17 and accept as part of the transaction</p>
+</li>
+<li>
+<p>Note the <code>SAVEPOINT</code> called <code>product_offer_savepoint</code></p>
+</li>
+<li>
+<p>Add a day to <code>offer_id</code> 19 and accept as part of the transaction</p>
+</li>
+<li>
+<p>Note the <code>ROLLBACK TO product_offer_savepoint</code></p>
+</li>
+<li>
+<p>Reverse adding a day to <code>offer_id</code> 19 and remove it from the transaction</p>
+</li>
+<li>
+<p>Go back to the line below the <code>ROLLBACK TO</code></p>
+</li>
+<li>
+<p>Add a day to <code>offer_id</code> 20 and accept as part of the transaction</p>
+</li>
+<li>
+<p>The transaction contains <code>UPDATE</code>s to <code>offer_id</code>s 17 and 20</p>
+</li>
+<li>
+<p>Note the <code>COMMIT</code> and makes these changes to the database</p>
 </li>
 </ul>
+<p>If we run:</p>
 <pre><code>SELECT *
-FROM &quot;sequel-mart-schema&quot;.v_Product_Offers_And_Products;
+FROM &quot;sequel-mart-schema&quot;.&quot;Product_Offers&quot;
+WHERE offer_id IN (17,19,20);
 </code></pre>
-<hr />
-<h5>Dropping a VIEW</h5>
-<p>We can remove a <code>VIEW</code> using the <code>DROP</code> syntax.</p>
-<p>If we wanted to remove our view we could say:</p>
-<pre><code>DROP VIEW v_Product_Offers_And_Products;
-</code></pre>
-<div class="warning">Views depend on their tables. If you want to drop a table, any view that references that table will need to be dropped first</div>
+<p>we see that IDs 17 and 20 have a modified <code>offer_start_date</code> but ID 19 has not changed</p>
 </section>
 <section class="slide__images">
-<caption>1. Location of VIEWs on the browser tab</caption>
-<img src="../../images/004_Views_Location_Browser.png" />
-<caption>2. Query we want to save as a VIEW</caption>
-<img src="../../images/004_Views_SELECT.png" />
-<caption>3. Scripting the query as a CREATE VIEW</caption>
-<img src="../../images/004_Views_CREATE_VIEW.png" />
-<caption>4. The new VIEW is in the browser tab</caption>
-<img src="../../images/004_Views_Location_Browser_After.png" />
-<caption>5. Query the VIEW directly</caption>
-<img src="../../images/004_Views_VIEW_SELECT.png" />
-<caption>6. Accessing the Properties...</caption>
-<img src="../../images/004_Views_Properties.png" />
-<caption>7. Source SQL Code in Properties... > Code</caption>
-<img src="../../images/004_Views_Properties_Code.png" />
-<caption>8. Source SQL Code with changes</caption>
-<img src="../../images/004_Views_Properties_Code_Changes.png" />
-<caption>9. Source SQL Code changed, warning message</caption>
-<img src="../../images/004_Views_Properties_Code_Warning.png" />
-<caption>10. Querying the changed VIEW directly</caption>
-<img src="../../images/004_Views_SELECT_After_Changes.png" />
+<caption>1. Product Offers table IDs 17, 19 & 20 (Before)</caption>
+<img src="../../images/004_Transactions_SELECT_Product_Offer_20.png" />
+<caption>2. Location of VIEWs on the browser tab</caption>
+<img src="../../images/004_Transactions_ROLLBACK_Only.png" />
+<caption>3. Product Offers table IDs 17, 19 & 20 (After)</caption>
+<img src="../../images/004_Transactions_SELECT_Product_Offer_20_After_Changes.png" />
 </section>
 
     </main>

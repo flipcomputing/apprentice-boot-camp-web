@@ -4,153 +4,104 @@ slide_number: 43
 slide_prev: 'slide_042/'
 slide_next: 'slide_044/'
 section_title: 'How do we change content?'
-slide_title: TRANSACTIONS
+slide_title: CREATE PROCEDURE...
 theme: 'theme_004'
 slide_layout: 'grid-2'
 ---
 
 <section class="slide__text">
 
-#### Run many SQL queries together
-- Only write the results from a series of SQL statements to the database (`COMMIT`) if they **all** succeed
-- Do not write to the database (`ROLLBACK`) if one does not succeed
+##### A set of often parametised SQL queries
+
+A `VIEW` can execute a single SQL statement
+
+A `PROCEDURE` can:
+- Chain and execute multiple SQL statements
+- Accept input parameters to influence the result
+- Accept output parameters
+
+<div class="warning">These are complicated to write at first but it has similarities with functions in coding languages</div>
 
 ```
-BEGIN;
-    INSERT <SQL_Statement1>;
-    UPDATE <SQL_Statement2>;
-SAVEPOINT <savepoint1>;
-    INSERT <SQL_Statement3>;
-ROLLBACK TO <savepoint1>;
-    UPDATE <SQL_Statement4>;
-COMMIT; | ROLLBACK;
+CREATE OR REPLACE PROCEDURE <schema_name>.<proc_name>(
+<input_param_1>, <input_param_2>)
+LANGUAGE 'plpgsql' | 'sql'
+AS $BODY$
+DECLARE <variable_name> <data_type>
+BEGIN
+        <SQL_Statement_1>
+        <SQL_Statement_2>
+        COMMIT;
+END;
+$BODY$;
 ```
 
-A transaction must have the following components:
-- `BEGIN;` = Where a transaction starts
+- `CREATE OR REPLACE PROCEDURE` = The name of the procedure and the schema it which it should be stored
+- `<input_param_1>, <input_param_2>` = Any external input parameters (optional)
+- `LANGUAGE` = PL/pgSQL is a procedural programming language supported by PostgreSQL
+- `$BODY$` = A token in between two dollar signs to avoid having to stringify the whole procedure
+  - Using 'BODY' is a convention but it could be any value (e.g. `$BOOTCAMP$`)
+- `DECLARE` = Any internally declared variables we can use in our procedure
+- `BEGIN ... END` = Area in which the SQL statements are batched as a `TRANSACTION`
 
-It must have at least one of the following components:
-- `COMMIT;` = Where the transaction ends and:
-    - Writes everything to the database tables affected
-    - Frees any locks taken out
-- `ROLLBACK;` = Ends the transaction and:
-    - Does not write anything to the database tables affected
-    - Frees any locks taken out
+##### Example - Generating Sales
+Our `sequel-mart-schema` includes a procedure for generating randomised sales (`p_sales_generate`)
 
-And it may have the following components:
--  `ROLLBACK TO;` = Ends the transaction and:
-    - Does not write anything to the database tables affected
-    - Frees any locks taken out
-- `SAVEPOINT` = Allows us to:
-    - Commit SQL statements before that point on an error (used with `ROLLBACK TO`)
-    - Roll back SQL statements after that point on an error
+If we:
+- Right-click on the procedure
+- Click Properties...
+- Click the Code tab
 
-<hr />
+We access the PLPGSQL code between the `$BODY$` tags
 
-##### Other things to note:
-- Make sure transactions are efficient and well tested before putting them into production
-- <div class="warning">Transactions lock tables or rows that are being changed</div>
-- <div class="warning">Other transactions wait until they have finished</div>
-- <div class="warning">This can lead to **blocking** and **deadlocking** issues if slow</div>
+This procedure:
+- Accepts an `INTEGER` input field called 'sales'
+  - This specifies how many sales you want to generate
+- Counts the number of `customers` who could make a sale and stores it as 'customer_total'
+- Iterates through the number of 'sales' we want to generate and assigns:
 
-<div class="warning">Make sure you don't start a transaction and leave it running without committing or rolling it back</div>
+`Sales_Header`
+  - A random `customer_id` using the 'customer_total' variable as a range
+  - A random `sale_date`
+  - A random `feedback_score`
 
-<hr />
+`Sales_Detail`
+  - A random number of products to include in this sale (between 1 and 20).  For each product we assign:
+    - The number of items sold (between 1 and 10)
+    - The product itself (weighted with a more popular product more likely to be chosen)
+    - The product's `unit_sales_price` and `wholesale_price`
 
-###### Example
-Let's query our `Product_Offers` table again for `offer_id`s 17, 19 and 20:
-```
-SELECT *
-FROM "sequel-mart-schema"."Product_Offers"
-WHERE offer_id IN (17,19,20);
-```
+##### Calling a Procedure
 
-The `offer_start_date`s are 28th August, 2nd September & 4th September respectively.
-
-If we wanted to add a day to `offer_id` 20 (make it 5th September), we would:
-- Use an `UPDATE`
-- Make use of the `INTERVAL` function to add the day
+A procedure can be executed using `CALL`
 
 ```
-UPDATE "sequel-mart-schema"."Product_Offers"
-SET offer_start_date = offer_start_date + INTERVAL '1 day'
-WHERE offer_id = 20;
+CALL <schema_name>.p_<proc_name>(<input_param_1>, <input_param_2>)
 ```
 
-This is a single statement transaction.  It's the equivalent of writing:
-```
-BEGIN;
-	UPDATE "sequel-mart-schema"."Product_Offers"
-	SET offer_start_date = offer_start_date + INTERVAL '1 day'
-	WHERE offer_id = 20;
-COMMIT;
-```
+<div class="warning">If you run the 'p_sales_generate' procedure now, your results for the exercises in section 6 will be different from the screenshots</div>
 
-However, if we were instead to write:
+
+For example if we were to run: 
 
 ```
-BEGIN;
-	UPDATE "sequel-mart-schema"."Product_Offers"
-	SET offer_start_date = offer_start_date + INTERVAL '1 day'
-	WHERE offer_id = 20;
-ROLLBACK;
+CALL 'sequel-mart-schema'.'p_sales_generate'(100);
 ```
 
-The `offer_start_date` for this offer would not be written to the database. It would still be 4th September 2021.
-
-##### Extending the example
-Now let's add a `SAVEPOINT` and `ROLLBACK TO` that `SAVEPOINT`
-
-```
-BEGIN;
-	UPDATE "sequel-mart-schema"."Product_Offers"
-	SET offer_start_date = offer_start_date + INTERVAL '1 day'
-	WHERE offer_id = 17;
-SAVEPOINT product_offer_savepoint;
-	UPDATE "sequel-mart-schema"."Product_Offers"
-	SET offer_start_date = offer_start_date + INTERVAL '1 day'
-	WHERE offer_id = 19;
-ROLLBACK TO product_offer_savepoint;
-	UPDATE "sequel-mart-schema"."Product_Offers"
-	SET offer_start_date = offer_start_date + INTERVAL '1 day'
-	WHERE offer_id = 20;
-COMMIT;
-```
-
-This time the SQL transaction will:
-- Note the `BEGIN`
-- Add a day to `offer_id` 17 and accept as part of the transaction
-- Note the `SAVEPOINT` called `product_offer_savepoint`
-- Add a day to `offer_id` 19 and accept as part of the transaction
-
-- Note the `ROLLBACK TO product_offer_savepoint`
-- Reverse adding a day to `offer_id` 19 and remove it from the transaction
-
-- Go back to the line below the `ROLLBACK TO`
-- Add a day to `offer_id` 20 and accept as part of the transaction
-
-- The transaction contains `UPDATE`s to `offer_id`s 17 and 20
-- Note the `COMMIT` and makes these changes to the database
-
-If we run:
-```
-SELECT *
-FROM "sequel-mart-schema"."Product_Offers"
-WHERE offer_id IN (17,19,20);
-```
-we see that IDs 17 and 20 have a modified `offer_start_date` but ID 19 has not changed
+We would:
+- Add 100 new randomly generated sales transactions to our `Sales_Header` table
+- Add about 1,000 new product purchases to our `Sales_Detail` table
 
 
 </section>
 
 <section class="slide__images">
-<caption>1. Product Offers table IDs 17, 19 & 20 (Before)</caption>
-<img src="{{ '../../images/004_Transactions_SELECT_Product_Offer_20.png' | url }}" />
-<caption>2. Location of VIEWs on the browser tab</caption>
-<img src="{{ '../../images/004_Transactions_ROLLBACK_Only.png' | url }}" />
-<caption>3. Product Offers table IDs 17, 19 & 20 (After)</caption>
-<img src="{{ '../../images/004_Transactions_SELECT_Product_Offer_20_After_Changes.png' | url }}" />
-
+<caption>1. Procedures (Location in Browser Tab)</caption>
+<img src="{{ '../../images/004_Procedure_Location.png' | url }}" />
+<caption>2. Procedures (Navigate to the code)</caption>
+<img src="{{ '../../images/004_Procedure_Properties.png' | url }}" />
+<caption>3. Procedures (Navigate to the code)</caption>
+<img src="{{ '../../images/004_Procedure_Code.png' | url }}" />
 
 
 </section>

@@ -40,13 +40,13 @@ Key points:
     <td></td>
   </tr>
   <tr>
-    <td>varchar(x)</td>
+    <td>VARCHAR(x)</td>
     <td>Text, number or other ascii character up to the number in brackets. <br />
     e.g. (varchar(10) would accept up to 10 characters)</td>
     <td>chars+1</td>
   </tr>
   <tr>
-    <td>nvarchar(x)</td>
+    <td>NVARCHAR(x)</td>
     <td>As above but also accepts foreign ascii characters (e.g. ä, é, ø, ü)</td>
     <td>2*chars+1</td>
   </tr>
@@ -57,28 +57,28 @@ Key points:
     <th>...</th>
   </tr>
   <tr>
-    <th>Integer</th>
+    <th>Integers</th>
     <th>(Whole Numbers)</th>
     <th></th>
   </tr>
 
   <tr>
-    <td>bit</td>
+    <td>BIT</td>
     <td>Either 0 or 1 (used for yes/no or true/false flags)</td>
     <td>1</td>
   </tr>
   <tr>
-    <td>smallint</td>
+    <td>SMALLINT</td>
     <td>Any whole number between -32,767 and 32,767</td>
     <td>2</td>
   </tr>
   <tr>
-    <td>int</td>
+    <td>INT</td>
     <td>Any whole number between -2,147,483,647 and 2,147,483,647</td>
     <td>4</td>
   </tr>
   <tr>
-    <td>bigint</td>
+    <td>BIGINT</td>
     <td>-9,223,372,036,854,775,807 to 9,223,372,036,854,775,807</td>
     <td>8</td>
   </tr>
@@ -94,7 +94,7 @@ Key points:
     <td></td>
   </tr>
   <tr>
-    <td>numeric(p, s)</td>
+    <td>NUMERIC(p, s)</td>
     <td>Any decimal up to the number of digits (precision) and decimal places (scale) <br /> e.g. (numeric(5,2) would accept a number up to 999.99)</td>
     <td>5-17</td>
   </tr>
@@ -105,17 +105,17 @@ Key points:
     <th>...</th>
   </tr>
   <tr>
-    <th>Timestamp</th>
+    <th>Dates & Times</th>
     <th></th>
     <th></th>
   </tr>
   <tr>
-    <td>date</td>
+    <td>DATE</td>
     <td>A date based on the current locale in YYYY-MM-DD format</td>
     <td>3</td>
   </tr>
   <tr>
-    <td>datetime</td>
+    <td>TIMESTAMP</td>
     <td>A date based on the current locale in YYYY-MM-DD HH:MM:SS.MS format</td>
     <td>5-8</td>
   </tr>

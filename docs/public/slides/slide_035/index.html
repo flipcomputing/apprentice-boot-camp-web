@@ -82,7 +82,7 @@ ALTER COLUMN column_002 SET DEFAULT 'Unknown';
 </code></pre>
 <hr/>
 <h6>Testing our new constraints</h6>
-<p>If we insert the following record (notice we're not including <code>column_002</code> or <code>column_004</code>):</p>
+<p>If we insert the following record (notice we're not including <code>column_002</code> or <code>column_003</code>):</p>
 <pre><code>INSERT INTO &quot;sequel-mart-schema&quot;.&quot;aaa_Dummy_Table&quot;
 	(column_001, column_004)
 VALUES (10, 89.56);
@@ -95,7 +95,7 @@ FROM &quot;sequel-mart-schema&quot;.&quot;aaa_Dummy_Table&quot;;
 <ul>
 <li><code>column_001</code> has changed datatype and is now <code>SMALLINT</code></li>
 <li><code>column_002</code> has used our default value of 'Unknown'</li>
-<li><code>column_004</code> has no default value but can accept <code>NULL</code> so it uses that</li>
+<li><code>column_003</code> has no default value but can accept <code>NULL</code> so it uses that</li>
 </ul>
 <hr />
 <p>Now let's try to violate the constraints.</p>

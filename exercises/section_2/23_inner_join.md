@@ -3,7 +3,7 @@
 ---
 
 ## 1.
-Q: Join Sales_Header (alias sh) to Stores (alias st).  Bring back the first 20 rows.
+Q: Join `Sales_Header` (alias sh) to `Stores` (alias st).  Bring back the first 20 rows.
 
 A:
 ```
@@ -16,7 +16,7 @@ LIMIT 20;
 ---
 
 ## 2.
-Q: Join Sales_Header (alias sh) to Dates (alias dt).  Bring back the first 20 rows.
+Q: Join `Sales_Header` (alias sh) to `Dates` (alias dt).  Bring back the first 20 rows.
 
 A:
 ```
@@ -29,7 +29,7 @@ LIMIT 20;
 ---
 
 ## 3.
-Q: Join Sales_Header (alias sh) to Sales_Detail (alias sd).  Bring back the first 20 rows.
+Q: Join `Sales_Header` (alias sh) to `Sales_Detail` (alias sd).  Bring back the first 20 rows.
 
 A:
 ```
@@ -42,7 +42,7 @@ LIMIT 20;
 ---
 
 ## 4.
-Q: Join Sales_Detail (alias sd) to Products (alias pr).  Bring back the first 20 rows.
+Q: Join `Sales_Detail` (alias sd) to `Products` (alias pr).  Bring back the first 20 rows.
 
 A:
 ```

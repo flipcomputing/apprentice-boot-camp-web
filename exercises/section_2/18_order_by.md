@@ -19,7 +19,7 @@ ORDER BY date_joined DESC;
 ---
 
 ## 2.
-Q: What is the most expensive wholesale_price for products that are not sold by the kg?
+Q: What is the most expensive `wholesale_price` for products that are not sold by the kg?
 
 A: The most expensive wholesale_price for products that are not sold by the kg is £2.00 for Poinsettias
 ```
@@ -31,7 +31,7 @@ ORDER BY wholesale_price DESC;
 ---
 
 ## 3.
-Q: What is the most expensive unit_sales_price for products that have a popularity below 65?
+Q: What is the most expensive `unit_sales_price` for products that have a `popularity` below 65?
 
 A: The most expensive unit_sales_price for products that have a popularity below 65 is £15.63 for red currants
 ```
@@ -43,7 +43,7 @@ ORDER BY unit_sales_price DESC;
 ---
 
 ## 4.
-Q: What is the lowest revenue for a sale (Sales_Detail) where there were more than 6 items_sold AND the cost_of_sales was more than 10?
+Q: What is the lowest `revenue` for a sale (`Sales_Detail`) where there were more than 6 `items_sold` AND the `cost_of_sales` was more than 10?
 
 A: £14.04 was the lowest revenue for a sale (Sales_Detail) where there were more than 6 items_sold AND the cost_of_sales was more than 10
 ```

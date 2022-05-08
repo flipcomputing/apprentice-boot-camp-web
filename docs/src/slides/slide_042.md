@@ -114,7 +114,7 @@ We can remove a `VIEW` using the `DROP` syntax.
 
 If we wanted to remove our view we could say:
 ```
-DROP VIEW v_Product_Offers_And_Products;
+DROP VIEW "sequel-mart-schema".v_Product_Offers_And_Products;
 ```
 
 <div class="warning">Views depend on their tables. If you want to drop a table, any view that references that table will need to be dropped first</div>

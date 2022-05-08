@@ -3,7 +3,7 @@
 ---
 
 ## 1.
-Q: Create the Product_Offers table in your own environment
+Q: Create the `Product_Offers` table in your own environment
 
 A: 
 ```

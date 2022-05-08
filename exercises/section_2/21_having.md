@@ -3,7 +3,7 @@
 ---
 
 ## 1.
-Q: How many product pack_sizes have an average popularity of 71 or more?
+Q: How many product `pack_sizes` have an average popularity of 71 or more?
 
 A: 4
 - bunch (73)
@@ -21,7 +21,7 @@ HAVING AVG(popularity) >= 71;
 ---
 
 ## 2.
-Q: In the Sales_Header table, which individual feedback_scores (1, 2, 3, 4 and/or 5) were used in more than 100 transactions (e.g. if 101 transactions had a feedback of 3 then 3 would count)?
+Q: In the `Sales_Header` table, which individual feedback_scores (1, 2, 3, 4 and/or 5) were used in more than 100 transactions (e.g. if 101 transactions had a feedback of 3 then 3 would count)?
 
 A: 
 - 1 *(166 transactions)*

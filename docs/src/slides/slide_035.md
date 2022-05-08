@@ -75,7 +75,7 @@ ALTER COLUMN column_002 SET DEFAULT 'Unknown';
 <hr/>
 
 ###### Testing our new constraints
-If we insert the following record (notice we're not including `column_002` or `column_004`):
+If we insert the following record (notice we're not including `column_002` or `column_003`):
 ```
 INSERT INTO "sequel-mart-schema"."aaa_Dummy_Table"
 	(column_001, column_004)
@@ -91,7 +91,7 @@ FROM "sequel-mart-schema"."aaa_Dummy_Table";
 We notice that (screenshot 6):
 - `column_001` has changed datatype and is now `SMALLINT`
 - `column_002` has used our default value of 'Unknown'
-- `column_004` has no default value but can accept `NULL` so it uses that
+- `column_003` has no default value but can accept `NULL` so it uses that
 
 <hr />
 

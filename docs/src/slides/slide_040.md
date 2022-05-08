@@ -209,7 +209,7 @@ DROP INDEX <schema_name>.<index_name>;
 
 For example, to drop the index we've just created run:
 ```
-DROP INDEX "sequel-mart-schema".sales_detail_product_id;
+DROP INDEX "sequel-mart-schema".sales_detail_sale_id;
 ```
 
 </section>

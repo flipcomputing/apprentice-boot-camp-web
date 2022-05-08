@@ -8,7 +8,7 @@ Q: Apart from Amelie M.W.H how many other customers are yet to make a transactio
 A: 3 
 - Arlo W.U.Z
 - Hugo C.A.R
-- Jude U.D.Y)
+- Jude U.D.Y
 
 ```
 SELECT *

@@ -36,7 +36,7 @@ WHERE pack_size NOT IN ('kg', 'unit', 'bunch', 'head');
 ---
 
 ## 4.
-Q: How many times did customers between 100 and 105 shop in our stores (from Sales_Header)?
+Q: How many times did customers between 100 and 105 shop in our stores (from `Sales_Header`)?
 
 A: Customer IDs 100-105 shopped in our stores 28 times
 ```
@@ -53,5 +53,5 @@ A: 3 Customer IDs names end with L.K
 ```
 SELECT *
 FROM "sequel-mart-schema"."Customers"
-WHERE customer_name like '%L.K';
+WHERE customer_name LIKE '%L.K';
 ```

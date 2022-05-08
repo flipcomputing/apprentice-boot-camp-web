@@ -18,7 +18,7 @@ WHERE offer_id BETWEEN 12 AND 16;
 Q: Reduce the offer_discount_percentage by 5% on any offer_name that ends with the word 'deal' 
 - HINT: Use the `LIKE` operator to get the deals
 
-A: This should change offer_ids 12 and 20 to 7.08 and 6.50 respectively
+A: This should change offers 'A Plum deal' and 'Discovery of a deal' to 7.08 and 6.50 respectively
 ```
 UPDATE "sequel-mart-schema"."Product_Offers"
 SET offer_discount_percentage = offer_discount_percentage * 0.95

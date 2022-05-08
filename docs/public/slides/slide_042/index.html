@@ -129,7 +129,7 @@ FROM &quot;sequel-mart-schema&quot;.v_Product_Offers_And_Products;
 <h5>Dropping a VIEW</h5>
 <p>We can remove a <code>VIEW</code> using the <code>DROP</code> syntax.</p>
 <p>If we wanted to remove our view we could say:</p>
-<pre><code>DROP VIEW v_Product_Offers_And_Products;
+<pre><code>DROP VIEW &quot;sequel-mart-schema&quot;.v_Product_Offers_And_Products;
 </code></pre>
 <div class="warning">Views depend on their tables. If you want to drop a table, any view that references that table will need to be dropped first</div>
 </section>

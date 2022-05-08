@@ -26,5 +26,5 @@ SELECT product_id, SUM(revenue) AS sum_revenue, AVG(revenue) AS avg_revenue
 FROM "sequel-mart-schema"."Sales_Detail"
 GROUP BY product_id
 ORDER BY sum_revenue DESC
-LIMIT 5;
+LIMIT 1;
 ```

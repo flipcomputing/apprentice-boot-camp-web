@@ -22,7 +22,7 @@ SELECT * FROM "sequel-mart-schema"."Sales_Detail";
 ```
 
 ```
-`SELECT * FROM "sequel-mart-schema"."Stores";
+SELECT * FROM "sequel-mart-schema"."Stores";
 ```
 
 ---

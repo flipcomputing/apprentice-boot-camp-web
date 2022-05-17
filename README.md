@@ -1,4 +1,12 @@
 # Database Bootcamp 2021
+
+## Competencies, Behaviours and Knowledge units
+
+These relate to the KSBs defined in the [Level 4 Software Developer standard](https://www.instituteforapprenticeships.org/apprenticeship-standards/software-developer-v1-1).
+
+* **K10**: principles and uses of relational and non-relational databases
+* **S3**: link code to data sets
+
 ---
 ## Table of contents
 ---

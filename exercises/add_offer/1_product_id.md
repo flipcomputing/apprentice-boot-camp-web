@@ -50,6 +50,7 @@ app.use('/products_id', productsIDRouter);
 ```
 
 - Test with REST Client
+- Add to restrequests.http
 
 ```
 GET http://localhost:5001/products_id

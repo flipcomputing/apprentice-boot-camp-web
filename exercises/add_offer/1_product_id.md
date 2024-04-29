@@ -9,7 +9,7 @@ AS
 SELECT product_id, product_item FROM "sequel-mart-schema"."Products"
 ```
 
-- Add file `backend\routes\products_ids.js`
+- Add file `backend\routes\products_id.js`
 
 ```
 //Route into the database to retrieve customer information

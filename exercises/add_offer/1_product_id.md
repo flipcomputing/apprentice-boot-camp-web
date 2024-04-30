@@ -6,7 +6,11 @@ Add view in pgAdmin
 ```
 CREATE VIEW "sequel-mart-schema".v_Product_Details
 AS
-SELECT product_id, product_item FROM "sequel-mart-schema"."Products"
+SELECT 
+    product_id, 
+    product_item || ' - ' || product_variety AS product_item
+FROM 
+    "sequel-mart-schema"."Products";
 ```
 
 - Add file `backend\routes\products_id.js`

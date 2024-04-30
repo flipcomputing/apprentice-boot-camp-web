@@ -1,5 +1,8 @@
 # Exercises
 ## 6.4 Summary - (Slide 53)
+
+- Copy and paste this SQL into pgAdmin and execute it
+  
 ```
 CREATE VIEW "sequel-mart-schema".v_Summary
 AS

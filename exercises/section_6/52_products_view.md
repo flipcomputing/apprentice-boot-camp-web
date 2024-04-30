@@ -1,5 +1,8 @@
 # Exercises
 ## 6.3 Products - (Slide 52)
+
+- Copy and paste this SQL into pgAdmin and execute it
+
 ```
 CREATE VIEW "sequel-mart-schema".v_Top_Products
 AS

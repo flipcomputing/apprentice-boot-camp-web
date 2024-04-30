@@ -1,5 +1,8 @@
 # Exercises
 ## 6.1 Transactions - (Slide 50)
+
+- Copy and paste this SQL into pgAdmin and execute it
+  
 ```
 CREATE VIEW "sequel-mart-schema".v_Top_Transactions
 AS

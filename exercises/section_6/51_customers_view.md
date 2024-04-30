@@ -1,5 +1,8 @@
 # Exercises
 ## 6.2 Customers - (Slide 51)
+
+- Copy and paste this SQL into pgAdmin and execute it
+  
 ```
 CREATE VIEW "sequel-mart-schema".v_Top_Customers
 AS

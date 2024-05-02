@@ -1,0 +1,23 @@
+- Install `create-react-app` and create a new  `frontend-dashboard` app:
+
+```
+npm install -g create-react-app
+npx create-react-app frontend-dashboard
+```
+
+- Update `docker-compose.yml`. Add a new service after the `app` service:
+
+```yml
+frontend-dashboard:
+    image: 'node:16' 
+    user: 'node'
+    working_dir: /home/node/frontend-dashboard
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./frontend-dashboard:/home/node/frontend-dashboard
+    ports:
+      - '3000:3000' # Assuming the React app runs on port 3000
+    command: 'npm start'
+```

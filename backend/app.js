@@ -48,3 +48,11 @@ app.use('/customers_distinct', customersDistinctRouter);
 //Products Route - Enable the data to be picked up from the router that contains the SQL code
 const productsDistinctRouter = require('./routes/products_distinct');
 app.use('/products_distinct', productsDistinctRouter);
+
+//Products with ID Route - Enable the data to be picked up from the router that contains the SQL code
+const productsIDRouter = require('./routes/products_id');
+app.use('/products_id', productsIDRouter);
+
+//Offers Route - Enable the data to be picked up from the router that contains the SQL code
+const ordersRouter = require('./routes/offers');
+app.use('/offers', ordersRouter);

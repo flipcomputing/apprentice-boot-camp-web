@@ -72,9 +72,11 @@ function OffersForm() {
         <label>
           Product Item:
           <select
-            value={formData.productID} // Changed to store product_item
+            value={formData.productID || ''} // Default value set to empty string
             onChange={e => setFormData({ ...formData, productID: e.target.value })}
           >
+            {/* Add an empty option for default value */}
+            <option value="">Select Product</option>
             {products.map(product => (
               <option key={product.product_id} value={product.product_item}>
                 {product.product_item}

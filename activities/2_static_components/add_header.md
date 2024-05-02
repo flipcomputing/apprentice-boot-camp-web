@@ -1,4 +1,4 @@
-- Update `frontend-dashboard/src/App.js`
+- Replace the content of `frontend-dashboard/src/App.js`
 
 ```jsx
 import React from 'react';

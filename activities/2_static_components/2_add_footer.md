@@ -1,4 +1,4 @@
-- Add a Footer component to `components.js` based on the footer html code in `frontend/src/index.html`
+- Add a Footer component to `App.js` based on the footer html code in `frontend/src/index.html`
 
 This time you will need to create the component yourself. 
 

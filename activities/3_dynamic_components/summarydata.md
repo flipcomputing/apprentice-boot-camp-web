@@ -1,7 +1,7 @@
 - Add the following lines to your `backend\app.js` - note that this is the **backend** folder. 
 
 ```javascript
-const express = require('express');
+const cors = require('cors');
 ```
 
 and, after `app` is defined:

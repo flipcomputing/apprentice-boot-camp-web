@@ -19,7 +19,7 @@ const backend = "http://localhost:5001";
 
 - Reload the Northern Store website
 
-  You will see a CORS error in the console. (Ctrl F12 to open Developer Tools)
+  You will see a CORS error in the console. (F12 to open Developer Tools)
 
 ## Allow the frontend-dashboard to access the backend endpoints
 

@@ -25,6 +25,7 @@ function App()  {
   function Stores() {
     return <div>
                 <Header />
+                <Store />
                 <SummaryData />
                 <Transactions />
                 <Customers />

@@ -21,3 +21,6 @@ router.get('/', (req, res) => {
     console.log(error);
   })
 })
+
+//Export it to be used by routes & files that need to connect
+module.exports = router;
